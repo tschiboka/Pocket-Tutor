@@ -1,0 +1,18 @@
+.main-menu__icon {
+    width: calc(14% - 1px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #3e4652;
+}
+
+.main-menu__icon__stripe1, .main-menu__icon__stripe2, .main-menu__icon__stripe3 {
+    width: 70%;
+    max-width: 35px;
+    height: 6%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background: #36ebee;
+}
