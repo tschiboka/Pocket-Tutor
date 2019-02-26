@@ -1,0 +1,8 @@
+.searchbar-container {
+    width: 80%;
+    height: 50px;
+}
+
+.searchbar-container input:focus {
+    color: red;
+}
