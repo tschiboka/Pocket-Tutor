@@ -15,12 +15,13 @@
     background: #21252b;
     color: rgb(68, 77, 90);
     font-style: italic;
-    font-size: 3vh;
+    font-size: 3.2vh;
 }
 
 .searchbar-container input:focus {
     color: #36ebee;
     font-style: normal;
+    font-family: "Lanenar";
 }
 
 /* Inputs in the app make placehoplders disappear on focus */
@@ -36,6 +37,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     border: none;
     background: #21252b;
     color: #36ebee;
+    cursor: pointer;
 }
 
 .searchbar-container button div {

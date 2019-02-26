@@ -1,7 +1,13 @@
+@font-face {
+  src: url(./fonts/LANENAR_.ttf);
+  font-family: "Lanenar";
+}
+
 body {
   margin: 0;
   padding: 0;
   background: rgb(249, 249, 250);
+  font-family: "Lanenar";
 }
 
 .App {

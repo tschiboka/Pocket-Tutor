@@ -6,13 +6,41 @@
     justify-content: center;
     align-items: center;
     border-right: 1px solid #3e4652;
+    cursor: pointer;
 }
 
 .main-menu__icon__stripe1, .main-menu__icon__stripe2, .main-menu__icon__stripe3 {
     width: 70%;
     max-width: 35px;
-    height: 6%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    height: 2%;
+    max-height: 1.5px;
+    min-height: 1px;
+    margin-top: 7%;
+    margin-bottom: 7%;
     background: #36ebee;
+}
+
+.main-menu__icon__stripe1 {
+    animation: stripe-anim 10s ease-in-out infinite;
+}
+
+.main-menu__icon__stripe2 {
+    animation: stripe-anim 10s ease-in-out 0.2s infinite;
+}
+
+.main-menu__icon__stripe3 {
+    animation: stripe-anim 10s ease-in-out 0.4s infinite;
+}
+
+@keyframes stripe-anim {
+    0% {
+        width: 70%;
+    }
+
+    5% {
+        width: 20%;
+    }
+    10% {
+        width: 70%;
+    }
 }
