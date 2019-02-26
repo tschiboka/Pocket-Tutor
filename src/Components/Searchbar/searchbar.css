@@ -1,8 +1,46 @@
 .searchbar-container {
-    width: 80%;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbar-container input {
+    width: 90%;
+    height: 80%;
+    border: none;
+    background: #21252b;
+    color: rgb(68, 77, 90);
+    font-style: italic;
+    font-size: 3vh;
 }
 
 .searchbar-container input:focus {
-    color: red;
+    color: #36ebee;
+    font-style: normal;
 }
+
+/* Inputs in the app make placehoplders disappear on focus */
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+.searchbar-container button {
+    font-size: 5vh;
+    line-height: 5vh;
+    border: none;
+    background: #21252b;
+    color: #36ebee;
+}
+
+.searchbar-container button div {
+    -webkit-transform: rotate(45deg); 
+       -moz-transform: rotate(45deg); 
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+

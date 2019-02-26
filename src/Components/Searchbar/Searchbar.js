@@ -9,8 +9,12 @@ export default class Searchbar extends Component {
                 <input
                     id="searchbar-input"
                     type="text"
-                    maxlength="20"
+                    maxlength="30"
+                    autoFocus="false"
                     placeholder="Search cards content" />
+                <button>
+                    <div>&#9906;</div>
+                </button>
             </div>
         ); // end of return
     } // end of render
