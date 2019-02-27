@@ -3,6 +3,19 @@ import React, { Component } from "react";
 import "./BrowseBox.css";
 
 export default class BrowseBox extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { currentCard: this.randomCard() };
+    } // end of constructor
+
+    randomCard() {
+        const
+            cardsLength = JSON.parse(localStorage.cards).length,
+            RAN = Math.floor(Math.random() * cardsLength);
+
+        return JSON.parse(localStorage.cards)[RAN];
+    } // end of randomCard
+
     render() {
         return (
             this.props.visible
@@ -11,7 +24,7 @@ export default class BrowseBox extends Component {
                     <div className="browse-box__header"></div>
 
                     <div className="browse-box__body">
-                        This is where you put your questions.
+                        {this.state.currentCard.question}
                     </div>
 
                     <div className="browse-box__footer">
