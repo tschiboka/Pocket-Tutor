@@ -16,6 +16,18 @@ export default class BrowseBox extends Component {
         return JSON.parse(localStorage.cards)[RAN];
     } // end of randomCard
 
+
+    // prev and next click handlers are temporaly solutions, cards can coome in different order
+    // rather than random in the later development of the app
+    prevClickHandler() {
+        this.setState({ currentCard: this.randomCard() });
+    } // end of prevClickHandler
+
+    nextClickHandler() {
+        this.setState({ currentCard: this.randomCard() });
+    } // end of prevClickHandler
+
+
     render() {
         return (
             this.props.visible
@@ -31,9 +43,17 @@ export default class BrowseBox extends Component {
                         <div className="browse-box__footer__progress-box"></div>
 
                         <div className="browse-box__footer__button-box">
-                            <button id="browse-box__prev-btn">Prev</button>
+                            <button
+                                id="browse-box__prev-btn"
+                                onClick={() => this.prevClickHandler()}
+                            >Prev</button>
+
                             <button id="browse-box__turn-btn">Turn</button>
-                            <button id="browse-box__next-btn">Next</button>
+
+                            <button
+                                id="browse-box__next-btn"
+                                onClick={() => this.nextClickHandler()}
+                            >Next</button>
                         </div>
                     </div>
                 </div>

@@ -9,8 +9,8 @@ export default class Searchbar extends Component {
                 <input
                     id="searchbar-input"
                     type="text"
-                    maxlength="30"
-                    autoFocus="false"
+                    maxLength="30"
+                    autoFocus={false}
                     placeholder="Search cards content" />
                 <button>
                     <div>&#9906;</div>
