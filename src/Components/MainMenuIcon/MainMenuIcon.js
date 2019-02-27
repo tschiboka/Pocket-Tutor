@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./main-menu-icon.css"
+import "./MainMenuIcon.css"
 
 export default class MainMenuIcon extends Component {
     constructor(props) {
@@ -10,9 +10,7 @@ export default class MainMenuIcon extends Component {
 
     // toggle menu on click
     handleClick() {
-        let visibility = this.state.isMenuVisible ? false : true;
-
-        this.setState({ isMenuVisible: visibility });
+        this.props.toggle();
     } // end of handleClick
 
     render() {
