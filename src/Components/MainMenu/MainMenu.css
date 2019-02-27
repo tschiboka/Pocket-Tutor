@@ -1,8 +1,12 @@
 .main-menu {
+    position: absolute;
+    top: 8%;
+    left: 0;
     min-width: 50%;
     width: 40%;
-    border: 1px solid #3e4652;
-    border-top: none;
+    background: rgba(33, 37, 43, 0.5);
+    border: 1px solid rgb(62, 70, 82);
+    border-left: none;
 }
 
 .main-menu ul {
@@ -23,9 +27,9 @@
 
 .main-menu-item:hover {
     background: rgba(255, 255, 255, 0.05);
-    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.035) 0%,rgba(255, 255, 255, 0.05) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.05) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.01) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.15) 0%,rgba(255, 255, 255, 0.01) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.01) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .main-menu-item div img {

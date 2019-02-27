@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+.main-menu__icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
 .main-menu__icon__stripe1, .main-menu__icon__stripe2, .main-menu__icon__stripe3 {
     width: 70%;
     max-width: 35px;
