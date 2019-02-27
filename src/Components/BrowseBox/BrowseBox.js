@@ -10,9 +10,19 @@ export default class BrowseBox extends Component {
                 <div className="browse-box">
                     <div className="browse-box__header"></div>
 
-                    <div className="browse-box__body"></div>
+                    <div className="browse-box__body">
+                        This is where you put your questions.
+                    </div>
 
-                    <div className="browse-box__footer"></div>
+                    <div className="browse-box__footer">
+                        <div className="browse-box__footer__progress-box"></div>
+
+                        <div className="browse-box__footer__button-box">
+                            <button id="browse-box__prev-btn">Prev</button>
+                            <button id="browse-box__turn-btn">Turn</button>
+                            <button id="browse-box__next-btn">Next</button>
+                        </div>
+                    </div>
                 </div>
                 : null
         ); // end of return
