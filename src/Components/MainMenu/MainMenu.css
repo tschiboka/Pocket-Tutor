@@ -1,6 +1,21 @@
 .main-menu {
-    width: 50%;
-    height: 70%;
+    min-width: 50%;
+    width: 40%;
     border: 1px solid #3e4652;
     border-top: none;
+}
+
+.main-menu ul {
+    margin: 0;
+    padding-left: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.main-menu-item {
+    margin: 3% 0;
+    padding: 0;
+    list-style: none;
+    font-size: 3.2vh;
 }
