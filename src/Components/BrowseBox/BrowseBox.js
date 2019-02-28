@@ -55,7 +55,14 @@ export default class BrowseBox extends Component {
                     </div>
 
                     <div className="browse-box__footer">
-                        <div className="browse-box__footer__progress-box"></div>
+                        <div className="browse-box__footer__progress-box">
+                            <div className="browse-box__footer__progress-box__text">
+                                66% (10 / 6)
+                            </div>
+                            <div className="browse-box__footer__progress-box__progress">
+
+                            </div>
+                        </div>
 
                         <div className="browse-box__footer__button-box">
                             <button

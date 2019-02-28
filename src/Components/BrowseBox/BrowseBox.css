@@ -37,11 +37,24 @@
 
 .browse-box__footer__progress-box {
     width: 95%;
-    height: 35%;
-    margin: 1.5% 2.5% 0 2.5%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    margin: 2.5%;
+    font-size: 2.5vh;
+}
+
+.browse-box__footer__progress-box__text {
+    height: 100%;
+    padding: 0 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: rgba(0, 0, 0, 0.25);
     border-left: 1px solid #3e4652;
     border-right: 1px solid #3e4652;
+    color: #36ebee;
 }
 
 .browse-box__footer__button-box {
