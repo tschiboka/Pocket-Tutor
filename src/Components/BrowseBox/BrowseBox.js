@@ -5,7 +5,10 @@ import "./BrowseBox.css";
 export default class BrowseBox extends Component {
     constructor(props) {
         super(props);
-        this.state = { currentCard: this.randomCard() };
+        this.state = {
+            currentCard: this.randomCard(),
+            questionIsUp: true
+        };
     } // end of constructor
 
     randomCard() {
@@ -20,14 +23,26 @@ export default class BrowseBox extends Component {
     // prev and next click handlers are temporaly solutions, cards can coome in different order
     // rather than random in the later development of the app
     prevClickHandler() {
-        this.setState({ currentCard: this.randomCard() });
+        this.setState({
+            currentCard: this.randomCard(),
+            questionIsUp: true
+        }); // end of setState
     } // end of prevClickHandler
 
     nextClickHandler() {
-        this.setState({ currentCard: this.randomCard() });
+        this.setState({
+            currentCard: this.randomCard(),
+            questionIsUp: true
+        }); // end of setState
     } // end of prevClickHandler
 
-
+    turnClickHandler() {
+        // set state to turn card
+        this.setState({
+            currentCard: this.state.currentCard, // card doesn't change
+            questionIsUp: this.state.questionIsUp ? false : true // toggle question / answer
+        }); // end of setState
+    } // end of turnClickHandler
     render() {
         return (
             this.props.visible
@@ -36,7 +51,7 @@ export default class BrowseBox extends Component {
                     <div className="browse-box__header"></div>
 
                     <div className="browse-box__body">
-                        {this.state.currentCard.question}
+                        {this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer}
                     </div>
 
                     <div className="browse-box__footer">
@@ -48,7 +63,10 @@ export default class BrowseBox extends Component {
                                 onClick={() => this.prevClickHandler()}
                             >Prev</button>
 
-                            <button id="browse-box__turn-btn">Turn</button>
+                            <button
+                                id="browse-box__turn-btn"
+                                onClick={() => this.turnClickHandler()}
+                            >Turn</button>
 
                             <button
                                 id="browse-box__next-btn"
