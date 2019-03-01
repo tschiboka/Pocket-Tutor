@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import "./BrowseBox.css";
 
+import TopicLabel from "../TopicLabel/TopicLabel"
+
 export default class BrowseBox extends Component {
     constructor(props) {
         super(props);
@@ -63,7 +65,13 @@ export default class BrowseBox extends Component {
             this.props.visible
                 ?
                 <div className="browse-box">
-                    <div className="browse-box__header"></div>
+                    <div className="browse-box__header">
+                        <TopicLabel text="ES6" color="blue" />
+
+                        <TopicLabel text="Java" />
+
+                        <TopicLabel text="TaaaalpraMagyarHiAHazaGyereAKocsmabolHaza" />
+                    </div>
 
                     <div className="browse-box__body">
                         {this.state.currentCard

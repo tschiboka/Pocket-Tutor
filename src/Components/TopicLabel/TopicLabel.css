@@ -1,0 +1,35 @@
+.topic-label {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 50px;
+    height: 3vh;
+    margin: 0 2.5px;
+    padding: 0 5px;
+    background: #a0dcec;
+    border-radius: 15px;
+    font-size: 2vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    line-height: 3vh;
+    color: #222;
+}
+
+.topic-label__circle {
+    position: relative;
+    width: 10px;
+    min-width: 10px; 
+    height: 10px;
+    min-height: 10px;
+    background: #333;
+    border-radius: 100%;
+    margin-right: 3px;
+    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px rgba(255, 255, 255, 0.53);
+}
+
+.topic-label__text {
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

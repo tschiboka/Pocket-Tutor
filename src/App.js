@@ -29,7 +29,8 @@ export default class App extends Component {
         isMainMenuVisible: false,
         view: this.state.view
       }); // end of setState
-    }, 100);
+      clearTimeout(delay);
+    }, 200);
   } // end of toggleMainMenu
 
   render() {

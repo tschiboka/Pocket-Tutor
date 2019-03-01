@@ -9,6 +9,10 @@
     border-left: none;
 }
 
+.main-menu:focus {
+    outline: none;
+}
+
 .main-menu ul {
     margin: 0;
     padding: 0;
