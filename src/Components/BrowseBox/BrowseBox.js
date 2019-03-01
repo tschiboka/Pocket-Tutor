@@ -12,11 +12,13 @@ export default class BrowseBox extends Component {
     } // end of constructor
 
     randomCard() {
-        const
-            cardsLength = JSON.parse(localStorage.cards).length,
-            RAN = Math.floor(Math.random() * cardsLength);
+        if (localStorage.cards) {
+            const
+                cardsLength = JSON.parse(localStorage.cards).length,
+                RAN = Math.floor(Math.random() * cardsLength);
 
-        return JSON.parse(localStorage.cards)[RAN];
+            return JSON.parse(localStorage.cards)[RAN];
+        }
     } // end of randomCard
 
 
@@ -45,9 +47,14 @@ export default class BrowseBox extends Component {
     } // end of turnClickHandler
 
     setProgress = () => {
-        const [correctAnswers, totalAnswers] = Array.from(this.state.currentCard.results);
+        if (this.state.currentCard) {
+            const [correctAnswers, totalAnswers] = Array.from(this.state.currentCard.results);
 
-        return Math.round((correctAnswers / totalAnswers) * 100) + "%";
+            return Math.round((correctAnswers / totalAnswers) * 100) + "%";
+        }
+        else {
+            return "0";
+        }
     } // end of setProgress
 
     render() {
@@ -59,13 +66,17 @@ export default class BrowseBox extends Component {
                     <div className="browse-box__header"></div>
 
                     <div className="browse-box__body">
-                        {this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer}
+                        {this.state.currentCard
+                            ? (this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer)
+                            : "No cards to show"}
                     </div>
 
                     <div className="browse-box__footer">
                         <div className="browse-box__footer__progress-box">
                             <div className="browse-box__footer__progress-box__text">
-                                {(this.state.currentCard.results + "").replace(/,/g, "/")}
+                                {this.state.currentCard
+                                    ? (this.state.currentCard.results + "").replace(/,/g, "/")
+                                    : "---"}
                             </div>
                             <div className="browse-box__footer__progress-box__progress">
                                 <div className="browse-box__footer__progress-bar">

@@ -21,8 +21,7 @@ export default class MainMenu extends Component {
     }
 
     handleBlur(e) {
-        if (this.props.visible) this.props.toggle(e)
-        return false;
+        if (this.props.visible) this.props.toggle(e);
     }
 
     render() {
