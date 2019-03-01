@@ -64,7 +64,9 @@ export default class BrowseBox extends Component {
 
                     <div className="browse-box__footer">
                         <div className="browse-box__footer__progress-box">
-                            <div className="browse-box__footer__progress-box__text"> 10 / 6 </div>
+                            <div className="browse-box__footer__progress-box__text">
+                                {(this.state.currentCard.results + "").replace(/,/g, "/")}
+                            </div>
                             <div className="browse-box__footer__progress-box__progress">
                                 <div className="browse-box__footer__progress-bar">
                                     <div
