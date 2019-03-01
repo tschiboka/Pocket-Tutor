@@ -7,12 +7,14 @@
     height: 3vh;
     margin: 0 2.5px;
     padding: 0 5px;
-    background: #a0dcec;
     border-radius: 15px;
     font-size: 2vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     line-height: 3vh;
-    color: #222;
+    color: rgb(17, 17, 17);
+    box-shadow:         1px 1px 1px #000, -1px -1px 1px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow:    1px 1px 1px #000, -1px -1px 1px rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: 1px 1px 1px #000, -1px -1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .topic-label__circle {
@@ -21,10 +23,12 @@
     min-width: 10px; 
     height: 10px;
     min-height: 10px;
-    background: #333;
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 100%;
     margin-right: 3px;
-    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px rgba(255, 255, 255, 0.53);
+    box-shadow:         inset 1px 1px 1px #000, inset -1px -1px 1px rgba(255, 255, 255, 0.53);
+    -moz-box-shadow:    inset 1px 1px 1px #000, inset -1px -1px 1px rgba(255, 255, 255, 0.53);
+    -webkit-box-shadow: inset 1px 1px 1px #000, inset -1px -1px 1px rgba(255, 255, 255, 0.53);
 }
 
 .topic-label__text {

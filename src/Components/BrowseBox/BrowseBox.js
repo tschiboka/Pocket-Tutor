@@ -66,11 +66,11 @@ export default class BrowseBox extends Component {
                 ?
                 <div className="browse-box">
                     <div className="browse-box__header">
-                        <TopicLabel text="ES6" color="blue" />
+                        <TopicLabel text="ES6" color="yellow" />
 
-                        <TopicLabel text="Java" />
+                        <TopicLabel text="Java" color="orange" />
 
-                        <TopicLabel text="TaaaalpraMagyarHiAHazaGyereAKocsmabolHaza" />
+                        <TopicLabel text="TaaaalpraMagyarHiAHazaGyereAKocsmabolHaza" color="pink" />
                     </div>
 
                     <div className="browse-box__body">
