@@ -10,56 +10,78 @@ import test_icon from "./../../images/test-icon.png";
 import settings_icon from "./../../images/settings-icon.png";
 
 export default class MainMenu extends Component {
+    componentDidUpdate() {
+        this.focusMenu();
+    }
+
+    focusMenu() {
+        if (document.getElementsByClassName("main-menu").length) {
+            document.getElementsByClassName("main-menu")[0].focus();
+        }
+    }
+
+    handleBlur(e) {
+        if (this.props.visible) this.props.toggle(e)
+        return false;
+    }
+
     render() {
+        // menu gets focus, element has to be displayed and visible, so my solution was to hide it behind
+        const
+            hiddenStyle = { zIndex: "-1" },
+            visibleStyle = { zIndex: "1000" }
+
         return (
-            this.props.visible
-                ?
-                <div className="main-menu">
-                    <ul>
-                        <li className="main-menu-item" id="main-menu__topics">
-                            <div>
-                                <img src={topics_icon} alt="topics" />
-                                Topics
+            <div
+                className="main-menu"
+                style={this.props.visible ? visibleStyle : hiddenStyle}
+                tabIndex={1}
+                onBlur={e => { this.handleBlur(e) }}
+            >
+                <ul>
+                    <li className="main-menu-item" id="main-menu__topics">
+                        <div>
+                            <img src={topics_icon} alt="topics" />
+                            Topics
                             </div>
-                        </li>
+                    </li>
 
-                        <li className="main-menu-item" id="main-menu__cards">
-                            <div>
-                                <img src={cards_icon} alt="cards" />
-                                Cards
+                    <li className="main-menu-item" id="main-menu__cards">
+                        <div>
+                            <img src={cards_icon} alt="cards" />
+                            Cards
                             </div>
-                        </li>
+                    </li>
 
-                        <li className="main-menu-item" id="main-menu__links">
-                            <div>
-                                <img src={links_icon} alt="links" />
-                                Links
+                    <li className="main-menu-item" id="main-menu__links">
+                        <div>
+                            <img src={links_icon} alt="links" />
+                            Links
                             </div>
-                        </li>
+                    </li>
 
-                        <li className="main-menu-item" id="main-menu__results">
-                            <div>
-                                <img src={result_icon} alt="results" />
-                                Results
+                    <li className="main-menu-item" id="main-menu__results">
+                        <div>
+                            <img src={result_icon} alt="results" />
+                            Results
                             </div>
-                        </li>
+                    </li>
 
-                        <li className="main-menu-item" id="main-menu__test">
-                            <div>
-                                <img src={test_icon} alt="test" />
-                                Test
+                    <li className="main-menu-item" id="main-menu__test">
+                        <div>
+                            <img src={test_icon} alt="test" />
+                            Test
                             </div>
-                        </li>
+                    </li>
 
-                        <li className="main-menu-item" id="main-menu__settings">
-                            <div>
-                                <img src={settings_icon} alt="settings" />
-                                Settings
+                    <li className="main-menu-item" id="main-menu__settings">
+                        <div>
+                            <img src={settings_icon} alt="settings" />
+                            Settings
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                : null
+                    </li>
+                </ul>
+            </div>
         )
     }
 } // end of MainMenu

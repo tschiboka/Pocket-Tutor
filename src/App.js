@@ -9,34 +9,47 @@ import BrowseBox from "./Components/BrowseBox/BrowseBox";
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isMainMenuVisible: false, // main menu is invisible by default
       view: "browse"            // default view is browse (user can read random cards)
     }; // end of state declaration
   } // end of constructor
 
-  toggleMainMenu() {
-    let visibility = this.state.isMainMenuVisible ? false : true;
-
+  extendMainMenu() {
     this.setState({
-      isMainMenuVisible: visibility,
+      isMainMenuVisible: true,
       view: this.state.view
     }); // end of setState
+  } // end of toggleMainMenu
+
+  closeMainMenu(e) {
+    const delay = setTimeout(() => {
+      this.setState({
+        isMainMenuVisible: false,
+        view: this.state.view
+      }); // end of setState
+    }, 100);
   } // end of toggleMainMenu
 
   render() {
     return (
       <div className="App">
         <header>
-          <MainMenuIcon toggle={this.toggleMainMenu.bind(this)} />
+          <MainMenuIcon
+            toggle={this.extendMainMenu.bind(this)}
+          />
 
           <Searchbar />
         </header>
 
         <BrowseBox visible={this.state.view === "browse"} />
 
-        <MainMenu visible={this.state.isMainMenuVisible} />
+        <MainMenu
+          visible={this.state.isMainMenuVisible}
+          toggle={this.closeMainMenu.bind(this)}
+        />
       </div>
     ); // end of return
   } // end of render
-} // end of App
+} // end of App[]
