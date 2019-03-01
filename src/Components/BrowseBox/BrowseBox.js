@@ -43,7 +43,15 @@ export default class BrowseBox extends Component {
             questionIsUp: this.state.questionIsUp ? false : true // toggle question / answer
         }); // end of setState
     } // end of turnClickHandler
+
+    setProgress = () => {
+        const [correctAnswers, totalAnswers] = Array.from(this.state.currentCard.results);
+
+        return Math.round((correctAnswers / totalAnswers) * 100) + "%";
+    } // end of setProgress
+
     render() {
+
         return (
             this.props.visible
                 ?
@@ -56,11 +64,14 @@ export default class BrowseBox extends Component {
 
                     <div className="browse-box__footer">
                         <div className="browse-box__footer__progress-box">
-                            <div className="browse-box__footer__progress-box__text">
-                                66% (10 / 6)
-                            </div>
+                            <div className="browse-box__footer__progress-box__text"> 10 / 6 </div>
                             <div className="browse-box__footer__progress-box__progress">
-
+                                <div className="browse-box__footer__progress-bar">
+                                    <div
+                                        className="browse-box__footer__progress"
+                                        style={{ width: this.setProgress() }}
+                                    ></div>
+                                </div>
                             </div>
                         </div>
 

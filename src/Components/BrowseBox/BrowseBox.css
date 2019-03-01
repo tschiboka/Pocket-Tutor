@@ -40,13 +40,14 @@
     height: 25%;
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
+    justify-content: space-between;
     margin: 2.5%;
     font-size: 2.5vh;
 }
 
 .browse-box__footer__progress-box__text {
     height: 100%;
+    width: 25%;
     padding: 0 2%;
     display: flex;
     justify-content: center;
@@ -55,6 +56,25 @@
     border-left: 1px solid #3e4652;
     border-right: 1px solid #3e4652;
     color: #36ebee;
+}
+
+.browse-box__footer__progress-box__progress {
+    width: 75%;
+    height: 100%;
+}
+
+.browse-box__footer__progress-bar {
+    height: 20%;
+    width: 95%;
+    margin: 4.5% 0 5% 4.5%;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid #3e4652;
+    border-bottom: 1px solid #3e4652;
+}
+
+.browse-box__footer__progress {
+    height: 100%;
+    background: #36ebee;
 }
 
 .browse-box__footer__button-box {
