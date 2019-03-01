@@ -33,9 +33,9 @@ export default class App extends Component {
           <Searchbar />
         </header>
 
-        <MainMenu visible={this.state.isMainMenuVisible} />
-
         <BrowseBox visible={this.state.view === "browse"} />
+
+        <MainMenu visible={this.state.isMainMenuVisible} />
       </div>
     ); // end of return
   } // end of render

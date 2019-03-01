@@ -18,7 +18,7 @@
 }
 
 .main-menu-item {
-    padding: 5% 0;
+    padding: 8% 0;
     list-style: none;
     font-size: 3.2vh;
     line-height: 3.2vh;
@@ -35,6 +35,6 @@
 .main-menu-item div img {
     width: 3.2vh;
     height: 3.2vh;
-    padding-left: 3vw;
-    padding-right: 1.5vw;
+    padding-left: 6vw;
+    padding-right: 3vw;
 }
