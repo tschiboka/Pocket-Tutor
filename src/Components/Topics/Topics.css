@@ -1,0 +1,32 @@
+.topics {
+    position: relative;
+    width: calc(96% - 2px);
+    height: calc(88% - 2px);
+    margin: 2%;
+    border: 1px solid #3e4652;
+}
+
+.topics-box {
+    width: 96%;
+    height: 90%;
+    margin: 4% 2%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #3e4652;
+    border-left: none;
+    border-right: none;
+}
+
+.topics-box__topic-list {
+    width: 100%;
+    height: 90%;
+}
+
+.topics-box__buttons {
+    width: 100%;
+    height: 10%;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #3e4652;
+    border-bottom: none;
+}

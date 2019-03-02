@@ -5,6 +5,7 @@ import Searchbar from "./Components/Searchbar/Searchbar";
 import MainMenuIcon from './Components/MainMenuIcon/MainMenuIcon';
 import MainMenu from "./Components/MainMenu/MainMenu";
 import BrowseBox from "./Components/BrowseBox/BrowseBox";
+import Topics from "./Components/Topics/Topics";
 
 export default class App extends Component {
   constructor(props) {
@@ -34,7 +35,10 @@ export default class App extends Component {
   } // end of toggleMainMenu
 
   changeView(view) {
-    console.log(view);
+    this.setState({
+      isMainMenuVisible: this.state.isMainMenuVisible,
+      view: view
+    }); // end of setState
   } // end of changeView
 
   render() {
@@ -49,6 +53,8 @@ export default class App extends Component {
         </header>
 
         <BrowseBox visible={this.state.view === "browse"} />
+
+        <Topics visible={this.state.view === "topics"} />
 
         <MainMenu
           visible={this.state.isMainMenuVisible}
