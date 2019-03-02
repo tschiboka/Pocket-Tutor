@@ -15,12 +15,28 @@
     background: rgba(0, 0, 0, 0.1);
 }
 
-.topics-box__topic-list {
+.topics-box__topic-list-box {
     width: 100%;
     height: 90%;
     border: 1px solid #3e4652;
     border-bottom: none;
+}
 
+.topics-box__topic-list-box ul {
+    width: 98%;
+    height: 100%;
+    margin: 0;
+    padding: 1%;
+}
+
+.topics-box__topic-list-box ul li {
+    display: flex;
+    margin: 2% 0;
+    list-style: none;
+}
+
+.topics-box__topic-list-box ul li:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .topics-box__buttons {
