@@ -13,8 +13,8 @@
     height: 80%;
     margin-left: 5%;
     border: none;
-    background: #21252b;
     color: #697c97;
+    background: rgb(22, 23, 27);
     font-family: "Lanenar";
     font-style: italic;
     font-size: 3.2vh;
@@ -37,7 +37,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     font-size: 5vh;
     line-height: 5vh;
     border: none;
-    background: #21252b;
+    background: rgb(22, 23, 27);
     color: #36ebee;
     cursor: pointer;
 }
