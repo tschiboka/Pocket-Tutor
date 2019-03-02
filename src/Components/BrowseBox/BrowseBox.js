@@ -84,7 +84,7 @@ export default class BrowseBox extends Component {
                 .join(",");
             colors.push(color ? color : "transparent");
         });
-        const elems = topics.map((t, i) => t ? <TopicLabel text={t} color={colors[i]} /> : "");
+        const elems = topics.map((t, i) => t ? <TopicLabel text={t} color={colors[i]} key={i} /> : "");
         return elems;
     } // end of renderTopics
 

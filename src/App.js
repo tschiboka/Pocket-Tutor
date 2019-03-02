@@ -33,6 +33,10 @@ export default class App extends Component {
     }, 200);
   } // end of toggleMainMenu
 
+  changeView(view) {
+    console.log(view);
+  } // end of changeView
+
   render() {
     return (
       <div className="App">
@@ -49,6 +53,7 @@ export default class App extends Component {
         <MainMenu
           visible={this.state.isMainMenuVisible}
           toggle={this.closeMainMenu.bind(this)}
+          changeView={this.changeView.bind(this)}
         />
       </div>
     ); // end of return

@@ -24,6 +24,13 @@ export default class MainMenu extends Component {
         if (this.props.visible) this.props.toggle(e);
     }
 
+    handleTopicsClick() {
+        this.props.toggle();
+
+        console.log("TOPICS");
+        this.props.changeView("topics");
+    } // end of handle topicsClick
+
     render() {
         // menu gets focus, element has to be displayed and visible, so my solution was to hide it behind
         const
@@ -38,42 +45,67 @@ export default class MainMenu extends Component {
                 onBlur={e => { this.handleBlur(e) }}
             >
                 <ul>
-                    <li className="main-menu-item" id="main-menu__topics">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__topics"
+                        key="topics"
+                        onClick={() => this.handleTopicsClick()}
+                    >
                         <div>
                             <img src={topics_icon} alt="topics" />
                             Topics
                             </div>
                     </li>
 
-                    <li className="main-menu-item" id="main-menu__cards">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__cards"
+                        key="cards"
+                    >
                         <div>
                             <img src={cards_icon} alt="cards" />
                             Cards
                             </div>
                     </li>
 
-                    <li className="main-menu-item" id="main-menu__links">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__links"
+                        key="links"
+                    >
                         <div>
                             <img src={links_icon} alt="links" />
                             Links
                             </div>
                     </li>
 
-                    <li className="main-menu-item" id="main-menu__results">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__results"
+                        key="results"
+                    >
                         <div>
                             <img src={result_icon} alt="results" />
                             Results
                             </div>
                     </li>
 
-                    <li className="main-menu-item" id="main-menu__test">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__test"
+                        key="test"
+                    >
                         <div>
                             <img src={test_icon} alt="test" />
                             Test
                             </div>
                     </li>
 
-                    <li className="main-menu-item" id="main-menu__settings">
+                    <li
+                        className="main-menu-item"
+                        id="main-menu__settings"
+                        key="settings"
+                    >
                         <div>
                             <img src={settings_icon} alt="settings" />
                             Settings
