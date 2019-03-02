@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./BrowseBox.css";
 
-import TopicLabel from "../TopicLabel/TopicLabel"
+import TopicLabel from "../TopicLabel/TopicLabel";
 
 export default class BrowseBox extends Component {
     constructor(props) {
@@ -59,6 +59,35 @@ export default class BrowseBox extends Component {
         }
     } // end of setProgress
 
+    renderTopics() {
+        const
+            CARD = this.state.currentCard,
+            topics = [],
+            colors = [];
+
+        // extract topics
+        if (CARD) {
+            if (CARD.topics && Array.isArray(CARD.topics)) {
+                // max 3 topics allowed
+                for (let i = 0; i < 3; i++) {
+                    if (CARD.topics[i]) topics.push(CARD.topics[i]);
+                } // end of for 3
+            } // end of there are topics
+        } // end of there is a valid card
+
+        topics.forEach(t => {
+            // get the corrisponding color if any
+            const color = JSON
+                .parse(localStorage.topics)
+                .map(topic => topic.name === t ? topic.color : null)
+                .filter(el => el)
+                .join(",");
+            colors.push(color ? color : "transparent");
+        });
+        const elems = topics.map((t, i) => t ? <TopicLabel text={t} color={colors[i]} /> : "");
+        return elems;
+    } // end of renderTopics
+
     render() {
 
         return (
@@ -66,11 +95,7 @@ export default class BrowseBox extends Component {
                 ?
                 <div className="browse-box">
                     <div className="browse-box__header">
-                        <TopicLabel text="ES6" color="yellow" />
-
-                        <TopicLabel text="Java" color="orange" />
-
-                        <TopicLabel text="TaaaalpraMagyarHiAHazaGyereAKocsmabolHaza" color="pink" />
+                        {this.renderTopics()}
                     </div>
 
                     <div className="browse-box__body">
