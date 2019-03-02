@@ -6,8 +6,21 @@ import TopicLabel from "../TopicLabel/TopicLabel";
 export default class Topics extends Component {
     renderTopics() {
         const topics = JSON.parse(localStorage.topics);
-        const topicList = topics.map((t, i) => <li><TopicLabel text={t.name} color={t.color} key={i} /></li>);
-        console.log(topicList);
+        const topicNums = topics.map(t =>
+            JSON.parse(localStorage.cards).map(c =>
+                c.topics.find(el => el === t.name) ? 1 : 0
+            ).reduce((prev, acc) => prev + acc)
+        );
+        console.log(topicNums);
+        const topicList = topics.map((t, i) =>
+            <li key={i}>
+                <TopicLabel text={t.name} color={t.color} />
+                {
+                    JSON.parse(localStorage.cards).map(c =>
+                        c.topics.find(el => el === t.name) ? 1 : 0
+                    ).reduce((prev, acc) => prev + acc)
+                }
+            </li>);
         return topicList;
     }
 

@@ -31,12 +31,25 @@
 
 .topics-box__topic-list-box ul li {
     display: flex;
-    margin: 2% 0;
+    margin: 2% 2%;
+    padding: 1%;
     list-style: none;
+    border-radius: 15px;
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .topics-box__topic-list-box ul li:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.topics-box__topic-list-box ul li:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.topics-box__topic-list-box ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .topics-box__buttons {
