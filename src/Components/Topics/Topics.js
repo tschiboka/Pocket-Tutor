@@ -14,6 +14,8 @@ export default class Topics extends Component {
                     <div className="topics-box__buttons">
                         <button>Add</button>
 
+                        <button>Filter</button>
+
                         <button>Remove</button>
                     </div>
                 </div>

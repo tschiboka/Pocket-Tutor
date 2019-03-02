@@ -89,7 +89,6 @@ export default class BrowseBox extends Component {
     } // end of renderTopics
 
     render() {
-
         return (
             this.props.visible
                 ?
