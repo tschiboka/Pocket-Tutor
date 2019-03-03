@@ -31,9 +31,12 @@
 
 .topics-box__topic-list-box ul li {
     display: flex;
+    justify-content: space-between;
     margin: 2% 2%;
-    padding: 1%;
+    padding: 1% 3% 1% 1%;
     list-style: none;
+    color: #36ebee;
+    font-size: 2.2vh;
     border-radius: 15px;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
