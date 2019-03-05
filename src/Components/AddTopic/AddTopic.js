@@ -54,6 +54,7 @@ export default class AddTopic extends Component {
                         <input
                             id="add-topic__name-input"
                             placeholder="Add topic name"
+                            maxLength="30"
                         />
 
                         <button id="add-topic__create-btn">Create topic</button>
