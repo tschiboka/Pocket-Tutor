@@ -89,6 +89,7 @@
     align-items: center;
 }
 
+
 #add-topic__name-input {
     width: 48%;
     height: 80%;
@@ -98,12 +99,14 @@
     font-size: 2.9vh;
     font-style: italic;
     /* Because of box-shadow, input seems to look out of center, transformY here is like an
-       artifiicial correction that seems to respond well in desktop and mobile sizes as well */
+    artifiicial correction that seems to respond well in desktop and mobile sizes as well */
     transform: translateY(-1px);
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
 }
+
+.topic--exists { color: red !important; }
 
 #add-topic__create-btn {
     width: 48%;

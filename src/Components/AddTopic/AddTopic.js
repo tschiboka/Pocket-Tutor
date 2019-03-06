@@ -26,10 +26,25 @@ export default class AddTopic extends Component {
 
         const input = document.getElementById("add-topic__name-input");
 
+        // disabling special characters
         newTopicName = input.value.replace(/[^\w ]/g, ""); // don't let special chararters appear in input
 
         input.value = newTopicName;
-        console.log("CLLIXK", newTopicName);
+
+        // if topicName exist input text becomes red
+        const topicExists = JSON
+            .parse(localStorage.topics) // string to object
+            .map(t => t.name.toLowerCase() === input.value.toLowerCase())  // iterate over topics and find out if value exists
+            .some(el => !!el);
+
+        input.classList = topicExists ? "topic--exists" : "";
+
+        // reset state
+        let newState = this.state;
+
+        newState.topicName = topicExists ? "" : input.value;
+
+        this.setState(newState);
     } // end of setTopicName
 
     renderPalette() {
@@ -45,6 +60,8 @@ export default class AddTopic extends Component {
                         className={className}
                         key={key}
                         style={{ "backgroundColor": co }}
+                        autoFocus={true}
+                        tabIndex={1}
                         onClick={() => this.handlePaletteClick(i)}
                     >&#10004;</div>
                 );
