@@ -8,7 +8,13 @@ import AddTopic from "../AddTopic/AddTopic";
 export default class Topics extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            "view": "none"
+        }
     } // end of constructor
+
+
 
     renderTopics() {
         const topics = JSON.parse(localStorage.topics);
@@ -25,9 +31,18 @@ export default class Topics extends Component {
         return topicList;
     } // end of renderTopics
 
-    addTopicClickHandler() {
-        console.log("CLICK");
+
+
+    changeView(newView = "none") {
+        // set view to add
+
+        const newState = this.state;
+
+        newState.view = newView;
+
+        this.setState(newState);
     } // end of addTopicClickHandler
+
 
     render() {
         return (
@@ -39,14 +54,19 @@ export default class Topics extends Component {
                     <div className="topics-box__topic-list-box">
                         <ul> {this.renderTopics()} </ul>
                     </div>
+
                     <div className="topics-box__buttons">
-                        <button onClick={() => this.addTopicClickHandler()}>Add</button>
+                        <button onClick={() => this.changeView("add-topic")}>Add</button>
 
                         <button>Filter</button>
 
                         <button>Remove</button>
                     </div>
-                    <AddTopic />
+
+                    <AddTopic
+                        visible={this.state.view === "add-topic"}
+                        closeAddTopic={this.changeView.bind(this)}
+                    />
                 </div>
             </div>
         ); // end of return

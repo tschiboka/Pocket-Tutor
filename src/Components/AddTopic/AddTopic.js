@@ -26,8 +26,21 @@ export default class AddTopic extends Component {
 
 
     handleCreateTopicBtnClick() {
-        console.log("CLICK");
+        if (this.state.topicName.length) {
+            const
+                topics = JSON.parse(localStorage.topics),
+                colors = ["#ffffff", "#ffff79", "#ffca79", "#ff9dce", "#ff8080", "#ff80ff", "#bdbbff", "#9fffff", "#b3ffb3", "#d6adad"];
 
+
+            topics.push({
+                "name": this.state.topicName,
+                "color": colors[this.state.selectedColor]
+            }); // end of topics object declaration
+
+            localStorage.setItem("topics", JSON.stringify(topics));
+
+            this.closeAddPanel();
+        } // end of if topic input has any value
     } // end of handleCreateTopicBtnClick
 
 
@@ -70,6 +83,19 @@ export default class AddTopic extends Component {
 
 
 
+
+    closeAddPanel() {
+        // set state back to default
+        this.setState({
+            selectedColor: 0,
+            topicName: ""
+        });
+
+        this.props.closeAddTopic();
+    } // end of closeAddTopic
+
+
+
     renderPalette() {
         const
             colors = ["#ffffff", "#ffff79", "#ffca79", "#ff9dce", "#ff8080", "#ff80ff", "#bdbbff", "#9fffff", "#b3ffb3", "#d6adad"],
@@ -93,32 +119,39 @@ export default class AddTopic extends Component {
         return palette;
     } // end of renderPalette
 
+
+
     render() {
-        return (
-            <div className="add-topic">
-                <div className="add-topic__header">
-                    Add topic
+        if (this.props.visible)
+            return (
+                <div className="add-topic">
+                    <div className="add-topic__header">
+                        Add topic
                     <span id="add-topic__topic-msg">/ topic name exists!</span>
-                    <button id="cancel-add-topic-btn">&times;</button>
-                </div>
-                <div className="add-topic__body">
-                    <div className="add-topic__palette">{this.renderPalette()}</div>
-
-                    <div className="add-topic__name">
-                        <input
-                            id="add-topic__name-input"
-                            placeholder="Add topic name"
-                            maxLength="30"
-                            onChange={() => this.setTopicName()}
-                        />
-
                         <button
-                            id="add-topic__create-btn"
-                            onClick={() => this.handleCreateTopicBtnClick()}
-                        >Create topic</button>
+                            id="cancel-add-topic-btn"
+                            onClick={() => this.closeAddPanel()}
+                        >&times;</button>
+                    </div>
+                    <div className="add-topic__body">
+                        <div className="add-topic__palette">{this.renderPalette()}</div>
+
+                        <div className="add-topic__name">
+                            <input
+                                id="add-topic__name-input"
+                                placeholder="Add topic name"
+                                maxLength="30"
+                                onChange={() => this.setTopicName()}
+                            />
+
+                            <button
+                                id="add-topic__create-btn"
+                                onClick={() => this.handleCreateTopicBtnClick()}
+                            >Create topic</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        ); // end of return
+            ); // end of return
+        else return null;
     } // end of render
 } // end of AddTopic
