@@ -95,10 +95,10 @@
     border: none;
     background: #eee;
     color: black;
-    font-family: "Lanenar";
     font-size: 2.9vh;
     font-style: italic;
-    text-shadow: 1px 1px 1px black;
+    /* Because of box-shadow, input seems to look out of center, transformY here is like an
+       artifiicial correction that seems to respond well in desktop and mobile sizes as well */
     transform: translateY(-1px);
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);

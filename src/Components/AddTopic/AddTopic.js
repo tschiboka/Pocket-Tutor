@@ -6,7 +6,10 @@ export default class AddTopic extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { selectedColor: 0 };
+        this.state = {
+            selectedColor: 0,
+            topicName: ""
+        };
     }
 
     handlePaletteClick(ind) {
@@ -16,7 +19,18 @@ export default class AddTopic extends Component {
 
         this.setState(newState);
         console.log(ind, " CLICKED", newState);
-    }
+    } // end of handlePaletteClick
+
+    setTopicName() {
+        let newTopicName = "";
+
+        const input = document.getElementById("add-topic__name-input");
+
+        newTopicName = input.value.replace(/[^\w ]/g, ""); // don't let special chararters appear in input
+
+        input.value = newTopicName;
+        console.log("CLLIXK", newTopicName);
+    } // end of setTopicName
 
     renderPalette() {
         const
@@ -55,6 +69,7 @@ export default class AddTopic extends Component {
                             id="add-topic__name-input"
                             placeholder="Add topic name"
                             maxLength="30"
+                            onChange={() => this.setTopicName()}
                         />
 
                         <button id="add-topic__create-btn">Create topic</button>
