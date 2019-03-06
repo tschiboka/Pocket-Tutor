@@ -108,6 +108,8 @@
 
 .topic--exists { color: red !important; }
 
+#add-topic__topic-msg { visibility: hidden; }
+
 #add-topic__create-btn {
     width: 48%;
     height: 90%;

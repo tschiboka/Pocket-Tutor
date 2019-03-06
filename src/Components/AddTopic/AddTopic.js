@@ -12,6 +12,8 @@ export default class AddTopic extends Component {
         };
     }
 
+
+
     handlePaletteClick(ind) {
         let newState = this.state;
 
@@ -20,6 +22,15 @@ export default class AddTopic extends Component {
         this.setState(newState);
         console.log(ind, " CLICKED", newState);
     } // end of handlePaletteClick
+
+
+
+    handleCreateTopicBtnClick() {
+        console.log("CLICK");
+
+    } // end of handleCreateTopicBtnClick
+
+
 
     setTopicName() {
         let newTopicName = "";
@@ -39,6 +50,16 @@ export default class AddTopic extends Component {
 
         input.classList = topicExists ? "topic--exists" : "";
 
+        // if topic exists header text changes and create button disappears
+        if (topicExists) {
+            document.getElementById("add-topic__topic-msg").style.visibility = "visible";
+            document.getElementById("add-topic__create-btn").style.visibility = "hidden";
+        } // end of if topic exists
+        else {
+            document.getElementById("add-topic__topic-msg").style.visibility = "hidden";
+            document.getElementById("add-topic__create-btn").style.visibility = "visible";
+        } // end of if topic doesn't exist
+
         // reset state
         let newState = this.state;
 
@@ -46,6 +67,8 @@ export default class AddTopic extends Component {
 
         this.setState(newState);
     } // end of setTopicName
+
+
 
     renderPalette() {
         const
@@ -75,7 +98,7 @@ export default class AddTopic extends Component {
             <div className="add-topic">
                 <div className="add-topic__header">
                     Add topic
-
+                    <span id="add-topic__topic-msg">/ topic name exists!</span>
                     <button id="cancel-add-topic-btn">&times;</button>
                 </div>
                 <div className="add-topic__body">
@@ -89,7 +112,10 @@ export default class AddTopic extends Component {
                             onChange={() => this.setTopicName()}
                         />
 
-                        <button id="add-topic__create-btn">Create topic</button>
+                        <button
+                            id="add-topic__create-btn"
+                            onClick={() => this.handleCreateTopicBtnClick()}
+                        >Create topic</button>
                     </div>
                 </div>
             </div>
