@@ -11,8 +11,10 @@ export default class Topics extends Component {
 
         this.state = {
             "view": "none",
-            "removeButtonsVisible": false
-        }
+            "removeButtonsVisible": false,
+            "removeName": "",
+            "removeNum": 0
+        } // end of state declaration
     } // end of constructor
 
 
@@ -34,7 +36,7 @@ export default class Topics extends Component {
                         }
                         {this.state.removeButtonsVisible
                             ? <button
-                                className={"topic__remove-item-btn name--" + t.name}
+                                className={"topic__remove-item-btn remove-topic-name--" + t.name}
                                 onClick={e => this.removeTopic(e)}
                             >&times;</button>
                             : null
@@ -48,8 +50,11 @@ export default class Topics extends Component {
 
 
     removeTopic(event) {
+        const
+            target = event.target,
+            name = target.classList[1].replace(/remove-topic-name--/, ""); // second item includes the name (remove-topic-name***)
 
-        console.log("REMOVE", event.target);
+        console.log("REMOVE", name);
     }
 
 
