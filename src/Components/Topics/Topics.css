@@ -20,6 +20,9 @@
     height: 90%;
     border: 1px solid #3e4652;
     border-bottom: none;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: lightblue transparent;
 }
 
 .topics-box__topic-list-box ul {
@@ -84,4 +87,19 @@
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9); 
+    background: #36ebee;
 }

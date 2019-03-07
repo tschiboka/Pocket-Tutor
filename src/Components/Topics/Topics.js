@@ -19,16 +19,21 @@ export default class Topics extends Component {
     renderTopics() {
         const topics = JSON.parse(localStorage.topics);
 
-        const topicList = topics.map((t, i) =>
-            <li key={i}>
-                <TopicLabel text={t.name} color={t.color} />
-                {
-                    JSON.parse(localStorage.cards).map(c =>
-                        c.topics.find(el => el === t.name) ? 1 : 0
-                    ).reduce((prev, acc) => prev + acc)
-                }
-            </li>);
-        return topicList;
+        if (topics.length) {
+            const topicList = topics.map((t, i) =>
+                <li key={i}>
+                    <TopicLabel text={t.name} color={t.color} />
+                    {
+                        JSON.parse(localStorage.cards).length ?
+                            JSON.parse(localStorage.cards).map(c =>
+                                c.topics.find(el => el === t.name) ? 1 : 0
+                            ).reduce((prev, acc) => prev + acc)
+                            : "0"
+                    }
+                </li>);
+            return topicList;
+        } // end of if there are topics
+        else { return null; }
     } // end of renderTopics
 
 

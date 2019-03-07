@@ -41,7 +41,14 @@ export default class App extends Component {
     }); // end of setState
   } // end of changeView
 
+  setLocalStorage() {
+    // set default localstorage falues in case missing or first visit
+    if (!localStorage.cards) { localStorage.setItem("cards", "[]") }
+    if (!localStorage.topics) { localStorage.setItem("topics", "[]") }
+  } // end of setLocalStorage
+
   render() {
+    this.setLocalStorage();
     return (
       <div className="App">
         <header>

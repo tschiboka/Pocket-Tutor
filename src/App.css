@@ -31,3 +31,7 @@ header {
   justify-content: row;
   align-items: stretch;
 }
+
+button {
+  outline: none;
+}
