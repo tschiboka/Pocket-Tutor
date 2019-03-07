@@ -48,6 +48,7 @@ export default class Topics extends Component {
 
 
     removeTopic(event) {
+
         console.log("REMOVE", event.target);
     }
 
@@ -79,6 +80,14 @@ export default class Topics extends Component {
                 className="topics"
                 style={{ display: this.props.visible ? "block" : "none" }}
             >
+                <div className="remove-msg">
+                    If you remove ... topic, the topic will be deleted from the 12 cards that featured it.
+                    Are you sure you want to remove ...?
+                    <div className="remove-item__button-box">
+                        <button>Yes</button>
+                        <button>No</button>
+                    </div>
+                </div>
                 <div className="topics-box">
                     <div className="topics-box__topic-list-box">
                         <ul> {this.renderTopics()} </ul>
