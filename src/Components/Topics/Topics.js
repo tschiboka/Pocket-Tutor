@@ -10,7 +10,8 @@ export default class Topics extends Component {
         super(props);
 
         this.state = {
-            "view": "none"
+            "view": "none",
+            "removeButtonsVisible": false
         }
     } // end of constructor
 
@@ -23,13 +24,16 @@ export default class Topics extends Component {
             const topicList = topics.map((t, i) =>
                 <li key={i}>
                     <TopicLabel text={t.name} color={t.color} />
-                    {
-                        JSON.parse(localStorage.cards).length ?
-                            JSON.parse(localStorage.cards).map(c =>
-                                c.topics.find(el => el === t.name) ? 1 : 0
-                            ).reduce((prev, acc) => prev + acc)
-                            : "0"
-                    }
+                    <div className="topic__item-misc">
+                        {
+                            JSON.parse(localStorage.cards).length ?
+                                JSON.parse(localStorage.cards).map(c =>
+                                    c.topics.find(el => el === t.name) ? 1 : 0
+                                ).reduce((prev, acc) => prev + acc)
+                                : "0"
+                        }
+                        {this.state.removeButtonsVisible ? <button className="topic__remove-item-btn">&times;</button> : null}
+                    </div>
                 </li>);
             return topicList;
         } // end of if there are topics
@@ -49,6 +53,16 @@ export default class Topics extends Component {
     } // end of addTopicClickHandler
 
 
+    toggleRemoveButtons() {
+        const newState = this.state;
+
+        if (this.state.removeButtonsVisible) { newState.removeButtonsVisible = false; }
+        else { newState.removeButtonsVisible = true; }
+
+        this.setState(newState);
+    } // end of toggleRemoveButtons
+
+
     render() {
         return (
             <div
@@ -63,9 +77,9 @@ export default class Topics extends Component {
                     <div className="topics-box__buttons">
                         <button onClick={() => this.changeView("add-topic")}>Add</button>
 
-                        <button>Filter</button>
+                        <button onClick={() => this.toggleRemoveButtons()}>Remove</button>
 
-                        <button>Remove</button>
+                        <button>Back</button>
                     </div>
 
                     <AddTopic
