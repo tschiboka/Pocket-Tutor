@@ -32,7 +32,13 @@ export default class Topics extends Component {
                                 ).reduce((prev, acc) => prev + acc)
                                 : "0"
                         }
-                        {this.state.removeButtonsVisible ? <button className="topic__remove-item-btn">&times;</button> : null}
+                        {this.state.removeButtonsVisible
+                            ? <button
+                                className={"topic__remove-item-btn name--" + t.name}
+                                onClick={e => this.removeTopic(e)}
+                            >&times;</button>
+                            : null
+                        }
                     </div>
                 </li>);
             return topicList;
@@ -40,6 +46,10 @@ export default class Topics extends Component {
         else { return null; }
     } // end of renderTopics
 
+
+    removeTopic(event) {
+        console.log("REMOVE", event.target);
+    }
 
 
     changeView(newView = "none") {
