@@ -12,6 +12,7 @@ export default class Topics extends Component {
         this.state = {
             "view": "none",
             "removeButtonsVisible": false,
+            "removeMsgVisible": false,
             "removeName": "",
             "removeNum": 0
         } // end of state declaration
@@ -53,20 +54,45 @@ export default class Topics extends Component {
     } // end of renderTopics
 
 
+
     removeTopic(event) {
         const
             target = event.target,
             name = target.classList[1].replace(/remove-topic-name--/, ""),  // second item includes the name (remove-topic-name***)
-            numOfCards = this.getNumOfCardsThatHasTopic(name),
-            newState = this.state;
+            numOfCards = this.getNumOfCardsThatHasTopic(name);
+
+        this.openRemoveMsg();
 
         // set new state
+        const newState = this.state;
+
         newState.removeName = name;
         newState.removeNum = numOfCards;
 
         this.setState(newState);
         console.log("REMOVE", name, numOfCards);
     } // end of removeTopic
+
+
+    closeRemoveMsg() {
+        console.log("OPEN");
+        const newState = this.state;
+
+        newState.removeMsgVisible = false;
+
+        this.setState(newState);
+    } // end of closeRemoveMsg
+
+
+    openRemoveMsg() {
+        console.log("CLOSE");
+        const newState = this.state;
+
+        newState.removeMsgVisible = true;
+
+        this.setState(newState);
+    } // end of toggleRemoveMsg
+
 
 
     changeView(newView = "none") {
@@ -80,11 +106,16 @@ export default class Topics extends Component {
     } // end of addTopicClickHandler
 
 
+
     toggleRemoveButtons() {
         const newState = this.state;
 
-        if (this.state.removeButtonsVisible) { newState.removeButtonsVisible = false; }
-        else { newState.removeButtonsVisible = true; }
+        // toggle remove button visibility
+        newState.removeButtonsVisible = newState.removeButtonsVisible ? false : true;
+
+        // reset remove features
+        newState.removeName = "";
+        newState.removeNum = 0;
 
         this.setState(newState);
     } // end of toggleRemoveButtons
@@ -95,21 +126,26 @@ export default class Topics extends Component {
             <div
                 className="topics"
                 style={{ display: this.props.visible ? "block" : "none" }}
+                onClick={() => this.closeRemoveMsg()}
             >
-                <div className="remove-msg">
-                    {
-                        this.state.removeNum
-                            ? "If you remove " + this.state.removeName
-                            + " topic, the topic will be deleted from " + this.state.removeNum
-                            + " card" + (this.state.removeNum > 1 ? "s" : "")
-                            + " that featured it. Are you sure you want to remove " + this.state.removeName + "?"
-                            : "No card has " + this.state.removeName + "topic. Do you want to remove it?"
-                    }
-                    <div className="remove-item__button-box">
-                        <button>Yes</button>
-                        <button>No</button>
+                {
+                    this.state.removeMsgVisible &&
+                    <div className="remove-msg">
+                        {
+                            this.state.removeNum
+                                ? "If you remove " + this.state.removeName
+                                + " topic, the topic will be deleted from " + this.state.removeNum
+                                + " card" + (this.state.removeNum > 1 ? "s" : "")
+                                + " that featured it. Are you sure you want to remove " + this.state.removeName + "?"
+                                : "No card has " + this.state.removeName + "topic. Do you want to remove it?"
+                        }
+                        <div className="remove-item__button-box">
+                            <button>Yes</button>
+                            <button>No</button>
+                        </div>
                     </div>
-                </div>
+
+                }
                 <div className="topics-box">
                     <div className="topics-box__topic-list-box">
                         <ul> {this.renderTopics()} </ul>
