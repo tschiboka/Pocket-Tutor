@@ -57,8 +57,14 @@ export default class Topics extends Component {
         const
             target = event.target,
             name = target.classList[1].replace(/remove-topic-name--/, ""),  // second item includes the name (remove-topic-name***)
-            numOfCards = this.getNumOfCardsThatHasTopic(name);
+            numOfCards = this.getNumOfCardsThatHasTopic(name),
+            newState = this.state;
 
+        // set new state
+        newState.removeName = name;
+        newState.removeNum = numOfCards;
+
+        this.setState(newState);
         console.log("REMOVE", name, numOfCards);
     } // end of removeTopic
 
@@ -91,8 +97,14 @@ export default class Topics extends Component {
                 style={{ display: this.props.visible ? "block" : "none" }}
             >
                 <div className="remove-msg">
-                    If you remove ... topic, the topic will be deleted from the 12 cards that featured it.
-                    Are you sure you want to remove ...?
+                    {
+                        this.state.removeNum
+                            ? "If you remove " + this.state.removeName
+                            + " topic, the topic will be deleted from " + this.state.removeNum
+                            + " card" + (this.state.removeNum > 1 ? "s" : "")
+                            + " that featured it. Are you sure you want to remove " + this.state.removeName + "?"
+                            : "No card has " + this.state.removeName + "topic. Do you want to remove it?"
+                    }
                     <div className="remove-item__button-box">
                         <button>Yes</button>
                         <button>No</button>
