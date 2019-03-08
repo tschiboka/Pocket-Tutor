@@ -17,7 +17,16 @@ export default class Topics extends Component {
         } // end of state declaration
     } // end of constructor
 
+    getNumOfCardsThatHasTopic(topicName) {
+        const
+            cards = JSON.parse(localStorage.cards),  // parse cards into obj
+            numOfCards = cards.length // in case it was not declared or deleted
+                ? cards.map(c => c.topics.find(el => el === topicName) ? 1 : 0) // find topic and return an array
+                    .reduce((prev, acc) => prev + acc) // reduce arr into the sum
+                : 0;
 
+        return numOfCards;
+    } // end of getNumOfCardsThatHasTopic
 
     renderTopics() {
         const topics = JSON.parse(localStorage.topics);
@@ -27,13 +36,7 @@ export default class Topics extends Component {
                 <li key={i}>
                     <TopicLabel text={t.name} color={t.color} />
                     <div className="topic__item-misc">
-                        {
-                            JSON.parse(localStorage.cards).length ?
-                                JSON.parse(localStorage.cards).map(c =>
-                                    c.topics.find(el => el === t.name) ? 1 : 0
-                                ).reduce((prev, acc) => prev + acc)
-                                : "0"
-                        }
+                        {this.getNumOfCardsThatHasTopic(t.name)}
                         {
                             this.state.removeButtonsVisible
                                 ? <button
@@ -54,13 +57,10 @@ export default class Topics extends Component {
         const
             target = event.target,
             name = target.classList[1].replace(/remove-topic-name--/, ""),  // second item includes the name (remove-topic-name***)
-            cards = JSON.parse(localStorage.cards),
-            numOfCards = cards.length
-                ? cards.map(c => c.topics.find(el => el === name) ? 1 : 0)
-                    .reduce((prev, acc) => prev + acc)
-                : 0;
+            numOfCards = this.getNumOfCardsThatHasTopic(name);
+
         console.log("REMOVE", name, numOfCards);
-    }
+    } // end of removeTopic
 
 
     changeView(newView = "none") {
