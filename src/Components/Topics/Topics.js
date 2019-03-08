@@ -34,12 +34,13 @@ export default class Topics extends Component {
                                 ).reduce((prev, acc) => prev + acc)
                                 : "0"
                         }
-                        {this.state.removeButtonsVisible
-                            ? <button
-                                className={"topic__remove-item-btn remove-topic-name--" + t.name}
-                                onClick={e => this.removeTopic(e)}
-                            >&times;</button>
-                            : null
+                        {
+                            this.state.removeButtonsVisible
+                                ? <button
+                                    className={"topic__remove-item-btn remove-topic-name--" + t.name}
+                                    onClick={e => this.removeTopic(e)}
+                                >&times;</button>
+                                : null
                         }
                     </div>
                 </li>);
@@ -52,9 +53,13 @@ export default class Topics extends Component {
     removeTopic(event) {
         const
             target = event.target,
-            name = target.classList[1].replace(/remove-topic-name--/, ""); // second item includes the name (remove-topic-name***)
-
-        console.log("REMOVE", name);
+            name = target.classList[1].replace(/remove-topic-name--/, ""),  // second item includes the name (remove-topic-name***)
+            cards = JSON.parse(localStorage.cards),
+            numOfCards = cards.length
+                ? cards.map(c => c.topics.find(el => el === name) ? 1 : 0)
+                    .reduce((prev, acc) => prev + acc)
+                : 0;
+        console.log("REMOVE", name, numOfCards);
     }
 
 
