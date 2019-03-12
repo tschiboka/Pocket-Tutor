@@ -56,7 +56,6 @@ export default class Topics extends Component {
 
 
     removeTopic(event) {
-        console.log(event);
         const
             target = event.target,
             name = target.classList[1].replace(/remove-topic-name--/, ""),  // second item includes the name (remove-topic-name***)
@@ -71,23 +70,21 @@ export default class Topics extends Component {
         newState.removeNum = numOfCards;
 
         this.setState(newState);
-        console.log("REMOVE", name, numOfCards);
     } // end of removeTopic
 
 
     closeRemoveMsg() {
-        console.log("CLOSE");
         const newState = this.state;
 
         newState.removeMsgVisible = false;
+        newState.removeName = "";
+        newState.removeNum = 0;
 
         this.setState(newState);
-
     } // end of closeRemoveMsg
 
 
     openRemoveMsg(event) {
-        console.log("OPEN");
         const newState = this.state;
 
         newState.removeMsgVisible = true;
@@ -96,6 +93,27 @@ export default class Topics extends Component {
         event.stopPropagation(); // further event bubbling would close the msg, outer div click closes the msg div
     } // end of toggleRemoveMsg
 
+
+
+    removeTopicFromCard(event) {
+        event.stopPropagation(); // the msg div will be closed by the function, so we can be sure state won't change while function runs
+
+        if (this.state.removeNum > 0) {
+            // REMOVE TOPIC FROM CARDS
+        } // end of if no cards held the removable topic
+
+        // REMOVE TOPIC
+        const
+            topics = JSON.parse(localStorage.topics),
+            index = topics.findIndex(e => e.name === this.state.removeName);
+
+        topics.splice(index, 1);
+
+        localStorage.setItem("topics", JSON.stringify(topics));
+        console.log(JSON.stringify(topics));
+
+        this.closeRemoveMsg(); // here msg is closed by function, not by event bubbling
+    } // end of removeTopicFromCards
 
 
     changeView(newView = "none") {
@@ -143,7 +161,7 @@ export default class Topics extends Component {
                                 : "No card has " + this.state.removeName + " topic added yet. Do you want to remove it?"
                         }
                         <div className="remove-item__button-box">
-                            <button onclick={() => this.removeTopicFromCard()}>Yes</button>
+                            <button onClick={e => this.removeTopicFromCard(e)}>Yes</button>
                             <button>No</button>
                         </div>
                     </div>
