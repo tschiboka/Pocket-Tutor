@@ -93,7 +93,7 @@ export default class Topics extends Component {
         newState.removeMsgVisible = true;
 
         this.setState(newState);
-        event.stopPropagation();
+        event.stopPropagation(); // further event bubbling would close the msg, outer div click closes the msg div
     } // end of toggleRemoveMsg
 
 
@@ -143,7 +143,7 @@ export default class Topics extends Component {
                                 : "No card has " + this.state.removeName + " topic added yet. Do you want to remove it?"
                         }
                         <div className="remove-item__button-box">
-                            <button>Yes</button>
+                            <button onclick={() => this.removeTopicFromCard()}>Yes</button>
                             <button>No</button>
                         </div>
                     </div>
