@@ -14,7 +14,9 @@ export default class Topics extends Component {
             "removeButtonsVisible": false,
             "removeMsgVisible": false,
             "removeName": "",
-            "removeNum": 0
+            "removeNum": 0,
+            "sortby": "created",
+            "ascending": true
         } // end of state declaration
     } // end of constructor
 
@@ -153,6 +155,43 @@ export default class Topics extends Component {
     } // end of toggleRemoveButtons
 
 
+    changeSortBy(newSortby) {
+        console.log(newSortby);
+        if (newSortby === this.state.sortby) {
+            // change direction
+            const newState = this.state;
+
+            newState.ascending = newState.ascending ? false : true; // toggle ascending / descending
+
+            this.setState(newState);
+        } // end of if sortby was the same as before
+        else {
+            // change sort by to the parameter given by the function
+            const newState = this.state;
+
+            newState.sortby = newSortby;
+
+            this.setState(newState);
+        } // end of if sortby was different than before
+    } // end of changeSortBy
+
+
+
+    renderSortButton(sortby) {
+        console.log(this.state.sortby === sortby);
+        return (
+            <button
+                className={"topics-box__header__" + { sortby } + (this.state.sortby === sortby ? " topics-box__header--active" : "")}
+                onClick={() => this.changeSortBy(sortby)}
+            >
+                {sortby}
+                {this.state.sortby === sortby && (this.state.ascending ? <span>&#9650;</span> : <span>&#9660;</span>)}
+            </button>
+        ) // end of return
+    } // end of renderSortButton
+
+
+
     render() {
         return (
             <div
@@ -174,7 +213,7 @@ export default class Topics extends Component {
                         <div className="remove-item__button-box">
                             <button onClick={e => this.removeTopicFromCard(e)}>Yes</button>
 
-                            {/* No need for onclick event on no button, event bubbling will close the msg. */}
+                            {/* No need for onclick event on NO button, event bubbling will close the msg. */}
                             <button>No</button>
                         </div>
                     </div>
@@ -183,11 +222,11 @@ export default class Topics extends Component {
                     <div className="topics-box__header">
                         <span className="topics-box__header__text">Sort by: </span>
 
-                        <button className="topics-box__header__name">Name</button>
+                        {this.renderSortButton("name")}
 
-                        <button className="topics-box__header__cards">Cards</button>
+                        {this.renderSortButton("cards")}
 
-                        <button className="topics-box__header__created">Created &#9650;</button>
+                        {this.renderSortButton("created")}
                     </div>
 
                     <div className="topics-box__topic-list-box">

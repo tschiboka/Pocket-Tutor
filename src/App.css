@@ -9,7 +9,12 @@ body {
   background: rgb(249, 249, 250) url(./images/padded.png);
   font-family: "Lanenar";
 }
+/*
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
+*/
 .App {
   position: relative;
   height: calc(100vh - 2px);
