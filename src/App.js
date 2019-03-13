@@ -61,7 +61,10 @@ export default class App extends Component {
 
         <BrowseBox visible={this.state.view === "browse"} />
 
-        <Topics visible={this.state.view === "topics"} />
+        <Topics
+          visible={this.state.view === "topics"}
+          changeView={this.changeView.bind(this)}
+        />
 
         <MainMenu
           visible={this.state.isMainMenuVisible}

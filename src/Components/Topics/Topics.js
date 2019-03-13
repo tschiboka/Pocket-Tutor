@@ -173,12 +173,23 @@ export default class Topics extends Component {
                         }
                         <div className="remove-item__button-box">
                             <button onClick={e => this.removeTopicFromCard(e)}>Yes</button>
+
+                            {/* No need for onclick event on no button, event bubbling will close the msg. */}
                             <button>No</button>
                         </div>
                     </div>
-
                 }
                 <div className="topics-box">
+                    <div className="topics-box__header">
+                        <span className="topics-box__header__text">Sort by: </span>
+
+                        <button className="topics-box__header__name">Name</button>
+
+                        <button className="topics-box__header__cards">Cards</button>
+
+                        <button className="topics-box__header__created">Created &#9650;</button>
+                    </div>
+
                     <div className="topics-box__topic-list-box">
                         <ul> {this.renderTopics()} </ul>
                     </div>
@@ -188,7 +199,7 @@ export default class Topics extends Component {
 
                         <button onClick={() => this.toggleRemoveButtons()}>Remove</button>
 
-                        <button>Back</button>
+                        <button onClick={() => this.props.changeView("browse")}>Back</button>
                     </div>
 
                     <AddTopic
