@@ -20,6 +20,9 @@ export default class Topics extends Component {
         } // end of state declaration
     } // end of constructor
 
+
+
+
     getNumOfCardsThatHasTopic(topicName) {
         const
             cards = JSON.parse(localStorage.cards),  // parse cards into obj
@@ -31,8 +34,31 @@ export default class Topics extends Component {
         return numOfCards;
     } // end of getNumOfCardsThatHasTopic
 
+
+
+
     renderTopics() {
-        const topics = JSON.parse(localStorage.topics);
+        let topics = JSON.parse(localStorage.topics);
+
+        // add to topics a number property
+        topics = topics.map(t => {
+            t.number = this.getNumOfCardsThatHasTopic(t.name);
+            return t;
+        });
+
+        // SORT TOPICS
+        switch (this.state.sortby) {
+            case "name": { topics = topics.sort((accu, curr) => accu.name > curr.name); break; }
+
+            case "cards": { topics = topics.sort((accu, curr) => accu.number > curr.number); break; }
+        }
+
+        // reverse if not ascending
+        if (!this.state.ascending) { topics = topics.reverse(); }
+
+        topics.forEach(t => {
+            console.log(t);
+        });
 
         if (topics.length) {
             const topicList = topics.map((t, i) =>
@@ -173,6 +199,8 @@ export default class Topics extends Component {
 
             this.setState(newState);
         } // end of if sortby was different than before
+
+        this.forceUpdate();
     } // end of changeSortBy
 
 
