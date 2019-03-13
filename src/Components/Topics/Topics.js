@@ -100,7 +100,19 @@ export default class Topics extends Component {
 
         if (this.state.removeNum > 0) {
             // REMOVE TOPIC FROM CARDS
-        } // end of if no cards held the removable topic
+            let cards = JSON.parse(localStorage.cards);
+
+            console.log("CARDS");
+            cards = cards.length && cards.map(c => {
+                const cardTopics = c.topics;
+
+                c.topics = cardTopics.filter(ct => ct !== this.state.removeName);
+                console.log(cardTopics);
+                return c;
+            }); // end of card iteration
+
+            localStorage.setItem("cards", JSON.stringify(cards));
+        } // end of if any card holds the topic to be removed
 
         // REMOVE TOPIC
         const
@@ -110,7 +122,6 @@ export default class Topics extends Component {
         topics.splice(index, 1);
 
         localStorage.setItem("topics", JSON.stringify(topics));
-        console.log(JSON.stringify(topics));
 
         this.closeRemoveMsg(); // here msg is closed by function, not by event bubbling
     } // end of removeTopicFromCards
