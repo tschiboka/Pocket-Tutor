@@ -26,7 +26,7 @@
 
 .cards__header__text {
     font-size: 3.8vw;
-    width: 19%;
+    width: 33.3%;
     color: #697c97;
     font-style: italic;
     text-align: center;
@@ -35,7 +35,7 @@
 }
 
 .cards__header button {
-    width: 27%;
+    width: 33.3%;
     height: 100%;
     color: #697c97;
     font-size: 3.8vw;

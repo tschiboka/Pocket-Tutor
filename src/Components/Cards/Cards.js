@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import "./Cards.css";
 
+import CardThumbnail from "../ChardThumbnail/CardThumbnail";
+
 export default class Cards extends Component {
     constructor(props) {
         super(props);
@@ -14,33 +16,11 @@ export default class Cards extends Component {
 
 
 
-    getNumOfCardsThatHasTopic(topicName) {
-        const
-            cards = JSON.parse(localStorage.cards),  // parse cards into obj
-            numOfCards = cards.length // in case it was not declared or deleted
-                ? cards.map(c => c.topics.find(el => el === topicName) ? 1 : 0) // find topic and return an array
-                    .reduce((prev, acc) => prev + acc) // reduce arr into the sum
-                : 0;
-
-        return numOfCards;
-    } // end of getNumOfCardsThatHasTopic
-
-
-
     renderCards() {
         let cards = JSON.parse(localStorage.cards);
 
-        // add to topics a number property
-        cards = cards.map(t => {
-            t.number = this.getNumOfCardsThatHasTopic(t.name);
-            return t;
-        });
-
-        // SORT TOPICS
+        // SORT CARDS
         switch (this.state.sortby) {
-            case "name": { cards = cards.sort((accu, curr) => accu.name > curr.name); break; }
-
-            case "cards": { cards = cards.sort((accu, curr) => accu.number > curr.number); break; }
 
             default: { } // react expects defult
         } // end of switch
@@ -48,16 +28,18 @@ export default class Cards extends Component {
         // reverse if not ascending
         if (!this.state.ascending) { cards = cards.reverse(); }
 
+
+        console.log(cards);
         // create JSX
         if (cards.length) {
             const cardsList = cards.map((c, i) =>
                 <li key={i}>
-
+                    <CardThumbnail id={c.id} />
                 </li>);
             return cardsList;
         } // end of if there are topics
         else { return null; }
-    } // end of renderTopics    
+    } // end of renderCards    
 
 
 
@@ -87,7 +69,7 @@ export default class Cards extends Component {
     renderSortButton(sortby) {
         return (
             <button
-                className={"cards__header__" + { sortby } + (this.state.sortby === sortby ? " topics__header--active" : "")}
+                className={"cards__header__" + sortby + (this.state.sortby === sortby ? " cards__header--active" : "")}
                 onClick={() => this.changeSortBy(sortby)}
             >
                 {sortby}
@@ -105,11 +87,9 @@ export default class Cards extends Component {
                     <div className="cards__header">
                         <span className="cards__header__text">Sort by: </span>
 
-                        {this.renderSortButton("name")}
+                        {this.renderSortButton("id")}
 
-                        {this.renderSortButton("cards")}
-
-                        {this.renderSortButton("created")}
+                        {this.renderSortButton("results")}
                     </div>
 
                     <div className="cards__body">{this.renderCards()}</div>
