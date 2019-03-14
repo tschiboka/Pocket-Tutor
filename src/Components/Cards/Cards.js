@@ -19,8 +19,10 @@ export default class Cards extends Component {
     renderCards() {
         let cards = JSON.parse(localStorage.cards);
 
+
         // SORT CARDS
         switch (this.state.sortby) {
+            case "results": { break; }
 
             default: { } // react expects defult
         } // end of switch
@@ -92,7 +94,9 @@ export default class Cards extends Component {
                         {this.renderSortButton("results")}
                     </div>
 
-                    <div className="cards__body">{this.renderCards()}</div>
+                    <div className="cards__body">
+                        <ul>{this.renderCards()}</ul>
+                    </div>
 
                     <div className="cards__button-box">
                         <button>Create</button>

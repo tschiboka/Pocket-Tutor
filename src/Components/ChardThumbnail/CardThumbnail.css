@@ -1,0 +1,4 @@
+.card-thumbnail__header {
+    display: flex;
+    flex-flow: row wrap;
+}
