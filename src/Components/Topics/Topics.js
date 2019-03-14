@@ -53,7 +53,7 @@ export default class Topics extends Component {
             case "cards": { topics = topics.sort((accu, curr) => accu.number > curr.number); break; }
 
             default: { } // react expects defult
-        } // end of swith
+        } // end of switch
 
         // reverse if not ascending
         if (!this.state.ascending) { topics = topics.reverse(); }
