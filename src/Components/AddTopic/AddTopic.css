@@ -13,7 +13,6 @@
 
 .add-topic__header {
     height: 25%;
-    width: 98%;
     padding-left: 2%;
     display: flex;
     justify-content: space-between;
@@ -31,7 +30,7 @@
 }
 
 .add-topic__body {
-    height: calc(71% - 1px);
+    height: 68%;
     width: 98%;
     margin: 1%;
     display: flex;
@@ -68,7 +67,7 @@
 }
 
 .add-topic__name {
-    width: calc(100% - 10px);
+    width: 99%;
     height: 50%;
     margin: 2px;
     padding: 0 2px;

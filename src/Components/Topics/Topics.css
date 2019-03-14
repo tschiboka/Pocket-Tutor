@@ -1,7 +1,7 @@
 .topics {
     position: relative;
-    width: calc(96% - 2px);
-    height: calc(88% - 2px);
+    width: 96%;
+    height: 88%;
     margin: 2%;
     border: 1px solid #3e4652;
 }
@@ -60,7 +60,7 @@
 }
 
 .topics-box__topic-list-box ul {
-    width: 98%;
+    width: 100%;
     height: 100%;
     margin: 0;
     padding: 1%;
@@ -131,7 +131,6 @@
     flex-direction: column;
     justify-content: space-evenly;
     width: calc(100% - 10px);
-    height: cald(20% - 10px);
     top: 35%;
     left: 0;
     padding: 5px;

@@ -39,6 +39,6 @@
 .main-menu-item div img {
     width: 3.2vh;
     height: 3.2vh;
-    padding-left: 20%;
-    padding-right: 10%;
+    margin-left: 20%;
+    margin-right: 10%;
 }

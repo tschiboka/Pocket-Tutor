@@ -1,5 +1,5 @@
 .main-menu__icon {
-    width: calc(14% - 1px);
+    width: 14% ;
     height: 100%;
     display: flex;
     flex-direction: column;
