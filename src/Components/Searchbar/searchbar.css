@@ -36,10 +36,14 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .searchbar-container button {
     font-size: 5vh;
     line-height: 5vh;
-    border: none;
     background: rgb(22, 23, 27);
     color: #36ebee;
-    cursor: pointer;
+    box-shadow: none;
+}
+
+.searchbar-container button:hover {
+    text-decoration: none;
+    box-shadow: none;
 }
 
 .searchbar-container button div {

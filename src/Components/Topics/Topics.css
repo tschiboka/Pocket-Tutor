@@ -17,7 +17,7 @@
 
 .topics-box__header {
     width: 100%;
-    height: 4%;
+    height: 5%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -37,22 +37,12 @@
 .topics-box__header button {
     width: 27%;
     height: 100%;
-    background: transparent;
-    border: none;
     color: #697c97;
     font-size: 3.8vw;
-    font-family: "Lanenar";
-    cursor: pointer;
-    overflow: hidden;
-    white-space: nowrap;
-    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .topics-box__header button:hover {
     color: #36ebee;
-    text-decoration: underline;
 }
 
 .topics-box__header--active {
@@ -61,7 +51,7 @@
 
 .topics-box__topic-list-box {
     width: 100%;
-    height: 90%;
+    height: 85%;
     border: 1px solid #3e4652;
     border-bottom: none;
     overflow-y: auto;
@@ -113,14 +103,8 @@
     margin-left: 5px;
     color: #d86969;
     font-size: 1.4vh;
-    border: none;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
-    background: transparent;
-    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-
 }
 
 .topics-box__buttons {
@@ -137,21 +121,8 @@
 .topics-box__buttons button {
     width: 33.3%;
     height: 100%;
-    background: transparent;
-    border: none;
     font-size: 3.2vh;
     color: #36ebee;
-    font-family: "Lanenar";
-    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.topics-box__buttons button:hover {
-    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    text-decoration: underline;
 }
 
 .remove-msg {
@@ -183,20 +154,7 @@
     margin: 0 5px;
     padding: 5px;
     font-size: 2.5vh;
-    background: transparent;
     color: #36ebee;
-    font-family: "Lanenar";
-    border: none;
-    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.remove-item__button-box button:hover {
-    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    text-decoration: underline;
 }
 
 ::-webkit-scrollbar {

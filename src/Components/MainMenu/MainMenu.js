@@ -24,12 +24,11 @@ export default class MainMenu extends Component {
         if (this.props.visible) this.props.toggle(e);
     }
 
-    handleTopicsClick() {
+    handleMenuItemClick(item) {
         this.props.toggle();
 
-        console.log("TOPICS");
-        this.props.changeView("topics");
-    } // end of handle topicsClick
+        this.props.changeView(item);
+    } // end of handle MenuItemClick
 
     render() {
         // menu gets focus, element has to be displayed and visible, so my solution was to hide it behind
@@ -49,7 +48,7 @@ export default class MainMenu extends Component {
                         className="main-menu-item"
                         id="main-menu__topics"
                         key="topics"
-                        onClick={() => this.handleTopicsClick()}
+                        onClick={() => this.handleMenuItemClick("topics")}
                     >
                         <div>
                             <img src={topics_icon} alt="topics" />
@@ -61,6 +60,7 @@ export default class MainMenu extends Component {
                         className="main-menu-item"
                         id="main-menu__cards"
                         key="cards"
+                        onClick={() => this.handleMenuItemClick("cards")}
                     >
                         <div>
                             <img src={cards_icon} alt="cards" />

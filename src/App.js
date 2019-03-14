@@ -6,6 +6,7 @@ import MainMenuIcon from './Components/MainMenuIcon/MainMenuIcon';
 import MainMenu from "./Components/MainMenu/MainMenu";
 import BrowseBox from "./Components/BrowseBox/BrowseBox";
 import Topics from "./Components/Topics/Topics";
+import Cards from "./Components/Cards/Cards";
 
 export default class App extends Component {
   constructor(props) {
@@ -63,6 +64,11 @@ export default class App extends Component {
 
         <Topics
           visible={this.state.view === "topics"}
+          changeView={this.changeView.bind(this)}
+        />
+
+        <Cards
+          visible={this.state.view === "cards"}
           changeView={this.changeView.bind(this)}
         />
 

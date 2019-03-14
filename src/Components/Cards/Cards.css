@@ -1,0 +1,12 @@
+.cards {
+    position: relative;
+    width: calc(96% - 2px);
+    height: calc(88% - 2px);
+    margin: 2%;
+    border: 1px solid #3e4652;
+}
+
+.cards__button-box {
+    height: 10%;
+    width: 100%;
+}

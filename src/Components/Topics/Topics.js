@@ -51,15 +51,14 @@ export default class Topics extends Component {
             case "name": { topics = topics.sort((accu, curr) => accu.name > curr.name); break; }
 
             case "cards": { topics = topics.sort((accu, curr) => accu.number > curr.number); break; }
-        }
+
+            default: { } // react expects defult
+        } // end of swith
 
         // reverse if not ascending
         if (!this.state.ascending) { topics = topics.reverse(); }
 
-        topics.forEach(t => {
-            console.log(t);
-        });
-
+        // create JSX
         if (topics.length) {
             const topicList = topics.map((t, i) =>
                 <li key={i}>
@@ -130,12 +129,10 @@ export default class Topics extends Component {
             // REMOVE TOPIC FROM CARDS
             let cards = JSON.parse(localStorage.cards);
 
-            console.log("CARDS");
             cards = cards.length && cards.map(c => {
                 const cardTopics = c.topics;
 
                 c.topics = cardTopics.filter(ct => ct !== this.state.removeName);
-                console.log(cardTopics);
                 return c;
             }); // end of card iteration
 
@@ -182,7 +179,6 @@ export default class Topics extends Component {
 
 
     changeSortBy(newSortby) {
-        console.log(newSortby);
         if (newSortby === this.state.sortby) {
             // change direction
             const newState = this.state;
@@ -206,7 +202,6 @@ export default class Topics extends Component {
 
 
     renderSortButton(sortby) {
-        console.log(this.state.sortby === sortby);
         return (
             <button
                 className={"topics-box__header__" + { sortby } + (this.state.sortby === sortby ? " topics-box__header--active" : "")}
