@@ -34,6 +34,8 @@ export default class CardThumbnail extends Component {
                 onMouseOut={() => this.showButtons(false)}
                 onClick={() => this.showButtons(this.state.buttonsVisible ? false : true)}
             >
+                {this.state.buttonsVisible && <button className="card-thumbnail__edit">edit</button>}
+
                 <div className="card-thumbnail__header">
                     {
                         card.topics.map(topic => {
@@ -47,7 +49,6 @@ export default class CardThumbnail extends Component {
 
                 <div className="card-thumbnail__body">{card.question}</div>
 
-                {this.state.buttonsVisible && <button className="card-thumbnail__edit">edit</button>}
 
                 {this.state.buttonsVisible && <button className="card-thumbnail__remove">remove</button>}
             </div>

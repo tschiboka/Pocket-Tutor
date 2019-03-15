@@ -32,9 +32,6 @@
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
-    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-   -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-   -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .cards__header button {
