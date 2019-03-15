@@ -41,6 +41,7 @@ button {
   flex-flow: column wrap;
   justify-content: center;
   outline: none;
+  color: #36ebee;
   font-family: "Lanenar";
   cursor: pointer;
   overflow: hidden;

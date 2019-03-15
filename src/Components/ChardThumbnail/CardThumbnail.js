@@ -11,19 +11,16 @@ export default class CardThumbnail extends Component {
         return (
             <div className="card-thumbnail">
                 <div className="card-thumbnail__header">
-                    {card.topics
-                        .map(topic => {
-                            const
-                                color = JSON.parse(localStorage.topics)
-                                    .filter(t => t.name === topic)[0].color;
-
-                            console.log(topic);
+                    {
+                        card.topics.map(topic => {
+                            const color = (JSON.parse(localStorage.topics).filter(t => t.name === topic) || ["rgba(255, 255, 255, 0.1)"])[0].color;
 
                             return <TopicLabel text={topic} color={color} />
                         })
                     }
+                    <span>{Math.round((card.results[0] / card.results[1]) * 100)}% id:{card.id}</span>
                 </div>
-                CARD
+                <div className="card-thumbnail__body">{card.question}</div>
             </div>
         );
     } // end of render

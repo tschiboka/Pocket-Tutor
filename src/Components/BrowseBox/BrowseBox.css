@@ -26,6 +26,9 @@
     width: 100%;
     height: 75%;
     padding: 5%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: aqua transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
