@@ -53,21 +53,21 @@ export default class CardThumbnail extends Component {
                         && <button
                             className="card-thumbnail__edit"
                             onClick={e => { console.log("EDIT"); }}
-                        >edit</button>
+                        > 	&#9998; </button>
                     }
                     {
                         this.state.buttonsVisible &&
                         <button
                             className="card-thumbnail__turn"
                             onClick={() => { console.log("TURN") }}
-                        >turn</button>
+                        > &#8630; </button>
                     }
                     {
                         this.state.buttonsVisible &&
                         <button
                             className="card-thumbnail__remove"
                             onClick={() => { console.log("REMOVE") }}
-                        >remove</button>
+                        > &#9986; </button>
                     }
                 </div>
             </div>

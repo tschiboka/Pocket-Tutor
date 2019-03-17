@@ -47,7 +47,8 @@
 }
 
 .card-thumbnail__button-box button {
-    width: 25%;
+    width: 12%;
+    font-size: 3vh;
     background: #141518;
 }
 
