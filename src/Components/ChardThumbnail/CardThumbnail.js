@@ -34,14 +34,6 @@ export default class CardThumbnail extends Component {
                 onMouseLeave={() => this.showButtons(false)} // onmouseout would make buttons disappear
                 onClick={() => this.showButtons(this.state.buttonsVisible ? false : true)}
             >
-                {
-                    this.state.buttonsVisible
-                    && <button
-                        className="card-thumbnail__edit"
-                        onClick={e => { console.log("EDIT"); }}
-                    >edit</button>
-                }
-
                 <div className="card-thumbnail__header">
                     {
                         card.topics.map(topic => {
@@ -55,8 +47,29 @@ export default class CardThumbnail extends Component {
 
                 <div className="card-thumbnail__body">{card.question}</div>
 
-
-                {this.state.buttonsVisible && <button className="card-thumbnail__remove">remove</button>}
+                <div className="card-thumbnail__button-box">
+                    {
+                        this.state.buttonsVisible
+                        && <button
+                            className="card-thumbnail__edit"
+                            onClick={e => { console.log("EDIT"); }}
+                        >edit</button>
+                    }
+                    {
+                        this.state.buttonsVisible &&
+                        <button
+                            className="card-thumbnail__turn"
+                            onClick={() => { console.log("TURN") }}
+                        >turn</button>
+                    }
+                    {
+                        this.state.buttonsVisible &&
+                        <button
+                            className="card-thumbnail__remove"
+                            onClick={() => { console.log("REMOVE") }}
+                        >remove</button>
+                    }
+                </div>
             </div>
         );
     } // end of render
