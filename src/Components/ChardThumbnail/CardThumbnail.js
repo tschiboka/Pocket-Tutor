@@ -19,6 +19,7 @@ export default class CardThumbnail extends Component {
         newState.buttonsVisible = show;
 
         this.setState(newState);
+        console.log("show buttons ", show);
     } // end of showButtons
 
 
@@ -26,15 +27,20 @@ export default class CardThumbnail extends Component {
     render() {
         const card = JSON.parse(localStorage.cards).filter(c => c.id === this.props.id)[0];
 
-        console.log(card);
         return (
             <div
                 className="card-thumbnail"
                 onMouseOver={() => this.showButtons(true)}
-                onMouseOut={() => this.showButtons(false)}
+                onMouseLeave={() => this.showButtons(false)} // onmouseout would make buttons disappear
                 onClick={() => this.showButtons(this.state.buttonsVisible ? false : true)}
             >
-                {this.state.buttonsVisible && <button className="card-thumbnail__edit">edit</button>}
+                {
+                    this.state.buttonsVisible
+                    && <button
+                        className="card-thumbnail__edit"
+                        onClick={e => { console.log("EDIT"); }}
+                    >edit</button>
+                }
 
                 <div className="card-thumbnail__header">
                     {
