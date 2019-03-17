@@ -60,6 +60,7 @@
 .card-thumbnail__button-box button:nth-child(2) {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    font-size: 4vh;
 }
 
 .card-thumbnail__button-box button:first-child {

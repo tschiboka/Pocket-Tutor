@@ -8,6 +8,7 @@ export default class CardThumbnail extends Component {
         super(props);
 
         this.state = {
+            "questionSide": true,
             "buttonsVisible": false
         }; // end of state declaration 
     } // end of constructor
@@ -19,8 +20,17 @@ export default class CardThumbnail extends Component {
         newState.buttonsVisible = show;
 
         this.setState(newState);
-        console.log("show buttons ", show);
     } // end of showButtons
+
+
+
+    turnCard() {
+        const newState = this.state;
+
+        newState.questionSide = newState.questionSide ? false : true; // toggle sides
+
+        this.setState(newState);
+    } // end of turnCard
 
 
 
@@ -45,7 +55,7 @@ export default class CardThumbnail extends Component {
                     <span>{Math.round((card.results[0] / card.results[1]) * 100)}% id:{card.id}</span>
                 </div>
 
-                <div className="card-thumbnail__body">{card.question}</div>
+                <div className="card-thumbnail__body">{this.state.questionSide ? card.question : card.answer}</div>
 
                 <div className="card-thumbnail__button-box">
                     {
@@ -59,7 +69,7 @@ export default class CardThumbnail extends Component {
                         this.state.buttonsVisible &&
                         <button
                             className="card-thumbnail__turn"
-                            onClick={() => { console.log("TURN") }}
+                            onClick={() => { this.turnCard() }}
                         > &#8630; </button>
                     }
                     {
