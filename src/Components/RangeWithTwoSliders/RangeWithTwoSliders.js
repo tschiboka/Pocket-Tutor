@@ -46,7 +46,12 @@ export default class RangeWithTwoSliders extends Component {
             // get ten percent for push effect
             const
                 track = document.getElementById(this.props.id + "__track"),
-                trackRect = track.getBoundingClientRect()
+                trackRect = track.getBoundingClientRect(),
+                minThumb = document.getElementById(this.props.id + "__slider--min"),
+                minRect = minThumb.getBoundingClientRect(),
+                maxThumb = document.getElementById(this.props.id + "__slider--max"),
+                maxRect = maxThumb.getBoundingClientRect();
+
 
             // SET THUMBS
             // MIN THUMB
@@ -60,12 +65,11 @@ export default class RangeWithTwoSliders extends Component {
                 slider.style.left = diffX + "px";
             } // end of if min is being slided
 
+
             // MAX THUMB
             if (this.state.mouseDown === "max") {
                 const // get slide and mouse values
                     slider = document.getElementById(this.props.id + "__slider--max"),
-                    sliderRect = slider.getBoundingClientRect(),
-                    sliderEnd = sliderRect.right,
                     mouseX = e.clientX,
                     trackX = Math.round(trackRect.x),
                     diffX = trackRect.width - (mouseX - trackX);
@@ -73,21 +77,31 @@ export default class RangeWithTwoSliders extends Component {
                 slider.style.right = diffX + "px";
             } // end of if max is being slided
 
+
             // SET ACTIVE TRACK
             const
                 box = document.getElementById(this.props.id + "__track"),
                 boxX = Math.round(box.getBoundingClientRect().x),
                 activeTrack = document.getElementById(this.props.id + "__active-track"),
-                minThumb = document.getElementById(this.props.id + "__slider--min"),
-                minRect = minThumb.getBoundingClientRect(),
                 activeTrackStart = minRect.x + (minRect.width / 2) - boxX,
-                maxThumb = document.getElementById(this.props.id + "__slider--max"),
-                maxRect = maxThumb.getBoundingClientRect(),
                 activeTrackEnd = maxRect.x + (maxRect.width / 2) - boxX,
                 activeTrackWidth = Math.max(activeTrackStart, activeTrackEnd) - Math.min(activeTrackStart, activeTrackEnd);
 
             activeTrack.style.width = activeTrackWidth + "px";
             activeTrack.style.left = activeTrackStart + "px";
+
+
+            // DISPLAY RANGE DIGITS
+            const
+                sliderWidth = document.getElementById(this.props.id + "__slider--min").getBoundingClientRect().width,
+                percent = (trackRect.width - sliderWidth) / 100,
+                minDigit = Math.round(Number((minThumb.style.left || "0").match(/\d+/g)[0]) / percent),
+                maxDigit = 100 - Math.round(Number((maxThumb.style.right || "0").match(/\d+/g)[0]) / percent);
+
+            document.getElementById(this.props.id + "min-text").innerHTML = minDigit;
+            document.getElementById(this.props.id + "max-text").innerHTML = maxDigit;
+
+            console.log(maxThumb.style.rigth);
         } // end of if mouseDown
     } // end of handleMouseMove
 
@@ -96,7 +110,10 @@ export default class RangeWithTwoSliders extends Component {
     render() {
         return (
             <div className="range" id={this.props.id}>
-                <span className="range__min-text">{this.state.min}</span>
+                <span
+                    className="range__min-text"
+                    id={this.props.id + "min-text"}
+                >{this.state.min}</span>
 
                 <div className="range__body">
 
@@ -126,7 +143,10 @@ export default class RangeWithTwoSliders extends Component {
                     </div>
                 </div>
 
-                <span className="range__max-text">{this.state.max}</span>
+                <span
+                    className="range__max-text"
+                    id={this.props.id + "max-text"}
+                >{this.state.max}</span>
             </div>
         ); // end of return
     } // end of render
