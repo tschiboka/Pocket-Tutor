@@ -46,10 +46,10 @@ export default class CardThumbnail extends Component {
             >
                 <div className="card-thumbnail__header">
                     {
-                        card.topics.map(topic => {
+                        card.topics.map((topic, i) => {
                             const color = (JSON.parse(localStorage.topics).filter(t => t.name === topic) || ["rgba(255, 255, 255, 0.1)"])[0].color;
 
-                            return <TopicLabel text={topic} color={color} />
+                            return <TopicLabel text={topic} color={color} key={i} />
                         })
                     }
                     <span>{Math.round((card.results[0] / card.results[1]) * 100)}% id:{card.id}</span>

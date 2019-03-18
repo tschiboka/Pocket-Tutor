@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import "./Cards.css";
 
-import CardThumbnail from "../ChardThumbnail/CardThumbnail";
+import CardThumbnail from "../CardThumbnail/CardThumbnail";
+import FilterCards from "../FilterCards/FilterCards";
 
 export default class Cards extends Component {
     constructor(props) {
@@ -10,9 +11,21 @@ export default class Cards extends Component {
 
         this.state = {
             "sortby": "id",
-            "ascending": true
+            "ascending": true,
+            "filterCardsPanelVisible": false
         } // end of state declaration
     } // end of constructor
+
+
+
+    toggleFilterCardsPanel(isVisible) {
+        console.log("CLOSE FILTER CARDS");
+        const newState = this.state;
+
+        newState.filterCardsPanelVisible = isVisible;
+
+        this.setState(newState);
+    } // end of closeFilterCards
 
 
 
@@ -119,10 +132,14 @@ export default class Cards extends Component {
                     <div className="cards__button-box">
                         <button>Create</button>
 
-                        <button>Filter</button>
+                        <button onClick={() => this.toggleFilterCardsPanel(this.state.filterCardsPanelVisible ? false : true)}>Filter</button>
 
                         <button onClick={() => this.props.changeView("browse")}>Back</button>
                     </div>
+                    {
+                        this.state.filterCardsPanelVisible &&
+                        <FilterCards closeFilterCards={this.toggleFilterCardsPanel.bind(this)} />
+                    }
                 </div>
             </div>
         ); // end of retrun
