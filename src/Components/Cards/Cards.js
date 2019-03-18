@@ -19,10 +19,15 @@ export default class Cards extends Component {
     renderCards() {
         let cards = JSON.parse(localStorage.cards);
 
+        // add add percent as a property to cards
+        cards.map(c => {
+            Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100);
+            return c;
+        });
 
         // SORT CARDS
         switch (this.state.sortby) {
-            case "results": { break; }
+            case "results": { cards = cards.sort((a, b) => a.percentage - b.percentage); break; }
 
             default: { } // react expects defult
         } // end of switch
@@ -31,7 +36,6 @@ export default class Cards extends Component {
         if (!this.state.ascending) { cards = cards.reverse(); }
 
 
-        console.log(cards);
         // create JSX
         if (cards.length) {
             const cardsList = cards.map((c, i) =>
