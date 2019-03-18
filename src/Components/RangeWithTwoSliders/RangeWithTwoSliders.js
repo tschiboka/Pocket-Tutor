@@ -39,54 +39,56 @@ export default class RangeWithTwoSliders extends Component {
 
 
     handleMouseMove(e) {
-        e.preventDefault();
-
-        // SET THUMBS
-        if (this.state.mouseDown === "min") {
-            const // get slide and mouse values
-                slider = document.getElementById(this.props.id + "__slider--min"),
-                mouseX = e.clientX,
-                track = document.getElementById(this.props.id + "__track"),
-                trackX = Math.round(track.getBoundingClientRect().x),
-                diffX = mouseX - trackX;
-
-            slider.style.left = diffX + "px";
-        } // end of if min is being slided
-
-        if (this.state.mouseDown === "max") {
-            const // get slide and mouse values
-                slider = document.getElementById(this.props.id + "__slider--max"),
-                sliderRect = slider.getBoundingClientRect(),
-                sliderEnd = sliderRect.right,
-                mouseX = e.clientX,
-                track = document.getElementById(this.props.id + "__track"),
-                trackRect = track.getBoundingClientRect(),
-                trackX = Math.round(trackRect.x),
-                diffX = trackRect.width - (mouseX - trackX);
-
-            console.log("WIDTH", trackRect.width);
-
-            slider.style.right = diffX + "px";
-        } // end of if max is being slided
-
-        // SET ACTIVE TRACK
+        // only active if mouse was already down
         if (this.state.mouseDown) {
+            e.preventDefault();
+
+            // get ten percent for push effect
+            const
+                track = document.getElementById(this.props.id + "__track"),
+                trackRect = track.getBoundingClientRect()
+
+            // SET THUMBS
+            // MIN THUMB
+            if (this.state.mouseDown === "min") {
+                const // get slide and mouse values
+                    slider = document.getElementById(this.props.id + "__slider--min"),
+                    mouseX = e.clientX,
+                    trackX = Math.round(track.getBoundingClientRect().x),
+                    diffX = mouseX - trackX;
+
+                slider.style.left = diffX + "px";
+            } // end of if min is being slided
+
+            // MAX THUMB
+            if (this.state.mouseDown === "max") {
+                const // get slide and mouse values
+                    slider = document.getElementById(this.props.id + "__slider--max"),
+                    sliderRect = slider.getBoundingClientRect(),
+                    sliderEnd = sliderRect.right,
+                    mouseX = e.clientX,
+                    trackX = Math.round(trackRect.x),
+                    diffX = trackRect.width - (mouseX - trackX);
+
+                slider.style.right = diffX + "px";
+            } // end of if max is being slided
+
+            // SET ACTIVE TRACK
             const
                 box = document.getElementById(this.props.id + "__track"),
                 boxX = Math.round(box.getBoundingClientRect().x),
-                track = document.getElementById(this.props.id + "__active-track"),
+                activeTrack = document.getElementById(this.props.id + "__active-track"),
                 minThumb = document.getElementById(this.props.id + "__slider--min"),
                 minRect = minThumb.getBoundingClientRect(),
-                trackStart = minRect.x + (minRect.width / 2) - boxX,
+                activeTrackStart = minRect.x + (minRect.width / 2) - boxX,
                 maxThumb = document.getElementById(this.props.id + "__slider--max"),
                 maxRect = maxThumb.getBoundingClientRect(),
-                trackEnd = maxRect.x + (maxRect.width / 2) - boxX,
-                trackWidth = Math.max(trackStart, trackEnd) - Math.min(trackStart, trackEnd);
+                activeTrackEnd = maxRect.x + (maxRect.width / 2) - boxX,
+                activeTrackWidth = Math.max(activeTrackStart, activeTrackEnd) - Math.min(activeTrackStart, activeTrackEnd);
 
-            track.style.width = trackWidth + "px";
-            track.style.left = trackStart + "px";
-
-        } // end of if there was a mouseDown
+            activeTrack.style.width = activeTrackWidth + "px";
+            activeTrack.style.left = activeTrackStart + "px";
+        } // end of if mouseDown
     } // end of handleMouseMove
 
 
