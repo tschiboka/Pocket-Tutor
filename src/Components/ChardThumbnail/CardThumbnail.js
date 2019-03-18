@@ -76,11 +76,11 @@ export default class CardThumbnail extends Component {
                         this.state.buttonsVisible &&
                         <button
                             className="card-thumbnail__remove"
-                            onClick={() => { console.log("REMOVE") }}
+                            onClick={() => { this.props.remove(this.props.id) }}
                         > &#9986; </button>
                     }
                 </div>
             </div>
-        );
+        ); // end of return
     } // end of render
 } // end of CardThumbnail

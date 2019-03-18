@@ -36,7 +36,10 @@ export default class Cards extends Component {
         if (cards.length) {
             const cardsList = cards.map((c, i) =>
                 <li key={i}>
-                    <CardThumbnail id={c.id} />
+                    <CardThumbnail
+                        id={c.id}
+                        remove={this.removeCard.bind(this)}
+                    />
                 </li>);
             return cardsList;
         } // end of if there are topics
@@ -79,6 +82,20 @@ export default class Cards extends Component {
             </button>
         ) // end of return
     } // end of renderSortButton
+
+
+
+    removeCard(id) {
+        console.log("REMOVE CARD");
+        let cards = JSON.parse(localStorage.cards);
+
+        cards = cards.filter(c => c.id !== id);
+
+        localStorage.setItem("cards", JSON.stringify(cards));
+
+        this.forceUpdate();
+    } // end of removeCard
+
 
 
     render() {
