@@ -26,11 +26,7 @@ export default class Cards extends Component {
         });
 
         // SORT CARDS
-        switch (this.state.sortby) {
-            case "results": { cards = cards.sort((a, b) => a.percentage - b.percentage); break; }
-
-            default: { } // react expects defult
-        } // end of switch
+        if (this.state.sortby === "results") { cards = cards.sort((a, b) => a.percentage - b.percentage); }
 
         // reverse if not ascending
         if (!this.state.ascending) { cards = cards.reverse(); }
@@ -82,6 +78,7 @@ export default class Cards extends Component {
                 onClick={() => this.changeSortBy(sortby)}
             >
                 {sortby}
+
                 {this.state.sortby === sortby && (this.state.ascending ? <span>&#9650;</span> : <span>&#9660;</span>)}
             </button>
         ) // end of return
@@ -124,7 +121,7 @@ export default class Cards extends Component {
 
                         <button>Filter</button>
 
-                        <button>Back</button>
+                        <button onClick={() => this.props.changeView("browse")}>Back</button>
                     </div>
                 </div>
             </div>
