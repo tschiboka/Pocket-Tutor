@@ -51,18 +51,23 @@ export default class RangeWithTwoSliders extends Component {
                 diffX = mouseX - trackX;
 
             slider.style.left = diffX + "px";
-        } // end of if min is being slide
+        } // end of if min is being slided
 
         if (this.state.mouseDown === "max") {
             const // get slide and mouse values
                 slider = document.getElementById(this.props.id + "__slider--max"),
+                sliderRect = slider.getBoundingClientRect(),
+                sliderEnd = sliderRect.right,
                 mouseX = e.clientX,
                 track = document.getElementById(this.props.id + "__track"),
-                trackX = Math.round(track.getBoundingClientRect().x),
-                diffX = mouseX - trackX;
+                trackRect = track.getBoundingClientRect(),
+                trackX = Math.round(trackRect.x),
+                diffX = trackRect.width - (mouseX - trackX);
 
-            slider.style.left = diffX + "px";
-        } // end of if min is being slide
+            console.log("WIDTH", trackRect.width);
+
+            slider.style.right = diffX + "px";
+        } // end of if max is being slided
 
         // SET ACTIVE TRACK
         if (this.state.mouseDown) {
@@ -81,7 +86,6 @@ export default class RangeWithTwoSliders extends Component {
             track.style.width = trackWidth + "px";
             track.style.left = trackStart + "px";
 
-            console.log();
         } // end of if there was a mouseDown
     } // end of handleMouseMove
 
