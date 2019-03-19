@@ -17,9 +17,11 @@ export default class RangeWithTwoSliders extends Component {
 
 
     handleMouseDown(target, e) {
+        e.preventDefault();
+
         const
             newState = this.state,
-            cursor = e.clientX,
+            cursor = (e.clientX || e.touches[0].clientX),
             sliderX = e.target.getBoundingClientRect().x,
             innerX = Math.round(cursor - sliderX);
 
@@ -69,7 +71,7 @@ export default class RangeWithTwoSliders extends Component {
             // MIN THUMB
             if (this.state.mouseDown === "min") {
                 const // get track and mouse values
-                    mouseX = e.clientX - this.state.innerX,
+                    mouseX = (e.clientX || e.touches[0].clientX) - this.state.innerX,
                     trackX = Math.round(trackRect.x),
                     diffX = mouseX - trackX,
                     newMinDigit = Math.round(diffX / percent),
@@ -91,7 +93,7 @@ export default class RangeWithTwoSliders extends Component {
             // MAX THUMB
             if (this.state.mouseDown === "max") {
                 const // get track and mouse values
-                    mouseX = e.clientX + this.state.innerX,
+                    mouseX = (e.clientX || e.touches[0].clientX) + this.state.innerX,
                     trackX = Math.round(trackRect.x),
                     diffX = trackRect.width - (mouseX - trackX),
                     newMaxDigit = 100 - (Math.round(diffX / percent)),
@@ -141,7 +143,6 @@ export default class RangeWithTwoSliders extends Component {
         return (
             <div
                 className="range" id={this.props.id}
-                onMouseLeave={() => this.resetMouseDown()}
                 onMouseUp={() => this.resetMouseDown()}
             >
                 <span
@@ -155,6 +156,7 @@ export default class RangeWithTwoSliders extends Component {
                         className="range__body__track"
                         id={this.props.id + "__track"}
                         onMouseMove={e => this.handleMouseMove(e)}
+                        onTouchMove={e => this.handleMouseMove(e)}
                     >
                         <div
                             className="range__body__active-track"
@@ -165,6 +167,7 @@ export default class RangeWithTwoSliders extends Component {
                             className="range__body__slider--min"
                             id={this.props.id + "__slider--min"}
                             onMouseDown={e => this.handleMouseDown("min", e)}
+                            onTouchStart={e => this.handleMouseDown("min", e)}
                             draggable={false}
                         ></div>
 
@@ -172,6 +175,7 @@ export default class RangeWithTwoSliders extends Component {
                             className="range__body__slider--max"
                             id={this.props.id + "__slider--max"}
                             onMouseDown={e => this.handleMouseDown("max", e)}
+                            onTouchStart={e => this.handleMouseDown("max", e)}
                             draggable={false}
                         ></div>
                     </div>
