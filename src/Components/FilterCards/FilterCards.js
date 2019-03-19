@@ -53,16 +53,95 @@ export default class FilterCards extends Component {
                     >&times;</button>
                 </div>
 
-                <section className="filter-cards__results-section">
-                    Results between:
+                <div className="filter-cards__body">
+                    <section className="filter-cards__results-section">
+                        Results between:
 
                     <RangeWithTwoSliders
-                        id="filter-cards__range"
-                        getValues={this.getSliderValues.bind(this)}
-                        min={0}
-                        max={100}
-                    />
-                </section>
+                            id="filter-cards__range"
+                            getValues={this.getSliderValues.bind(this)}
+                            min={0}
+                            max={100}
+                        />
+                    </section>
+
+                    <section className="filter-cards__topics">
+                        Select topics:
+
+                        <div className="filter-cards__topics__selector-box">
+                            <span className="custom-dropdown">
+                                <select>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                </select>
+                            </span>
+
+                            <span className="custom-dropdown">
+                                <select>
+                                    <option>Sherlock Holmes</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                </select>
+                            </span>
+
+                            <span className="custom-dropdown">
+                                <select>
+                                    <option>Sherlock Holmes is blablablabla</option>
+                                    <option>The Great Gatsby</option>
+                                    <option>V for Vendetta</option>
+                                    <option>The Wolf of Wallstreet</option>
+                                    <option>Quantum of Solace</option>
+                                </select>
+                            </span>
+                        </div>
+                    </section>
+
+                    <section className="filter-cards__buttons">
+                        <button id="filter-cards__reset-btn">Reset</button>
+
+                        <button id="filter-cards__filter-btn">Filter Cards</button>
+                    </section>
+                </div>
             </div>
         ); // end of return
     } // end of render

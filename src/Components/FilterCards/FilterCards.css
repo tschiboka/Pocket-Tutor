@@ -28,3 +28,113 @@
     font-size: 3vh;
     color: #36ebee;
 }
+
+.filter-cards__body {
+    position: relative;
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.filter-cards__results-section {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.filter-cards__topics {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.filter-cards__topics__selector-box {
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 30%;
+    vertical-align: middle;
+}
+
+.custom-dropdown select {
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    background-color: #0d0e10;
+    color: #36ebee;
+    font-size: 2vh;
+    padding: 1%;
+    padding-right: 10%;
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+    text-overflow: '...';
+    font-family: "Lanenar";
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: aqua transparent;
+    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
+}
+  
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after { /*  Custom dropdown arrow */
+    content: "\25BC";
+    height: 100%;
+    top: 60%;
+    right: 1%;
+    padding-right: 2%;
+    color: #36ebee;
+    font-size: 1.5vh;
+    margin-top: -.5em;
+}
+
+.custom-dropdown::before { /*  Custom dropdown arrow cover */
+    width: 15%;
+    height: 80%;
+    right: 0;
+    top: 20%;
+    bottom: 0;
+    border-radius: 0 15px 15px 0;
+    border-left: black;
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.filter-cards__buttons {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.filter-cards__buttons button {
+    width: 100%;
+    height: 80%;
+    font-size: 2.8vh;
+}
