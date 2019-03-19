@@ -43,10 +43,10 @@
 
 .range__body__slider--min, .range__body__slider--max {
     position: absolute;
-    top: 0;
-    width: 5%;
-    height: 100%;
-    border-radius: 10px;
+    top: -25%;
+    width: 7%;
+    height: 150%;
+    border-radius: 60px;
     background: #3e4652;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
