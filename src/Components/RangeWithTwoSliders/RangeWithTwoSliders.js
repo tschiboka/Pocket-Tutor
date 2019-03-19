@@ -76,7 +76,7 @@ export default class RangeWithTwoSliders extends Component {
                     newMaxDigit = 100 - Math.round(Number((maxThumb.style.right || "0").match(/\d+/g)[0]) / percent);
 
                 // min slider won't go over 80
-                if (newMinDigit <= 80) {
+                if (newMinDigit <= 80 && newMinDigit >= 0) {
                     // SET MIN SLIDER 
                     sliderMin.style.left = diffX + "px";
 
@@ -99,7 +99,7 @@ export default class RangeWithTwoSliders extends Component {
 
 
                 // max slider won't go under 20
-                if (newMaxDigit >= 20) {
+                if (newMaxDigit >= 20 && newMaxDigit <= 100) {
                     // SET MAX SLIDER 
                     sliderMax.style.right = (100 - newMaxDigit) * percent + "px";
 
