@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     font-size: 2.5vh;
+    text-shadow: 2px 2px 2px black;
 }
 
 .range__body {
@@ -27,9 +28,10 @@
     width: 100%;
     height: 50%;
     border-radius: 10px;
-    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .range__body__active-track {
@@ -37,22 +39,36 @@
     width: calc(100% - 4px);
     height: calc(100% - 4px);
     margin: 2px;
+    margin-top: 2.5px;
     background: #36ebee;
-    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    background: -moz-linear-gradient(top, rgba(54,235,238,1) 0%, rgba(84,240,240,1) 38%, rgba(232,240,240,1) 50%, rgba(109,232,232,1) 62%, rgba(54,235,238,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(54,235,238,1)), color-stop(38%, rgba(84,240,240,1)), color-stop(50%, rgba(232,240,240,1)), color-stop(62%, rgba(109,232,232,1)), color-stop(100%, rgba(54,235,238,1)));
+    background: -webkit-linear-gradient(top, rgba(54,235,238,1) 0%, rgba(84,240,240,1) 38%, rgba(232,240,240,1) 50%, rgba(109,232,232,1) 62%, rgba(54,235,238,1) 100%);
+    background: -o-linear-gradient(top, rgba(54,235,238,1) 0%, rgba(84,240,240,1) 38%, rgba(232,240,240,1) 50%, rgba(109,232,232,1) 62%, rgba(54,235,238,1) 100%);
+    background: -ms-linear-gradient(top, rgba(54,235,238,1) 0%, rgba(84,240,240,1) 38%, rgba(232,240,240,1) 50%, rgba(109,232,232,1) 62%, rgba(54,235,238,1) 100%);
 }
 
 .range__body__slider--min, .range__body__slider--max {
     position: absolute;
-    top: -5px;
+    top: -4px;
     width: 20px;
     height: 20px;
     border-radius: 60px;
     background: #3e4652;
-    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    background-image: -webkit-radial-gradient(  50%   0%,  8% 50%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%,.9) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient(   0%  50%, 50%  7%, hsla(0,0%,100%,.7) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient( 100%  50%, 50%  5%, hsla(0,0%,100%,.7) 0%, hsla(0,0%,100%,0) 100%),    
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   3%, hsla(0,0%,  0%,.1) 3.5%),
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%,.5) 7.5%),
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.7) 2.2%),
+    -webkit-radial-gradient( 50% 50%, 200% 40%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .range__body__slider--min {
