@@ -25,9 +25,8 @@
 .range__body__track {
     position: relative;
     width: 100%;
-    height: 75%;
+    height: 50%;
     border-radius: 10px;
-    border: 1px solid #3e4652;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
@@ -39,13 +38,16 @@
     height: calc(100% - 4px);
     margin: 2px;
     background: #36ebee;
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .range__body__slider--min, .range__body__slider--max {
     position: absolute;
-    top: -25%;
-    width: 7%;
-    height: 150%;
+    top: -5px;
+    width: 20px;
+    height: 20px;
     border-radius: 60px;
     background: #3e4652;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);

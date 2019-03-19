@@ -10,15 +10,21 @@ export default class RangeWithTwoSliders extends Component {
         this.state = {
             min, max,
             "mouseDown": false,
+            "innerX": 0
         };
     } // end of constructor
 
 
 
     handleMouseDown(target, e) {
-        const newState = this.state;
+        const
+            newState = this.state,
+            cursor = e.clientX,
+            sliderX = e.target.getBoundingClientRect().x,
+            innerX = Math.round(cursor - sliderX);
 
         newState.mouseDown = target;
+        newState.innerX = innerX;
 
         if (target === "min") { newState.minStartX = e.clientX; }
 
@@ -33,15 +39,17 @@ export default class RangeWithTwoSliders extends Component {
         // reset
         newState.mouseDown = false;
 
+        console.log("LEAVE");
         this.setState(newState);
     } // resetMouseDown
 
 
 
     handleMouseMove(e) {
+        e.preventDefault();
+
         // only active if mouse was already down
         if (this.state.mouseDown) {
-            e.preventDefault();
 
             const
                 track = document.getElementById(this.props.id + "__track"),
@@ -61,7 +69,7 @@ export default class RangeWithTwoSliders extends Component {
             // MIN THUMB
             if (this.state.mouseDown === "min") {
                 const // get track and mouse values
-                    mouseX = e.clientX,
+                    mouseX = e.clientX - this.state.innerX,
                     trackX = Math.round(trackRect.x),
                     diffX = mouseX - trackX,
                     newMinDigit = Math.round(diffX / percent),
@@ -83,7 +91,7 @@ export default class RangeWithTwoSliders extends Component {
             // MAX THUMB
             if (this.state.mouseDown === "max") {
                 const // get track and mouse values
-                    mouseX = e.clientX,
+                    mouseX = e.clientX + this.state.innerX,
                     trackX = Math.round(trackRect.x),
                     diffX = trackRect.width - (mouseX - trackX),
                     newMaxDigit = 100 - (Math.round(diffX / percent)),
@@ -131,7 +139,11 @@ export default class RangeWithTwoSliders extends Component {
 
     render() {
         return (
-            <div className="range" id={this.props.id}>
+            <div
+                className="range" id={this.props.id}
+                onMouseLeave={() => this.resetMouseDown()}
+                onMouseUp={() => this.resetMouseDown()}
+            >
                 <span
                     className="range__min-text"
                     id={this.props.id + "min-text"}
@@ -142,8 +154,6 @@ export default class RangeWithTwoSliders extends Component {
                     <div
                         className="range__body__track"
                         id={this.props.id + "__track"}
-                        onMouseLeave={() => this.resetMouseDown()}
-                        onMouseUp={() => this.resetMouseDown()}
                         onMouseMove={e => this.handleMouseMove(e)}
                     >
                         <div
@@ -155,12 +165,14 @@ export default class RangeWithTwoSliders extends Component {
                             className="range__body__slider--min"
                             id={this.props.id + "__slider--min"}
                             onMouseDown={e => this.handleMouseDown("min", e)}
+                            draggable={false}
                         ></div>
 
                         <div
                             className="range__body__slider--max"
                             id={this.props.id + "__slider--max"}
                             onMouseDown={e => this.handleMouseDown("max", e)}
+                            draggable={false}
                         ></div>
                     </div>
                 </div>
