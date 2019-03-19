@@ -41,8 +41,14 @@ export default class RangeWithTwoSliders extends Component {
         // reset
         newState.mouseDown = false;
 
-        console.log("LEAVE");
+        // set state
+        newState.min = Number(document.getElementById(this.props.id + "min-text").innerHTML);
+        newState.max = Number(document.getElementById(this.props.id + "max-text").innerHTML);
+
         this.setState(newState);
+
+        // send values to parent
+        this.props.getValues(this.state.min, this.state.max);
     } // resetMouseDown
 
 
@@ -144,6 +150,8 @@ export default class RangeWithTwoSliders extends Component {
             <div
                 className="range" id={this.props.id}
                 onMouseUp={() => this.resetMouseDown()}
+                onTouchCancel={() => this.resetMouseDown()}
+                onTouchEnd={() => this.resetMouseDown()}
             >
                 <span
                     className="range__min-text"

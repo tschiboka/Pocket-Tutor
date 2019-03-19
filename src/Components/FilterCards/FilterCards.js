@@ -30,6 +30,17 @@ export default class FilterCards extends Component {
 
 
 
+    getSliderValues(min, max) {
+        const newState = this.state;
+
+        newState.range = [min, max];
+
+        console.log(min, max);
+        this.setState(newState);
+    } // end of getSliderValues
+
+
+
     render() {
         return (
             <div className="filter-cards">
@@ -45,7 +56,12 @@ export default class FilterCards extends Component {
                 <section className="filter-cards__results-section">
                     Results between:
 
-                    <RangeWithTwoSliders id="filter-cards__range" min={0} max={100} />
+                    <RangeWithTwoSliders
+                        id="filter-cards__range"
+                        getValues={this.getSliderValues.bind(this)}
+                        min={0}
+                        max={100}
+                    />
                 </section>
             </div>
         ); // end of return
