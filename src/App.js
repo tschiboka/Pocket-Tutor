@@ -14,8 +14,9 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      isMainMenuVisible: false, // main menu is invisible by default
-      view: "browse"            // default view is browse (user can read random cards)
+      "isMainMenuVisible": false, // main menu is invisible by default
+      "view": "browse",            // default view is browse (user can read random cards)
+      "editCardIsVisible": false  // edit card will be able to be opened from multiple places
     }; // end of state declaration
   } // end of constructor
 
@@ -32,11 +33,11 @@ export default class App extends Component {
 
   closeMainMenu(e) {
     const delay = setTimeout(() => {
-      this.setState({
-        "isMainMenuVisible": false,
-        "view": this.state.view,
-        "editCardVisible": false
-      }); // end of setState
+      const newState = this.state;
+
+      newState.isMainMenuVisible = false;
+
+      this.setState(newState);
       clearTimeout(delay);
     }, 200);
   } // end of toggleMainMenu
@@ -62,9 +63,10 @@ export default class App extends Component {
 
   // edit cards can be opened form multiple places thoughout the app
   openCloseEditCards(isOpen) {
+    console.log("OPEN", isOpen);
     const newState = this.state;
 
-    newState.editCardVisible = isOpen;
+    newState.editCardIsVisible = isOpen;
 
     this.setState(newState);
   } // end of openCloseEditCards
@@ -96,10 +98,12 @@ export default class App extends Component {
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
         />
 
-        <EditCards
-          visible={this.state.editCardVisible}
-          openCloseEditCards={this.openCloseEditCards.bind(this)}
-        />
+        {
+          this.state.editCardIsVisible &&
+          <EditCards
+            openCloseEditCards={this.openCloseEditCards.bind(this)}
+          />
+        }
 
         <MainMenu
           visible={this.state.isMainMenuVisible}

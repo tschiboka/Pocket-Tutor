@@ -59,10 +59,10 @@ export default class CardThumbnail extends Component {
 
                 <div className="card-thumbnail__button-box">
                     {
-                        this.state.buttonsVisible
-                        && <button
+                        this.state.buttonsVisible &&
+                        <button
                             className="card-thumbnail__edit"
-                            onClick={e => { console.log("EDIT"); }}
+                            onClick={() => this.props.edit(true)}
                         > 	&#9998; </button>
                     }
                     {

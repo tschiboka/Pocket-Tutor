@@ -64,6 +64,7 @@ export default class Cards extends Component {
                     <CardThumbnail
                         id={c.id}
                         remove={this.removeCardConfirm.bind(this)}
+                        edit={() => this.openEditCards(true)}
                     />
                 </li>);
             return cardsList;
@@ -71,6 +72,11 @@ export default class Cards extends Component {
         else { return null; }
     } // end of renderCards    
 
+
+
+    openEditCards(isOpen) {
+        this.props.openCloseEditCards(isOpen);
+    } // end of openEditCards
 
 
     changeSortBy(newSortby) {
