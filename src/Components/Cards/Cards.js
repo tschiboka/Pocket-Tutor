@@ -112,6 +112,12 @@ export default class Cards extends Component {
 
 
 
+    submitFilter(range, selectedTopics) {
+        console.log("SUBMIT", range, selectedTopics);
+    } // end of submitFilter
+
+
+
     render() {
         return (
             this.props.visible &&
@@ -138,7 +144,10 @@ export default class Cards extends Component {
                     </div>
                     {
                         this.state.filterCardsPanelVisible &&
-                        <FilterCards closeFilterCards={this.toggleFilterCardsPanel.bind(this)} />
+                        <FilterCards
+                            submit={this.submitFilter.bind(this)}
+                            closeFilterCards={this.toggleFilterCardsPanel.bind(this)}
+                        />
                     }
                 </div>
             </div>

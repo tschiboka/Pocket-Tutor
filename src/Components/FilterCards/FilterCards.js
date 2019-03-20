@@ -11,21 +11,35 @@ export default class FilterCards extends Component {
         this.state = {
             "range": [0, 100],
             "topicsOptions": JSON.parse(localStorage.topics).map(t => t.name),
-            "selectedTopics": ["", "", ""]
+            "selectedTopics": ["", "", ""],
         }; // end of state declaration
     } // end of constructor
 
 
 
-    closeFilterCards() {
-        // set back default
+    resetState() {
         const newState = {
             "range": [0, 100],
             "topicsOptions": JSON.parse(localStorage.topics).map(t => t.name),
-            "selectedTopics": ["", "", ""]
+            "selectedTopics": ["", "", ""],
         }; // end of default state declaratoion
 
+        const option1 = document.getElementById("card-filter-option1");
+        option1.value = "no topic";
+
+        const option2 = document.getElementById("card-filter-option2");
+        option2.value = "no topic";
+
+        const option3 = document.getElementById("card-filter-option3");
+        option3.value = "no topic";
+
         this.setState(newState);
+    } // end of resetState
+
+
+
+    closeFilterCards() {
+        this.resetState();
 
         this.props.closeFilterCards(false);
     } // end of closeFilterCards
@@ -37,14 +51,12 @@ export default class FilterCards extends Component {
 
         newState.range = [min, max];
 
-        console.log(min, max);
         this.setState(newState);
     } // end of getSliderValues
 
 
 
     renderOptions(options) {
-        console.log(options);
         if (options[0] !== "no topic") { options.unshift("no topic") }
         return options.map((o, i) => (
             <option
@@ -65,8 +77,14 @@ export default class FilterCards extends Component {
         newState.selectedTopics.splice(optionInd - 1, 1, value);
 
         this.setState(newState);
-        console.log(newState);
     } // end of getOptionValue
+
+
+
+    submit() {
+        this.props.submit(this.state.range, this.state.selectedTopics);
+        this.props.closeFilterCards();
+    } // end of submit
 
 
 
@@ -86,7 +104,7 @@ export default class FilterCards extends Component {
                     <section className="filter-cards__results-section">
                         Results between:
 
-                    <RangeWithTwoSliders
+                        <RangeWithTwoSliders
                             id="filter-cards__range"
                             getValues={this.getSliderValues.bind(this)}
                             min={0}
@@ -130,9 +148,15 @@ export default class FilterCards extends Component {
                     </section>
 
                     <section className="filter-cards__buttons">
-                        <button id="filter-cards__reset-btn">Reset</button>
+                        <button
+                            id="filter-cards__reset-btn"
+                            onClick={() => this.resetState()}
+                        >Reset</button>
 
-                        <button id="filter-cards__filter-btn">Filter Cards</button>
+                        <button
+                            id="filter-cards__filter-btn"
+                            onClick={() => { this.submit() }}
+                        >Filter Cards</button>
                     </section>
                 </div>
             </div>

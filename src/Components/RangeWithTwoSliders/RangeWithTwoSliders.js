@@ -10,7 +10,7 @@ export default class RangeWithTwoSliders extends Component {
         this.state = {
             min, max,
             "mouseDown": false,
-            "innerX": 0
+            "innerX": 0,
         };
     } // end of constructor
 
