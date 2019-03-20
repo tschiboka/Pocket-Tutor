@@ -12,13 +12,14 @@ export default class Cards extends Component {
         this.state = {
             "sortby": "id",
             "ascending": true,
-            "filterCardsPanelVisible": false
+            "filterCardsPanelVisible": false,
+            "filtersApplied": "none" // alternatively if filter is set {range:[x, y], topics:["topic1", "topic2", "topic3"]}
         } // end of state declaration
     } // end of constructor
 
 
 
-    toggleFilterCardsPanel(isVisible) {
+    toggleFilterCardsPanel(isVisible = false) {
         console.log("CLOSE FILTER CARDS");
         const newState = this.state;
 
@@ -114,6 +115,25 @@ export default class Cards extends Component {
 
     submitFilter(range, selectedTopics) {
         console.log("SUBMIT", range, selectedTopics);
+
+        let filterApplied = {};
+
+        // if range [0, 100] and selectedTopics ["", "", ""] let filterApplied to be "none"
+
+        // no topic boils down to ""
+        let filterTopics = selectedTopics.filter(t => t !== "no topic" && t !== "");
+
+        // set filterApplied if it is a valid filter setting
+        if (!filterTopics.length && range[0] === 0 && range[1] === 100) { filterApplied = "none" }
+        else { filterApplied = { range: range, topics: filterTopics } }
+
+        // set state
+        const newState = this.state;
+
+        newState.filtersApplied = filterApplied;
+
+        this.setState(newState);
+        console.log("FITERTOPICS", filterApplied);
     } // end of submitFilter
 
 
