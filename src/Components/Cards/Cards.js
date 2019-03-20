@@ -30,7 +30,7 @@ export default class Cards extends Component {
 
 
 
-    renderCards() {
+    renderCards(filters) {
         let cards = JSON.parse(localStorage.cards);
 
         // add add percent as a property to cards
@@ -38,6 +38,15 @@ export default class Cards extends Component {
             Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100);
             return c;
         });
+
+        // FILTER CARDS
+        filters !== "none" && // only runs when filters set
+            (cards = cards.filter(card => (
+                card.percentage >= filters.range[0] && // upper range
+                card.percentage <= filters.range[1] && // lower range
+                (!filters.topics.length ||             // if topic set at all 
+                    filters.topics.filter(ft => card.topics.includes(ft)).length) // intersection of topics on card and filter
+            ))); // end of filter
 
         // SORT CARDS
         if (this.state.sortby === "results") { cards = cards.sort((a, b) => a.percentage - b.percentage); }
@@ -133,7 +142,6 @@ export default class Cards extends Component {
         newState.filtersApplied = filterApplied;
 
         this.setState(newState);
-        console.log("FITERTOPICS", filterApplied);
     } // end of submitFilter
 
 
@@ -152,7 +160,7 @@ export default class Cards extends Component {
                     </div>
 
                     <div className="cards__body">
-                        <ul>{this.renderCards()}</ul>
+                        <ul>{this.renderCards(this.state.filtersApplied)}</ul>
                     </div>
 
                     <div className="cards__button-box">
