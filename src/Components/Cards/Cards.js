@@ -13,7 +13,9 @@ export default class Cards extends Component {
             "sortby": "id",
             "ascending": true,
             "filterCardsPanelVisible": false,
-            "filtersApplied": "none" // alternatively if filter is set {range:[x, y], topics:["topic1", "topic2", "topic3"]}
+            "filtersApplied": "none", // alternatively if filter is set {range:[x, y], topics:["topic1", "topic2", "topic3"]}
+            "deleteConfirmVisible": false,
+            "deleteId": 0
         } // end of state declaration
     } // end of constructor
 
@@ -61,7 +63,7 @@ export default class Cards extends Component {
                 <li key={i}>
                     <CardThumbnail
                         id={c.id}
-                        remove={this.removeCard.bind(this)}
+                        remove={this.removeCardConfirm.bind(this)}
                     />
                 </li>);
             return cardsList;
@@ -109,22 +111,31 @@ export default class Cards extends Component {
 
 
 
+    removeCardConfirm(id) {
+        console.log("REMOVE");
+        const newState = this.state;
+
+        newState.deleteConfirmVisible = true;
+        newState.deleteId = id;
+
+        this.setState(newState);
+    } // end of removeCardConfirm
+
+
     removeCard(id) {
-        console.log("REMOVE CARD");
         let cards = JSON.parse(localStorage.cards);
 
         cards = cards.filter(c => c.id !== id);
 
         localStorage.setItem("cards", JSON.stringify(cards));
 
+        this.closeRemoveConfim();
+
         this.forceUpdate();
     } // end of removeCard
 
 
-
     submitFilter(range, selectedTopics) {
-        console.log("SUBMIT", range, selectedTopics);
-
         let filterApplied = {};
 
         // if range [0, 100] and selectedTopics ["", "", ""] let filterApplied to be "none"
@@ -143,6 +154,16 @@ export default class Cards extends Component {
 
         this.setState(newState);
     } // end of submitFilter
+
+
+
+    closeRemoveConfim() {
+        const newState = this.state;
+
+        newState.deleteConfirmVisible = false;
+
+        this.setState(newState);
+    } // end of closeRemoveConfirm
 
 
 
@@ -176,6 +197,20 @@ export default class Cards extends Component {
                             submit={this.submitFilter.bind(this)}
                             closeFilterCards={this.toggleFilterCardsPanel.bind(this)}
                         />
+                    }
+                    {
+                        this.state.deleteConfirmVisible &&
+                        <div className="cards__delete-confirm">
+                            Are you sure you want to delete this card?
+                            <br />
+                            card id: {this.state.deleteId}
+
+                            <div className="cards__delete-confirm__button-box">
+                                <button onClick={() => this.removeCard(this.state.deleteId)}>Yes</button>
+
+                                <button onClick={() => this.closeRemoveConfim()}>No</button>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>

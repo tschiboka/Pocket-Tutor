@@ -99,3 +99,28 @@
     font-size: 3.2vh;
     color: #36ebee;
 }
+
+.cards__delete-confirm {
+    position: absolute;
+    height: 20%;
+    width: 96%;
+    top: 40%;
+    left: 2%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 4px double #3e4652;
+    background: #181717;
+}
+
+.cards__delete-confirm button {
+    width: 30%;
+}
+
+.cards__delete-confirm__button-box {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
