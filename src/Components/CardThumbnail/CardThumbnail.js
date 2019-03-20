@@ -62,7 +62,7 @@ export default class CardThumbnail extends Component {
                         this.state.buttonsVisible &&
                         <button
                             className="card-thumbnail__edit"
-                            onClick={() => this.props.edit(true)}
+                            onClick={() => this.props.edit(true, this.props.id)}
                         > 	&#9998; </button>
                     }
                     {

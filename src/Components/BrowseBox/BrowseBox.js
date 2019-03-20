@@ -105,7 +105,10 @@ export default class BrowseBox extends Component {
 
                     <div className="browse-box__footer">
                         <div className="browse-box__footer__progress-box">
-                            <button className="browse-box__footer__progress-box__edit">Edit</button>
+                            <button onClick={() => this.props.openCloseEditCards(true, this.state.currentCard.id)}
+                                className="browse-box__footer__progress-box__edit"
+
+                            >Edit</button>
                             <div className="browse-box__footer__progress-box__progress">
                                 <div className="browse-box__footer__progress-bar">
                                     <div

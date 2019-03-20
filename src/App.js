@@ -62,8 +62,8 @@ export default class App extends Component {
 
 
   // edit cards can be opened form multiple places thoughout the app
-  openCloseEditCards(isOpen) {
-    console.log("OPEN", isOpen);
+  openCloseEditCards(isOpen, id) {
+    console.log("OPEN", isOpen, id);
     const newState = this.state;
 
     newState.editCardIsVisible = isOpen;
@@ -85,7 +85,10 @@ export default class App extends Component {
           <Searchbar />
         </header>
 
-        <BrowseBox visible={this.state.view === "browse"} />
+        <BrowseBox
+          visible={this.state.view === "browse"}
+          openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
+        />
 
         <Topics
           visible={this.state.view === "topics"}

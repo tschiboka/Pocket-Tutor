@@ -64,7 +64,7 @@ export default class Cards extends Component {
                     <CardThumbnail
                         id={c.id}
                         remove={this.removeCardConfirm.bind(this)}
-                        edit={() => this.openEditCards(true)}
+                        edit={() => this.openEditCards(true, c.id)}
                     />
                 </li>);
             return cardsList;
@@ -74,9 +74,10 @@ export default class Cards extends Component {
 
 
 
-    openEditCards(isOpen) {
-        this.props.openCloseEditCards(isOpen);
+    openEditCards(isOpen, id) {
+        this.props.openCloseEditCards(isOpen, id);
     } // end of openEditCards
+
 
 
     changeSortBy(newSortby) {
@@ -191,7 +192,7 @@ export default class Cards extends Component {
                     </div>
 
                     <div className="cards__button-box">
-                        <button>Create</button>
+                        <button onClick={() => this.props.openCloseEditCards(true, null)}>Create</button>
 
                         <button onClick={() => this.toggleFilterCardsPanel(this.state.filterCardsPanelVisible ? false : true)}>Filter</button>
 
