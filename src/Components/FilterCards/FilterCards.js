@@ -10,7 +10,8 @@ export default class FilterCards extends Component {
 
         this.state = {
             "range": [0, 100],
-            "topics": []
+            "topicsOptions": JSON.parse(localStorage.topics).map(t => t.name),
+            "selectedTopics": ["", "", ""]
         }; // end of state declaration
     } // end of constructor
 
@@ -20,7 +21,8 @@ export default class FilterCards extends Component {
         // set back default
         const newState = {
             "range": [0, 100],
-            "topics": []
+            "topicsOptions": JSON.parse(localStorage.topics).map(t => t.name),
+            "selectedTopics": ["", "", ""]
         }; // end of default state declaratoion
 
         this.setState(newState);
@@ -38,6 +40,33 @@ export default class FilterCards extends Component {
         console.log(min, max);
         this.setState(newState);
     } // end of getSliderValues
+
+
+
+    renderOptions(options) {
+        console.log(options);
+        if (options[0] !== "no topic") { options.unshift("no topic") }
+        return options.map((o, i) => (
+            <option
+                disabled={o === "no topic" ? false : this.state.selectedTopics.some(e => e === o)}
+                value={o}
+                key={i}>{o}
+            </option>)
+        )
+    } // end of renderOptions
+
+
+
+    getOptionValue(optionInd) {
+        const
+            newState = this.state,
+            value = document.getElementById("card-filter-option" + optionInd).value;
+
+        newState.selectedTopics.splice(optionInd - 1, 1, value);
+
+        this.setState(newState);
+        console.log(newState);
+    } // end of getOptionValue
 
 
 
@@ -70,67 +99,31 @@ export default class FilterCards extends Component {
 
                         <div className="filter-cards__topics__selector-box">
                             <span className="custom-dropdown">
-                                <select>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
+                                <select
+                                    id="card-filter-option1"
+                                    defaultValue="no topic"
+                                    onChange={() => this.getOptionValue(1)}
+                                >
+                                    {this.renderOptions(this.state.topicsOptions)}
                                 </select>
                             </span>
 
                             <span className="custom-dropdown">
-                                <select>
-                                    <option>Sherlock Holmes</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
+                                <select
+                                    id="card-filter-option2"
+                                    defaultValue="no topic"
+                                    onChange={() => this.getOptionValue(2)}
+                                >
+                                    {this.renderOptions(this.state.topicsOptions)}
                                 </select>
                             </span>
-
                             <span className="custom-dropdown">
-                                <select>
-                                    <option>Sherlock Holmes is blablablabla</option>
-                                    <option>The Great Gatsby</option>
-                                    <option>V for Vendetta</option>
-                                    <option>The Wolf of Wallstreet</option>
-                                    <option>Quantum of Solace</option>
+                                <select
+                                    id="card-filter-option3"
+                                    defaultValue="no topic"
+                                    onChange={() => this.getOptionValue(3)}
+                                >
+                                    {this.renderOptions(this.state.topicsOptions)}
                                 </select>
                             </span>
                         </div>
