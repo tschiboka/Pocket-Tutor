@@ -14,19 +14,21 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      "isMainMenuVisible": false, // main menu is invisible by default
+      "isMainMenuVisible": false,  // main menu is invisible by default
       "view": "browse",            // default view is browse (user can read random cards)
-      "editCardIsVisible": false  // edit card will be able to be opened from multiple places
+      "editCardIsVisible": false,  // edit card will be able to be opened from multiple places
+      "editCardId": null           // if id is not set it will be given a new id by EditCard (aka new Card)
     }; // end of state declaration
   } // end of constructor
 
 
 
   extendMainMenu() {
-    this.setState({
-      isMainMenuVisible: true,
-      view: this.state.view
-    }); // end of setState
+    const newState = this.state;
+
+    newState.isMainMenuVisible = true;
+
+    this.setState(newState);
   } // end of toggleMainMenu
 
 
@@ -44,17 +46,20 @@ export default class App extends Component {
 
 
 
+  // CHANGE THE MAIN VIEW OF THE APP
   changeView(view) {
-    this.setState({
-      isMainMenuVisible: this.state.isMainMenuVisible,
-      view: view
-    }); // end of setState
+    const newState = this.state;
+
+    newState.view = view;
+
+    this.setState(newState);
   } // end of changeView
 
 
 
+  // SET LOCALSORAGE, FIRST RUN IN THE BROWSER WOULD FAIL
   setLocalStorage() {
-    // set default localstorage falues in case missing or first visit
+    // set default localstorage values in case missing or first visit
     if (!localStorage.cards) { localStorage.setItem("cards", "[]") }
     if (!localStorage.topics) { localStorage.setItem("topics", "[]") }
   } // end of setLocalStorage
@@ -67,6 +72,7 @@ export default class App extends Component {
     const newState = this.state;
 
     newState.editCardIsVisible = isOpen;
+    newState.editCardId = id;
 
     this.setState(newState);
   } // end of openCloseEditCards
@@ -101,10 +107,11 @@ export default class App extends Component {
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
         />
 
-        {
+        { // EDIT CARDS
           this.state.editCardIsVisible &&
           <EditCards
             openCloseEditCards={this.openCloseEditCards.bind(this)}
+            id={this.state.editCardId}
           />
         }
 

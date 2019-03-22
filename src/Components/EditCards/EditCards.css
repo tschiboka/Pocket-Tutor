@@ -1,8 +1,24 @@
 .edit-cards {
     position: absolute;
-    top: 0;
+    top: 8%;
     left: 0;
-    height: 100%;
+    height: 92%;
     width: 100%;
-    background: red;
+    background: #131417;
+}
+
+.edit-cards__inner {
+    width: 96%;
+    height: 96%;
+    margin: 2%;
+    border: 1px solid #3e4652;
+}
+
+.edit-cards__header {
+    width: 100%;
+    height: 8%;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
 }
