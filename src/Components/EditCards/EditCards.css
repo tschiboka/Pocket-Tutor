@@ -16,9 +16,27 @@
 
 .edit-cards__header {
     width: 100%;
-    height: 8%;
+    height: 6%;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: rgba(0, 0, 0, 0.1);
     box-shadow:         inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.edit-cards__header span:first-child {
+    font-style: italic;
+}
+
+.edit-cards__header span:nth-child(2) {
+    color: #697c97;
+    padding: 0 5px;
+    border-radius: 3px 0 0 3px;
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
+
 }
