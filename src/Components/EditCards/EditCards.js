@@ -165,7 +165,7 @@ export default class EditCards extends Component {
                     <div className="edit-cards__footer">
                         <button>Submit</button>
 
-                        <button>Back</button>
+                        <button onClick={() => this.props.openCloseEditCards()}>Back</button>
                     </div>
                 </div>
             </div>
