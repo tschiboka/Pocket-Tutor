@@ -18,7 +18,7 @@ export default class EditCards extends Component {
                     "question": "",
                     "answer": "",
                     "results": [0, 0],
-                    "topic": []
+                    "topics": []
                 }, // end of empty card def
             "collapseBtns": [false, false, false] // [labels, question-text, answer-text] collapse buttons (false default)
         } // end of state declaration
@@ -79,8 +79,6 @@ export default class EditCards extends Component {
         topics.style.height = topicsPc + "%";
         question.style.height = questionPc + "%";
         answer.style.height = answerPc + "%";
-
-        console.log(topics, question, answer, topicsPc, questionPc, answerPc);
     } // end of collapseBtn
 
 
@@ -134,7 +132,9 @@ export default class EditCards extends Component {
                             <textarea
                                 name="edit-cards__question-textarea"
                                 className="edit-cards__textarea"
+                                placeholder="Question text"
                                 id="edit-cards__question-textarea">
+                                {this.state.card.question && this.state.card.question}
                             </textarea>
                         </div>
 
@@ -155,7 +155,9 @@ export default class EditCards extends Component {
                             <textarea
                                 name="edit-cards__answer-textarea"
                                 className="edit-cards__textarea"
+                                placeholder="Answer text"
                                 id="edit-cards__answer-textarea">
+                                {this.state.card.answer && this.state.card.answer}
                             </textarea>
                         </div>
                     </div>
