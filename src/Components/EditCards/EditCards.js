@@ -46,14 +46,41 @@ export default class EditCards extends Component {
 
     // collapseInd: 0 - label, 1 - question, 2 - answer
     toggleCollapseBtn(collapseInd) {
-        console.log(collapseInd);
-
         // set collapse btns
         const newState = this.state;
 
         newState.collapseBtns[collapseInd] = newState.collapseBtns[collapseInd] ? false : true;
 
         this.setState(newState);
+
+        // get the resizable items
+        const
+            topics = document.getElementById("edit-cards__topics-settings"),
+            question = document.getElementById("edit-cards__question-settings"),
+            answer = document.getElementById("edit-cards__answer-settings");
+
+        // set height percentages paragraphs (headers) = 6% * 3 rest divided amoung topics question answer total 82%
+        let
+            total = 82,
+            [topicsPc, questionPc, answerPc] = [0, 0, 0];
+
+
+        let rest = total - (topicsPc = this.state.collapseBtns[0] ? 0 : 12);
+
+        rest = (!this.state.collapseBtns[1] && !this.state.collapseBtns[2]) ? rest / 2 : rest;
+
+        questionPc = this.state.collapseBtns[1] ? 0 : rest;
+        answerPc = this.state.collapseBtns[2] ? 0 : rest;
+
+        topics.style.display = topicsPc ? "flex" : "none";
+        question.style.display = questionPc ? "flex" : "none";
+        answer.style.display = answerPc ? "flex" : "none";
+
+        topics.style.height = topicsPc + "%";
+        question.style.height = questionPc + "%";
+        answer.style.height = answerPc + "%";
+
+        console.log(topics, question, answer, topicsPc, questionPc, answerPc);
     } // end of collapseBtn
 
 
@@ -86,7 +113,9 @@ export default class EditCards extends Component {
                             Topics settings
                         </div>
 
-                        <div className="edit-cards__topics-box">
+                        <div
+                            id="edit-cards__topics-settings"
+                            className="edit-cards__topics-box">
                             {this.renderTopicLabels()}
                         </div>
 
@@ -99,7 +128,9 @@ export default class EditCards extends Component {
                             Edit question
                         </div>
 
-                        <div className="edit-cards__question-text">
+                        <div
+                            id="edit-cards__question-settings"
+                            className="edit-cards__question-text">
                             <textarea
                                 name="edit-cards__question-textarea"
                                 className="edit-cards__textarea"
@@ -118,7 +149,9 @@ export default class EditCards extends Component {
                             Edit answer
                         </div>
 
-                        <div className="edit-cards__answer-text">
+                        <div
+                            id="edit-cards__answer-settings"
+                            className="edit-cards__answer-text">
                             <textarea
                                 name="edit-cards__answer-textarea"
                                 className="edit-cards__textarea"
