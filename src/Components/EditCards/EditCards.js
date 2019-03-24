@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import "./EditCards.css";
 
+import TopicLabel from "../TopicLabel/TopicLabel";
+
 export default class EditCards extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,8 @@ export default class EditCards extends Component {
                     "answer": "",
                     "results": [0, 0],
                     "topic": []
-                },  // end of empty card def
+                }, // end of empty card def
+            "collapseBtns": [false, false, false] // [labels, question-text, answer-text] collapse buttons (false default)
         } // end of state declaration
     } // end of constructor
 
@@ -26,15 +29,44 @@ export default class EditCards extends Component {
     componentDidMount() {
         const newState = this.state;
 
-        newState.card.id = this.state.id; // now card recieves the correct id in case it wasn't declaredb (id: null in props)
+        newState.card.id = this.state.id; // now card recieves the correct id in case it wasn't declared (id: null in props)
 
         this.setState(newState);
+
+        this.sizeEditElements();
     } // end of componentDidMount
 
 
 
+    sizeEditElements() {
+        console.log("SIZE");
+    } // end of sizeEditElements
+
+
+
+    // collapseInd: 0 - label, 1 - question, 2 - answer
+    toggleCollapseBtn(collapseInd) {
+        console.log(collapseInd);
+
+        // set collapse btns
+        const newState = this.state;
+
+        newState.collapseBtns[collapseInd] = newState.collapseBtns[collapseInd] ? false : true;
+
+        this.setState(newState);
+    } // end of collapseBtn
+
+
+
+    renderTopicLabels() {
+        return this.state.card.topics.map((topic, i) =>
+            <TopicLabel text={topic} color={JSON.parse(localStorage.topics).find(t => t.name === topic).color} key={i} />
+        ); // end of return map
+    } // renderTopicLabels
+
+
+
     render() {
-        console.log(this.props.id, this.state.card);
         return (
             <div className="edit-cards">
                 <div className="edit-cards__inner">
@@ -45,11 +77,60 @@ export default class EditCards extends Component {
                     </div>
 
                     <div className="edit-cards__body">
-                        <div className="edit-cards__topics-box"></div>
+                        <div className="edit-cards__paragraph edit-cards__paragraph--topics">
+                            <button
+                                className="edit-cards__collapse-btn"
+                                onClick={() => this.toggleCollapseBtn(0)}
+                            >{this.state.collapseBtns[0] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
+
+                            Topics settings
+                        </div>
+
+                        <div className="edit-cards__topics-box">
+                            {this.renderTopicLabels()}
+                        </div>
+
+                        <div className="edit-cards__paragraph edit-cards__paragraph--question">
+                            <button
+                                className="edit-cards__collapse-btn"
+                                onClick={() => this.toggleCollapseBtn(1)}
+                            >{this.state.collapseBtns[1] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
+
+                            Edit question
+                        </div>
+
+                        <div className="edit-cards__question-text">
+                            <textarea
+                                name="edit-cards__question-textarea"
+                                className="edit-cards__textarea"
+                                id="edit-cards__question-textarea">
+                            </textarea>
+                        </div>
 
                         <div className="edit-cards__question-box"></div>
 
-                        <div className="edit-cards__answer-box"></div>
+                        <div className="edit-cards__paragraph edit-cards__paragraph--answer">
+                            <button
+                                className="edit-cards__collapse-btn"
+                                onClick={() => this.toggleCollapseBtn(2)}
+                            >{this.state.collapseBtns[2] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
+
+                            Edit answer
+                        </div>
+
+                        <div className="edit-cards__answer-text">
+                            <textarea
+                                name="edit-cards__answer-textarea"
+                                className="edit-cards__textarea"
+                                id="edit-cards__answer-textarea">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div className="edit-cards__footer">
+                        <button>Submit</button>
+
+                        <button>Back</button>
                     </div>
                 </div>
             </div>
