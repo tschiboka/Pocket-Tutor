@@ -47,6 +47,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 }
 
 .searchbar-container button div {
+    text-shadow: none;
     -webkit-transform: rotate(45deg); 
        -moz-transform: rotate(45deg); 
          -o-transform: rotate(45deg);

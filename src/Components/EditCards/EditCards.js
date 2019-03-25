@@ -20,7 +20,7 @@ export default class EditCards extends Component {
                     "results": [0, 0],
                     "topics": []
                 }, // end of empty card def
-            "collapseBtns": [false, false, false] // [labels, question-text, answer-text] collapse buttons (false default)
+            "collapseBtns": [false, false, false], // [labels, question-text, answer-text] collapse buttons (false default)
         } // end of state declaration
     } // end of constructor
 
@@ -65,7 +65,7 @@ export default class EditCards extends Component {
             [topicsPc, questionPc, answerPc] = [0, 0, 0];
 
 
-        let rest = total - (topicsPc = this.state.collapseBtns[0] ? 0 : 12);
+        let rest = total - (topicsPc = this.state.collapseBtns[0] ? 0 : 16);
 
         rest = (!this.state.collapseBtns[1] && !this.state.collapseBtns[2]) ? rest / 2 : rest;
 
@@ -84,9 +84,34 @@ export default class EditCards extends Component {
 
 
     renderTopicLabels() {
-        return this.state.card.topics.map((topic, i) =>
-            <TopicLabel text={topic} color={JSON.parse(localStorage.topics).find(t => t.name === topic).color} key={i} />
-        ); // end of return map
+        let topics = JSON.parse(localStorage.topics)
+        topics.unshift({ "name": "no topic" });
+
+        return (
+            <div id="edit-cards__topics-settings" className="edit-cards__topic-box">{
+                [0, 1, 2].map(ind => (
+                    // ADD THREE SELECTORS
+                    <div className="edit-cards__topic" key={ind}>
+                        <select
+                            name={"edit-cards__topic-select" + ind}
+                            id={"edit-cards__topic-select" + ind}
+                        >
+                            {topics.map((topic, tInd) => (
+                                // RETURN ALL TOPICS
+                                <option
+                                    value={topic.name}
+                                    key={tInd}
+                                >
+                                    {topic.name}
+                                </option>
+                            ))}
+                        </select>
+                        {console.log()}
+                        <TopicLabel text={this.state.card.topics[ind]} color={""} />
+                    </div>
+                )) // end of outer map
+            }</div>
+        ); // end of return select
     } // renderTopicLabels
 
 
@@ -111,11 +136,7 @@ export default class EditCards extends Component {
                             Topics settings
                         </div>
 
-                        <div
-                            id="edit-cards__topics-settings"
-                            className="edit-cards__topics-box">
-                            {this.renderTopicLabels()}
-                        </div>
+                        {this.renderTopicLabels()}
 
                         <div className="edit-cards__paragraph edit-cards__paragraph--question">
                             <button
@@ -133,8 +154,9 @@ export default class EditCards extends Component {
                                 name="edit-cards__question-textarea"
                                 className="edit-cards__textarea"
                                 placeholder="Question text"
-                                id="edit-cards__question-textarea">
-                                {this.state.card.question && this.state.card.question}
+                                id="edit-cards__question-textarea"
+                                defaultValue={this.state.card.question && this.state.card.question}
+                            >
                             </textarea>
                         </div>
 
@@ -156,8 +178,9 @@ export default class EditCards extends Component {
                                 name="edit-cards__answer-textarea"
                                 className="edit-cards__textarea"
                                 placeholder="Answer text"
-                                id="edit-cards__answer-textarea">
-                                {this.state.card.answer && this.state.card.answer}
+                                id="edit-cards__answer-textarea"
+                                defaultValue={this.state.card.answer && this.state.card.answer}
+                            >
                             </textarea>
                         </div>
                     </div>

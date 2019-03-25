@@ -79,13 +79,33 @@
 }
 
 .edit-cards__topic-box {
-    height: 12%;
+    height: 16%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.edit-cards__topic {
+    display: flex;
+    justify-content: space-between;
 }
 
 .edit-cards__textarea {
     resize: none;
+    white-space: nowrap;
     width: 100%;
     height: 100%;
+    padding: 1%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: aqua transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-style: italic;
     background: rgba(255, 255, 255, 0.015);
     color: #697c97;
     font-family: "Lanenar";
