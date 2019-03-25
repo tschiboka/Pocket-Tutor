@@ -65,13 +65,14 @@ export default class EditCards extends Component {
             [topicsPc, questionPc, answerPc] = [0, 0, 0];
 
 
-        let rest = total - (topicsPc = this.state.collapseBtns[0] ? 0 : 16);
+        let rest = total - (topicsPc = this.state.collapseBtns[0] ? 0 : 16); // topics is fixed 16%
 
-        rest = (!this.state.collapseBtns[1] && !this.state.collapseBtns[2]) ? rest / 2 : rest;
+        rest = (!this.state.collapseBtns[1] && !this.state.collapseBtns[2]) ? rest / 2 : rest; // rest divvy up space
 
         questionPc = this.state.collapseBtns[1] ? 0 : rest;
         answerPc = this.state.collapseBtns[2] ? 0 : rest;
 
+        // display changes
         topics.style.display = topicsPc ? "flex" : "none";
         question.style.display = questionPc ? "flex" : "none";
         answer.style.display = answerPc ? "flex" : "none";
@@ -92,22 +93,24 @@ export default class EditCards extends Component {
                 [0, 1, 2].map(ind => (
                     // ADD THREE SELECTORS
                     <div className="edit-cards__topic" key={ind}>
-                        <select
-                            name={"edit-cards__topic-select" + ind}
-                            id={"edit-cards__topic-select" + ind}
-                        >
-                            {topics.map((topic, tInd) => (
-                                // RETURN ALL TOPICS
-                                <option
-                                    value={topic.name}
-                                    key={tInd}
-                                >
-                                    {topic.name}
-                                </option>
-                            ))}
-                        </select>
-                        {console.log()}
-                        <TopicLabel text={this.state.card.topics[ind]} color={""} />
+                        <div className="custom-dropdown">
+                            <select>
+                                {topics.map((topic, tInd) => (
+                                    // RENDER OPTIONS
+                                    <option
+                                        value={topic.name}
+                                        key={tInd}
+                                    >
+                                        {topic.name}
+                                    </option>
+                                ))}
+                            </select>
+
+                        </div>
+                        {this.state.card.topics[ind] && <TopicLabel
+                            text={this.state.card.topics[ind]}
+                            color={(topics.find(t => t.name === this.state.card.topics[ind]) || { "color": "" }).color}
+                        />}
                     </div>
                 )) // end of outer map
             }</div>
