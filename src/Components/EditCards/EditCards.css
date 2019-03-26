@@ -55,12 +55,27 @@
     -webkit-box-shadow: inset -1px -1px 1px #000000, inset 1px 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-.edit-cards__collapse-btn {
-    padding: 0;
-    width: 2.5vh;
-    height: 2.5vh;
+.edit-cards__paragraph span {
+    margin-right: 1%;
+    margin-left: auto;
+    font-style: italic;
+    text-shadow: -1px -1px 1px black;
     font-size: 1.8vh;
-    line-height: 2.5vh;    
+}
+
+.edit-cards__valid-field-txt {
+    color: rgb(142, 231, 176);
+}
+
+.edit-cards__invalid-field-txt {
+    color: rgb(247, 123, 123);
+}
+
+.edit-cards__collapse-btn {
+    margin: 0 1%;
+    padding: 2px 4px;
+    font-size: 1.8vh;
+    line-height: 2.5vh;
 }
 
 .edit-cards__footer {

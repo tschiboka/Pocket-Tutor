@@ -21,7 +21,8 @@ export default class EditCards extends Component {
                     "topics": []
                 }, // end of empty card def
             "collapseBtns": [false, false, false], // [labels, question-text, answer-text] collapse buttons (false default)
-            "enabledTopics": [] // all the topic options that are currently selected will be disabled (card can not have a certain topic multiple times)
+            "enabledTopics": [], // all the topic options that are currently selected will be disabled (card can not have a certain topic multiple times)
+            "validateForm": { "topics": false, "question": false, "answer": false } // all required fields has to be set in order to be able to submit form
         } // end of state declaration
     } // end of constructor
 
@@ -47,14 +48,14 @@ export default class EditCards extends Component {
         // set enabledTopics
         let enabledTopics = JSON.parse(localStorage.topics).map(t => t.name);
         enabledTopics.unshift("no topic");
+
+        // weed out the ones to be desabled
         topicsToDisable.map(td => {
-            console.log(td);
             if (td !== "no topic") {
                 enabledTopics = enabledTopics.filter(en => en !== td);
             } // end of if not no topic
         }); // end of map arguments
 
-        console.log(enabledTopics);
         return enabledTopics;
     } // end of disableTopicOptions
 
@@ -154,6 +155,35 @@ export default class EditCards extends Component {
 
 
 
+    handleTextAreaOnBlur(event, cardProp) {
+        const newState = this.state;
+
+        newState.card[cardProp] = event.target.value;
+
+        this.setState(newState);
+    } // end of handleTextAreaOnBlur
+
+
+
+    submitCard() {
+        const cardToSubmit = this.state.card;
+
+        cardToSubmit.topics = cardToSubmit.topics.filter(t => t !== "no topic");
+
+        const cards = JSON.parse(localStorage.cards);
+
+        // if card existed, modify it
+        if (cards.find(c => c.id === cardToSubmit.id)) {
+            console.log("CARD EXISTS");
+        }
+        else {
+            console.log("CARD IS NEW");
+        }
+        console.log("SUBMIT", cardToSubmit);
+    } // end of submitCard
+
+
+
     render() {
         return (
             <div className="edit-cards">
@@ -172,6 +202,11 @@ export default class EditCards extends Component {
                             >{this.state.collapseBtns[0] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
                             Topics settings
+                            {
+                                this.state.card.topics.filter(t => t !== "no topic").length ?
+                                    <span className="edit-cards__valid-field-txt">&#10003;</span> :
+                                    <span className="edit-cards__invalid-field-txt">required field</span>
+                            }
                         </div>
 
                         {this.renderTopicLabels(this.state)}
@@ -183,6 +218,11 @@ export default class EditCards extends Component {
                             >{this.state.collapseBtns[1] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
                             Edit question
+                            {
+                                this.state.card.question ?
+                                    <span className="edit-cards__valid-field-txt">&#10003;</span> :
+                                    <span className="edit-cards__invalid-field-txt">required field</span>
+                            }
                         </div>
 
                         <div
@@ -194,6 +234,7 @@ export default class EditCards extends Component {
                                 placeholder="Question text"
                                 id="edit-cards__question-textarea"
                                 defaultValue={this.state.card.question && this.state.card.question}
+                                onBlur={e => this.handleTextAreaOnBlur(e, "question")}
                             >
                             </textarea>
                         </div>
@@ -207,6 +248,11 @@ export default class EditCards extends Component {
                             >{this.state.collapseBtns[2] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
                             Edit answer
+                            {
+                                this.state.card.answer ?
+                                    <span className="edit-cards__valid-field-txt">&#10003;</span> :
+                                    <span className="edit-cards__invalid-field-txt">required field</span>
+                            }
                         </div>
 
                         <div
@@ -218,13 +264,14 @@ export default class EditCards extends Component {
                                 placeholder="Answer text"
                                 id="edit-cards__answer-textarea"
                                 defaultValue={this.state.card.answer && this.state.card.answer}
+                                onBlur={e => this.handleTextAreaOnBlur(e, "answer")}
                             >
                             </textarea>
                         </div>
                     </div>
 
                     <div className="edit-cards__footer">
-                        <button>Submit</button>
+                        <button onClick={() => this.submitCard()}>Submit</button>
 
                         <button onClick={() => this.props.openCloseEditCards()}>Back</button>
                     </div>
