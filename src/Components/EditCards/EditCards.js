@@ -11,7 +11,7 @@ export default class EditCards extends Component {
         const cards = JSON.parse(localStorage.cards);
 
         this.state = {
-            "id": this.props.id || ++cards[cards.length - 1].id,    // if no id is provided by prop create one (last ind id plus one)
+            "id": this.props.id || (cards.length ? ++cards[cards.length - 1].id : 1),    // if no id is provided by prop create one (last ind id plus one)
             "card": cards.find(c => c.id === this.props.id) ||      // get card if id is found, so EditCard can be filled up 
                 {
                     "id": this.props.id, // id still can be null, later on will be assigned in didRender

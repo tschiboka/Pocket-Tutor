@@ -108,6 +108,7 @@ export default class BrowseBox extends Component {
                             <button
                                 onClick={() => this.props.openCloseEditCards(true, this.state.currentCard.id)}
                                 className="browse-box__footer__progress-box__edit"
+                                disabled={!this.state.currentCard}
                             >Edit</button>
 
                             <div className="browse-box__footer__progress-box__progress">
@@ -124,16 +125,19 @@ export default class BrowseBox extends Component {
                             <button
                                 id="browse-box__prev-btn"
                                 onClick={() => this.prevClickHandler()}
+                                disabled={!this.state.currentCard}
                             >Prev</button>
 
                             <button
                                 id="browse-box__turn-btn"
                                 onClick={() => this.turnClickHandler()}
+                                disabled={!this.state.currentCard}
                             >Turn</button>
 
                             <button
                                 id="browse-box__next-btn"
                                 onClick={() => this.nextClickHandler()}
+                                disabled={!this.state.currentCard}
                             >Next</button>
                         </div>
                     </div>

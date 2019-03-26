@@ -136,3 +136,8 @@
     margin-right: 0;
     border-bottom-right-radius: 15px;
 }
+
+button:disabled {
+    color: transparent;
+    text-shadow: none;
+}
