@@ -22,7 +22,6 @@ export default class EditCards extends Component {
                 }, // end of empty card def
             "collapseBtns": [false, false, false], // [labels, question-text, answer-text] collapse buttons (false default)
             "enabledTopics": [], // all the topic options that are currently selected will be disabled (card can not have a certain topic multiple times)
-            "validateForm": { "topics": false, "question": false, "answer": false } // all required fields has to be set in order to be able to submit form
         } // end of state declaration
     } // end of constructor
 
@@ -173,13 +172,17 @@ export default class EditCards extends Component {
         const cards = JSON.parse(localStorage.cards);
 
         // if card existed, modify it
-        if (cards.find(c => c.id === cardToSubmit.id)) {
-            console.log("CARD EXISTS");
-        }
+        const cardIndToModify = cards.findIndex(c => c.id === cardToSubmit.id);
+
+        if (cardIndToModify >= 0) {
+            cards.splice(cardIndToModify, 1, cardToSubmit);
+        } // end of if card id existed
         else {
-            console.log("CARD IS NEW");
-        }
-        console.log("SUBMIT", cardToSubmit);
+            cards.push(cardToSubmit);
+        } // end of if card id didn't exist
+
+        // MODIFY LOCALSTORAGE
+        localStorage.setItem("cards", JSON.stringify(cards));
     } // end of submitCard
 
 
@@ -219,7 +222,7 @@ export default class EditCards extends Component {
 
                             Edit question
                             {
-                                this.state.card.question ?
+                                /\w/g.test(this.state.card.question) ?
                                     <span className="edit-cards__valid-field-txt">&#10003;</span> :
                                     <span className="edit-cards__invalid-field-txt">required field</span>
                             }
@@ -249,7 +252,7 @@ export default class EditCards extends Component {
 
                             Edit answer
                             {
-                                this.state.card.answer ?
+                                /\w/g.test(this.state.card.answer) ?
                                     <span className="edit-cards__valid-field-txt">&#10003;</span> :
                                     <span className="edit-cards__invalid-field-txt">required field</span>
                             }
@@ -271,7 +274,11 @@ export default class EditCards extends Component {
                     </div>
 
                     <div className="edit-cards__footer">
-                        <button onClick={() => this.submitCard()}>Submit</button>
+                        <button
+                            id="edit-cards__submit-btn"
+                            onClick={() => this.submitCard()}
+                            disabled={!(/\w/g.test(this.state.card.question) && /\w/g.test(this.state.card.answer) && this.state.card.topics.filter(t => t !== "no topic").length)}
+                        >Submit</button>
 
                         <button onClick={() => this.props.openCloseEditCards()}>Back</button>
                     </div>

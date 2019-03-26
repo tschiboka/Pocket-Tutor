@@ -93,6 +93,10 @@
     font-size: 2.8vh;
 }
 
+#edit-cards__submit-btn:disabled {
+    color: rgb(247, 123, 123);
+}
+
 .edit-cards__topic-box {
     height: 16%;
     width: 100%;
