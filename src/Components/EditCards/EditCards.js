@@ -183,6 +183,9 @@ export default class EditCards extends Component {
 
         // MODIFY LOCALSTORAGE
         localStorage.setItem("cards", JSON.stringify(cards));
+
+        // close editcards
+        this.props.openCloseEditCards();
     } // end of submitCard
 
 

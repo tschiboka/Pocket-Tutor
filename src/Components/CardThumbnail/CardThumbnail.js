@@ -52,7 +52,7 @@ export default class CardThumbnail extends Component {
                             return <TopicLabel text={topic} color={color} key={i} />
                         })
                     }
-                    <span>{Math.round((card.results[0] / card.results[1]) * 100)}% id:{card.id}</span>
+                    <span>{card.results[1] ? Math.round((card.results[0] / card.results[1]) * 100) : 0}% id:{card.id}</span>
                 </div>
 
                 <div className="card-thumbnail__body">{this.state.questionSide ? card.question : card.answer}</div>

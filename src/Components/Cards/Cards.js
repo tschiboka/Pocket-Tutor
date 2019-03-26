@@ -36,10 +36,7 @@ export default class Cards extends Component {
         let cards = JSON.parse(localStorage.cards);
 
         // add add percent as a property to cards
-        cards.map(c => {
-            Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100);
-            return c;
-        });
+        cards.map(c => c.results[1] ? Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100) : 0);
 
         // FILTER CARDS
         filters !== "none" && // only runs when filters set

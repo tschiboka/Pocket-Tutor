@@ -52,7 +52,7 @@ export default class BrowseBox extends Component {
         if (this.state.currentCard) {
             const [correctAnswers, totalAnswers] = Array.from(this.state.currentCard.results);
 
-            return Math.round((correctAnswers / totalAnswers) * 100) + "%";
+            return (totalAnswers ? Math.round((correctAnswers / totalAnswers) * 100) : 0) + "%";
         }
         else {
             return "0";
