@@ -21,6 +21,7 @@ export default class EditCards extends Component {
                     "topics": []
                 }, // end of empty card def
             "collapseBtns": [false, false, false], // [labels, question-text, answer-text] collapse buttons (false default)
+            "enabledTopics": [] // all the topic options that are currently selected will be disabled (card can not have a certain topic multiple times)
         } // end of state declaration
     } // end of constructor
 
@@ -31,16 +32,31 @@ export default class EditCards extends Component {
 
         newState.card.id = this.state.id; // now card recieves the correct id in case it wasn't declared (id: null in props)
 
-        this.setState(newState);
+        // taylor topics, so it can be modified by editCard safely
+        newState.card.topics = Array(3).fill("").map((t, i) => newState.card.topics[i] ? newState.card.topics[i] : "no topic");
 
-        this.sizeEditElements();
+        // set enabledTopics
+        newState.enabledTopics = this.disableTopicOptions(...newState.card.topics);
+
+        this.setState(newState);
     } // end of componentDidMount
 
 
 
-    sizeEditElements() {
-        console.log("SIZE");
-    } // end of sizeEditElements
+    disableTopicOptions(...topicsToDisable) {
+        // set enabledTopics
+        let enabledTopics = JSON.parse(localStorage.topics).map(t => t.name);
+        enabledTopics.unshift("no topic");
+        topicsToDisable.map(td => {
+            console.log(td);
+            if (td !== "no topic") {
+                enabledTopics = enabledTopics.filter(en => en !== td);
+            } // end of if not no topic
+        }); // end of map arguments
+
+        console.log(enabledTopics);
+        return enabledTopics;
+    } // end of disableTopicOptions
 
 
 
@@ -84,8 +100,22 @@ export default class EditCards extends Component {
 
 
 
+    setTopicOption(ind) {
+        const newState = this.state;
+
+        const value = document.getElementById("edit-cards__select" + ind).value;
+
+        newState.card.topics[ind] = value;
+
+        newState.enabledTopics = this.disableTopicOptions(...newState.card.topics);
+
+        this.setState(newState);
+    } // end of setTopiucOption
+
+
+
     renderTopicLabels() {
-        let topics = JSON.parse(localStorage.topics)
+        let topics = JSON.parse(localStorage.topics);
         topics.unshift({ "name": "no topic" });
 
         return (
@@ -94,11 +124,16 @@ export default class EditCards extends Component {
                     // ADD THREE SELECTORS
                     <div className="edit-cards__topic" key={ind}>
                         <div className="custom-dropdown">
-                            <select>
+                            <select
+                                defaultValue={this.state.card.topics[ind] || "no topic"}
+                                id={"edit-cards__select" + ind}
+                                onChange={() => this.setTopicOption(ind)}
+                            >
                                 {topics.map((topic, tInd) => (
                                     // RENDER OPTIONS
                                     <option
                                         value={topic.name}
+                                        disabled={!this.state.enabledTopics.some(et => et === topic.name)}
                                         key={tInd}
                                     >
                                         {topic.name}
@@ -107,7 +142,7 @@ export default class EditCards extends Component {
                             </select>
 
                         </div>
-                        {this.state.card.topics[ind] && <TopicLabel
+                        {this.state.card.topics[ind] !== "no topic" && <TopicLabel
                             text={this.state.card.topics[ind]}
                             color={(topics.find(t => t.name === this.state.card.topics[ind]) || { "color": "" }).color}
                         />}
@@ -139,7 +174,7 @@ export default class EditCards extends Component {
                             Topics settings
                         </div>
 
-                        {this.renderTopicLabels()}
+                        {this.renderTopicLabels(this.state)}
 
                         <div className="edit-cards__paragraph edit-cards__paragraph--question">
                             <button
