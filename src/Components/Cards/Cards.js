@@ -36,17 +36,18 @@ export default class Cards extends Component {
         let cards = JSON.parse(localStorage.cards);
 
         // add add percent as a property to cards
-        cards.map(c => c.results[1] ? Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100) : 0);
+        cards.map(c => c.results[1] ? Math.round(c.percentage = ((c.results[0] / c.results[1])) * 100) : c.percentage = 0);
 
         // FILTER CARDS
         filters !== "none" && // only runs when filters set
             (cards = cards.filter(card => (
-                card.percentage >= filters.range[0] && // upper range
-                card.percentage <= filters.range[1] && // lower range
+                (card.percentage >= filters.range[0]) && // upper range
+                (card.percentage <= filters.range[1]) && // lower range
                 (!filters.topics.length ||             // if topic set at all 
                     filters.topics.filter(ft => card.topics.includes(ft)).length) // intersection of topics on card and filter
             ))); // end of filter
 
+        console.log(filters, cards);
         // SORT CARDS
         if (this.state.sortby === "results") { cards = cards.sort((a, b) => a.percentage - b.percentage); }
 

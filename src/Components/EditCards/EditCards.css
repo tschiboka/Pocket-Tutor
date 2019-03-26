@@ -127,6 +127,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    white-space: pre-wrap;
     text-align: center;
     font-style: italic;
     background: rgba(255, 255, 255, 0.015);
