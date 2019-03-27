@@ -1,0 +1,21 @@
+.test {
+    width: 96%;
+    height: 88%;
+    margin: 2%;
+    border: 1px solid #3e4652;
+}
+
+.test__header {
+    width: 100%;
+    height: 6%;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
+    font-style: italic;
+}

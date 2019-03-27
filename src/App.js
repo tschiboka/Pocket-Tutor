@@ -8,6 +8,8 @@ import BrowseBox from "./Components/BrowseBox/BrowseBox";
 import Topics from "./Components/Topics/Topics";
 import Cards from "./Components/Cards/Cards";
 import EditCards from "./Components/EditCards/EditCards";
+import Test from "./Components/Test/Test";
+
 
 export default class App extends Component {
   constructor(props) {
@@ -105,6 +107,11 @@ export default class App extends Component {
           visible={this.state.view === "cards"}
           changeView={this.changeView.bind(this)}
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
+        />
+
+        <Test
+          visible={this.state.view === "test"}
+          changeView={this.changeView.bind(this)}
         />
 
         { // EDIT CARDS
