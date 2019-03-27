@@ -119,6 +119,7 @@ export default class App extends Component {
           visible={this.state.isMainMenuVisible}
           toggle={this.closeMainMenu.bind(this)}
           changeView={this.changeView.bind(this)}
+          openCloseEditCards={this.openCloseEditCards.bind(this)} // when menu item clicked, edit card closes
         />
       </div>
     ); // end of return

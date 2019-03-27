@@ -25,6 +25,9 @@ export default class MainMenu extends Component {
     }
 
     handleMenuItemClick(item) {
+        // close edit card
+        this.props.openCloseEditCards(false);
+
         this.props.toggle();
 
         this.props.changeView(item);
