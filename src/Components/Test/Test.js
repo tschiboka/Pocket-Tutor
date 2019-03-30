@@ -15,16 +15,25 @@ export default class Test extends Component {
     } // end of constructor
 
 
+    selectTestTopic(topicSelector, ind) {
+        const list = "";
+    } // end of selectTestTopic
+
+
+
 
     renderTopics(topicSelector) {
         return (
             <ul className={"test__topic-list--" + topicSelector}>
                 {this.state[topicSelector].map((topic, i) =>
-                    <li className="test__topic">
+                    <li className={"test__topic test__topic--" + topicSelector}
+                        id={"test__topic-available" + i}
+                        key={i}
+                        selected={false}
+                        onClick={() => this.selectTestTopic(topicSelector, i)}>
                         <TopicLabel
                             text={topic.name}
-                            color={topic.color}
-                            key={i} />
+                            color={topic.color} />
                     </li>
                 ) /* end of topicSelector map*/}
             </ul>
