@@ -82,6 +82,7 @@
     display: flex;
     justify-content: space-between;
     margin: 5% 2%;
+    padding: 1px;
     border-radius: 15px;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
@@ -100,8 +101,11 @@
     background: rgba(134, 211, 224, 0.2);
 }
 
-
 .test__topic {
     list-style: none;
     margin: 4px;
+}
+
+.availableTopics--selected, .selectedTopics--selected {
+    border: 1px solid #36ebee;;
 }

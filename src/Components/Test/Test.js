@@ -16,7 +16,14 @@ export default class Test extends Component {
 
 
     selectTestTopic(topicSelector, ind) {
-        const list = "";
+        // select topic
+        const
+            allTopics = "test__topic--" + topicSelector,
+            topics = document.getElementsByClassName(allTopics),
+            selectedTopic = topics[ind];
+
+        selectedTopic.classList.add(topicSelector + "--selected");
+        console.log(selectedTopic);
     } // end of selectTestTopic
 
 
@@ -29,7 +36,6 @@ export default class Test extends Component {
                     <li className={"test__topic test__topic--" + topicSelector}
                         id={"test__topic-available" + i}
                         key={i}
-                        selected={false}
                         onClick={() => this.selectTestTopic(topicSelector, i)}>
                         <TopicLabel
                             text={topic.name}
