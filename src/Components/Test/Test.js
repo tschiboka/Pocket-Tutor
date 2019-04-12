@@ -16,6 +16,31 @@ export default class Test extends Component {
 
 
 
+    swapTopicItems(whereFrom, whereTo) {
+        console.log("SWAP", whereFrom, whereTo);
+
+        const
+            selectedListItems = [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected")],
+            selectedTopics = selectedListItems.map(selItem => document.querySelector("#" + selItem.id + ">div>span").innerHTML);
+
+        // remove selected classes from whereFrom
+        selectedListItems.forEach(selItem => selItem.classList.remove("test__topic-list__item--selected"));
+        console.log(selectedTopics);
+
+        const newState = this.state;
+
+        // swap items 
+        for (let i = selectedTopics.length - 1; i >= 0; i--) {
+            console.log("SEL", selectedTopics[i]);
+
+            newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]);
+        } // end of selected topic items reverse iteration (reverse is important to keep the original indexing)
+
+        this.setState(newState);
+    } // end of swapTopicItems
+
+
+
     selectTestTopic(topicSelector, topicInd) {
 
         console.log(topicSelector, topicInd);
