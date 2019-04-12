@@ -106,6 +106,7 @@
     margin: 4px;
 }
 
-.availableTopics--selected, .selectedTopics--selected {
-    border: 1px solid #36ebee;;
+.test__available-topics-box ul li.test__topic-list__item--selected,
+.test__selected-topic-box ul li.test__topic-list__item--selected {
+    background: #36ebeec4;    
 }

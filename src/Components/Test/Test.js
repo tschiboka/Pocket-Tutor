@@ -15,17 +15,19 @@ export default class Test extends Component {
     } // end of constructor
 
 
-    selectTestTopic(topicSelector, ind) {
-        // select topic
-        const
-            allTopics = "test__topic--" + topicSelector,
-            topics = document.getElementsByClassName(allTopics),
-            selectedTopic = topics[ind];
 
-        selectedTopic.classList.add(topicSelector + "--selected");
-        console.log(selectedTopic);
+    selectTestTopic(topicSelector, topicInd) {
+
+        console.log(topicSelector, topicInd);
+        const selectedItem = document.querySelector(".test__topic-list--" + topicSelector + ">li#test__topic--" + topicInd);
+
+        // check if item has been selected, in that case deselect
+        ([...selectedItem.classList].find(cl => cl === "test__topic-list__item--selected"))
+            ? selectedItem.classList.remove("test__topic-list__item--selected")
+            : selectedItem.classList.add("test__topic-list__item--selected");
+
+        console.log(selectedItem);
     } // end of selectTestTopic
-
 
 
 
@@ -33,8 +35,8 @@ export default class Test extends Component {
         return (
             <ul className={"test__topic-list--" + topicSelector}>
                 {this.state[topicSelector].map((topic, i) =>
-                    <li className={"test__topic test__topic--" + topicSelector}
-                        id={"test__topic-available" + i}
+                    <li className={"test__topic-list__item"}
+                        id={"test__topic--" + i}
                         key={i}
                         onClick={() => this.selectTestTopic(topicSelector, i)}>
                         <TopicLabel
@@ -62,9 +64,15 @@ export default class Test extends Component {
                     </div>
 
                     <div className="test__topics-btn-box">
-                        <button id="test__select-btn">&gt;</button>
+                        <button
+                            id="test__select-btn"
+                            onClick={() => this.swapTopicItems("availableTopics", "selectedTopics")}
+                        >&gt;</button>
 
-                        <button id="test__deselect-btn">&lt;</button>
+                        <button
+                            id="test__deselect-btn"
+                            onClick={() => this.swapTopicItems("selectedTopics", "availableTopics")}
+                        >&lt;</button>
                     </div>
 
                     <div className="test__selected-topic-box">
