@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./Test.css";
 
 import TopicLabel from "../TopicLabel/TopicLabel";
+import RangeWithTwoSliders from "../RangeWithTwoSliders/RangeWithTwoSliders";
 
 export default class Test extends Component {
     constructor(props) {
@@ -17,22 +18,17 @@ export default class Test extends Component {
 
 
     swapTopicItems(whereFrom, whereTo) {
-        console.log("SWAP", whereFrom, whereTo);
-
         const
             selectedListItems = [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected")],
             selectedTopics = selectedListItems.map(selItem => document.querySelector("#" + selItem.id + ">div>span").innerHTML);
 
         // remove selected classes from whereFrom
         selectedListItems.forEach(selItem => selItem.classList.remove("test__topic-list__item--selected"));
-        console.log(selectedTopics);
 
         const newState = this.state;
 
         // swap items 
         for (let i = selectedTopics.length - 1; i >= 0; i--) {
-            console.log("SEL", selectedTopics[i]);
-
             newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]);
         } // end of selected topic items reverse iteration (reverse is important to keep the original indexing)
 
@@ -54,6 +50,15 @@ export default class Test extends Component {
         console.log(selectedItem);
     } // end of selectTestTopic
 
+
+
+    getSliderValues(min, max) {
+        const newState = this.state;
+
+        newState.range = [min, max];
+
+        this.setState(newState);
+    } // end of getSliderValues
 
 
     renderTopics(topicSelector) {
@@ -105,6 +110,28 @@ export default class Test extends Component {
 
                         <div className="test__selected-topics">{this.renderTopics("selectedTopics")}</div>
                     </div>
+                </div>
+
+                <div className="test__difficulty-box">
+                    <div className="test__difficulty-header"></div>
+
+                    <RangeWithTwoSliders
+                        id="test__range"
+                        getValues={this.getSliderValues.bind(this)}
+                        min={0}
+                        max={100}
+                    />
+                </div>
+
+                <div className="test__select-box">
+
+                    <div>cards selected</div>
+                </div>
+
+                <div className="test__footer">
+                    <button>Back</button>
+
+                    <button>Start Test</button>
                 </div>
             </div>
         ); // end of return
