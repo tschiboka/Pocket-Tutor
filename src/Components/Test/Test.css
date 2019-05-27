@@ -22,7 +22,7 @@
 
 .test__topics-box {
     width: 100%;
-    height: 50%;
+    height: 55%;
     display: flex;
     justify-content: space-evenly;
     border: 1px solid #3e4652;
@@ -38,8 +38,11 @@
 }
 
 .test__available-topics__header, .test__selected-topics__header {
-    height: 10%;
+    height: 8%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
@@ -109,4 +112,50 @@
 .test__available-topics-box ul li.test__topic-list__item--selected,
 .test__selected-topic-box ul li.test__topic-list__item--selected {
     background: #36ebeec4;    
+}
+
+.test__difficulty-box {
+    height: 17%;
+    width: 100%;
+    border: 1px solid #3e4652;
+}
+
+.test__difficulty-header {
+    height: 40%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
+    font-style: italic;
+}
+
+.test__range-box {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.test__select-box {
+    height: 12%;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test__footer {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.test__footer button {
+    height: 100%;
+    width: 50%;
+    font-size: 3.2vh;
 }

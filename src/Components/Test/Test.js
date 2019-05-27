@@ -20,28 +20,18 @@ export default class Test extends Component {
     swapTopicItems(whereFrom, whereTo) {
         const
             selectedListItems = [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected>div>span")],
-            selectedTopics = selectedListItems.map(selItem => selItem.innerHTML);
+            selectedTopics = selectedListItems.map(selItem => selItem.innerHTML),
+            newState = this.state;
 
         // remove selected classes from whereFrom
         [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected")]
             .forEach(selItem => selItem.classList.remove("test__topic-list__item--selected"));
 
-        const newState = this.state;
-
-
-        console.log("FROM", whereFrom, newState[whereFrom]);
-        console.log("TO", whereTo, newState[whereTo]);
-        console.log("SELECTEDLISTITEMS", selectedListItems);
-        console.log("SELECTEDTOPICS", selectedTopics);
-
-
         // swap items
         for (let i = newState[whereFrom].length - 1; i >= 0; i--) {
             // remove item at the index
-            console.log("I", i, "NEWSTATEWHEREFROM", newState[whereFrom]);
             if (selectedTopics.some(e => e === newState[whereFrom][i].name)) {
-                console.log("moving", newState[whereFrom][i].name);
-                newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]);
+                newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]); // remove and push at the same time
             } // end of if item found in selected ones
         } // end of whereFrom reverse iteration (reverse is important to keep the original indexing)
 
@@ -50,6 +40,9 @@ export default class Test extends Component {
 
         this.setState(newState);
     } // end of swapTopicItems
+
+
+
 
     selectTestTopic(topicSelector, topicInd) {
 
@@ -127,18 +120,19 @@ export default class Test extends Component {
                 </div>
 
                 <div className="test__difficulty-box">
-                    <div className="test__difficulty-header"></div>
+                    <div className="test__difficulty-header">Difficulty</div>
 
-                    <RangeWithTwoSliders
-                        id="test__range"
-                        getValues={this.getSliderValues.bind(this)}
-                        min={0}
-                        max={100}
-                    />
+                    <div className="test__range-box">
+                        <RangeWithTwoSliders
+                            id="test__range"
+                            getValues={this.getSliderValues.bind(this)}
+                            min={0}
+                            max={100}
+                        />
+                    </div>
                 </div>
 
                 <div className="test__select-box">
-
                     <div>cards selected</div>
                 </div>
 
