@@ -10,7 +10,7 @@ export default class Test extends Component {
         super(props);
 
         this.state = {
-            "availableTopics": JSON.parse(localStorage.topics),
+            "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
             "selectedTopics": []
         } // end of state declaration
     } // end of constructor
@@ -19,23 +19,37 @@ export default class Test extends Component {
 
     swapTopicItems(whereFrom, whereTo) {
         const
-            selectedListItems = [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected")],
-            selectedTopics = selectedListItems.map(selItem => document.querySelector("#" + selItem.id + ">div>span").innerHTML);
+            selectedListItems = [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected>div>span")],
+            selectedTopics = selectedListItems.map(selItem => selItem.innerHTML);
 
         // remove selected classes from whereFrom
-        selectedListItems.forEach(selItem => selItem.classList.remove("test__topic-list__item--selected"));
+        [...document.querySelectorAll(".test__topic-list--" + whereFrom + ">li.test__topic-list__item--selected")]
+            .forEach(selItem => selItem.classList.remove("test__topic-list__item--selected"));
 
         const newState = this.state;
 
-        // swap items 
-        for (let i = selectedTopics.length - 1; i >= 0; i--) {
-            newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]);
-        } // end of selected topic items reverse iteration (reverse is important to keep the original indexing)
+
+        console.log("FROM", whereFrom, newState[whereFrom]);
+        console.log("TO", whereTo, newState[whereTo]);
+        console.log("SELECTEDLISTITEMS", selectedListItems);
+        console.log("SELECTEDTOPICS", selectedTopics);
+
+
+        // swap items
+        for (let i = newState[whereFrom].length - 1; i >= 0; i--) {
+            // remove item at the index
+            console.log("I", i, "NEWSTATEWHEREFROM", newState[whereFrom]);
+            if (selectedTopics.some(e => e === newState[whereFrom][i].name)) {
+                console.log("moving", newState[whereFrom][i].name);
+                newState[whereTo].push(...[...newState[whereFrom].splice(i, 1)]);
+            } // end of if item found in selected ones
+        } // end of whereFrom reverse iteration (reverse is important to keep the original indexing)
+
+        // sort lexicaly
+        newState[whereTo].sort((a, b) => a.name > b.name);
 
         this.setState(newState);
     } // end of swapTopicItems
-
-
 
     selectTestTopic(topicSelector, topicInd) {
 
