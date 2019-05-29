@@ -134,6 +134,14 @@ export default class Test extends Component {
 
                 <div className="test__select-box">
                     <div>cards selected</div>
+
+                    <div className="test__selected-cards-box">
+                        <button>&#9668;</button>
+
+                        <span id="test__selected-cards-num">28</span>
+
+                        <button>&#9658;</button>
+                    </div>
                 </div>
 
                 <div className="test__footer">
