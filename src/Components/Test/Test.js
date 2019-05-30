@@ -4,6 +4,7 @@ import "./Test.css";
 
 import TopicLabel from "../TopicLabel/TopicLabel";
 import RangeWithTwoSliders from "../RangeWithTwoSliders/RangeWithTwoSliders";
+import RotatingButton from "../RotatingButton/RotatingButton";
 
 export default class Test extends Component {
     constructor(props) {
@@ -132,16 +133,12 @@ export default class Test extends Component {
                     </div>
                 </div>
 
-                <div className="test__select-box">
+                <div className="test__select-box" >
                     <div>cards selected</div>
 
-                    <div className="test__selected-cards-box">
-                        <button>&#9668;</button>
-
-                        <span id="test__selected-cards-num">28</span>
-
-                        <button>&#9658;</button>
-                    </div>
+                    <RotatingButton
+                        id="test__rotating-button"
+                    />
                 </div>
 
                 <div className="test__footer">
