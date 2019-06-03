@@ -13,7 +13,7 @@ export default class Test extends Component {
         this.state = {
             "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
             "selectedTopics": [],
-            "maxCards": 0
+            "selectedCardsIds": []
         } // end of state declaration
     } // end of constructor
 
@@ -42,7 +42,7 @@ export default class Test extends Component {
 
         this.setState(newState);
 
-        this.calculateMaxCards(); // refresh maxCards
+        this.selectCards(); // refresh maxCards
     } // end of swapTopicItems
 
 
@@ -68,14 +68,31 @@ export default class Test extends Component {
 
         newState.range = [min, max];
 
-        newState.maxCards = this.calculateMaxCards();
         this.setState(newState);
+
+        this.selectCards();
     } // end of getSliderValues
 
 
 
-    calculateMaxCards() {
-        alert();
+    // calculate the maximum amount of cards possible, considering topics and result ranges (returns an array)
+    selectCards() {
+        const
+            cards = JSON.parse(localStorage.cards),
+            topicsSelected = this.state.selectedTopics.map(t => t.name);
+
+        // filter relevant cards by topic and range
+        return cards.filter(c => {
+            const topicsOfCard = c.topics;
+
+            let
+                topicInterSection = !!topicsOfCard.filter(t => topicsSelected.includes(t)).length, // if card has any topic from the selected ones
+                range = (this.state.range || [0, 100]), // in case range slider hasn't been set
+                percent = c.results[1] ? Math.round((c.results[0] / c.results[1]) * 100) : 0, // results as percentage
+                rangeInterSection = percent >= range[0] && percent <= range[1];
+
+            return topicInterSection && rangeInterSection;
+        }); // end of filter cards
     } // end of calculateMaxCards
 
 
