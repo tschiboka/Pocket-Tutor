@@ -1,16 +1,29 @@
 .rot-btn {
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
-.rot-btn>button {
+.rot-btn__btn-box {
+    height: 100%;
+    width: 20%;
+}
+
+.rot-btn__btn-box>button {
     height: 50%;
-    width: 15%;
-    font-size: 0.5em;
+    width: 100%;
+    font-size: 1em;
 }
 
-#test__selected-cards-num {
-    width: 70%;
+.rot-btn__btn-box>button:nth-child(2):hover {
+    text-decoration: overline;
+}
+
+.rot-btn__num-box {
+    width: 80%;
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
 }
