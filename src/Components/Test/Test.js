@@ -12,7 +12,8 @@ export default class Test extends Component {
 
         this.state = {
             "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
-            "selectedTopics": []
+            "selectedTopics": [],
+            "maxCards": 0
         } // end of state declaration
     } // end of constructor
 
@@ -40,6 +41,8 @@ export default class Test extends Component {
         newState[whereTo].sort((a, b) => a.name > b.name);
 
         this.setState(newState);
+
+        this.calculateMaxCards(); // refresh maxCards
     } // end of swapTopicItems
 
 
@@ -65,8 +68,16 @@ export default class Test extends Component {
 
         newState.range = [min, max];
 
+        newState.maxCards = this.calculateMaxCards();
         this.setState(newState);
     } // end of getSliderValues
+
+
+
+    calculateMaxCards() {
+        alert();
+    } // end of calculateMaxCards
+
 
 
     renderTopics(topicSelector) {
@@ -105,12 +116,12 @@ export default class Test extends Component {
                         <button
                             id="test__select-btn"
                             onClick={() => this.swapTopicItems("availableTopics", "selectedTopics")}
-                        >&gt;</button>
+                        >&#9658;</button>
 
                         <button
                             id="test__deselect-btn"
                             onClick={() => this.swapTopicItems("selectedTopics", "availableTopics")}
-                        >&lt;</button>
+                        >&#9668;</button>
                     </div>
 
                     <div className="test__selected-topic-box">

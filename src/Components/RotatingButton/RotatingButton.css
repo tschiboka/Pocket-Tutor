@@ -14,7 +14,7 @@
 .rot-btn__btn-box>button {
     height: 50%;
     width: 100%;
-    font-size: 1em;
+    font-size: 0.8em;
 }
 
 .rot-btn__btn-box>button:nth-child(2):hover {
