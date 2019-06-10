@@ -9,7 +9,8 @@ export default class RotatingButton extends Component {
         this.state = {
             "current": this.props.max,
             "prevMax": this.props.max,
-            "currMax": this.props.max
+            "currMax": this.props.max,
+            "mouseDown": false
         } // end of state declaration
     } // end of constructor
 
@@ -41,11 +42,37 @@ export default class RotatingButton extends Component {
 
 
 
+    handleMouseDown(num) {
+        // MouseDown reacts with delay
+        const reactionTime = setTimeout(() => {
+            const delay = 200;
+
+
+            const newState = this.state;
+
+            newState.mouseDown = true;
+
+            this.setState(newState);
+        }, 1500); // end of reactionTime
+    } // end of handleMousweDown
+
+
+
+    handleMouseUp() {
+        const newState = this.state;
+
+        newState.mouseDown = false;
+
+        this.setState(newState);
+    } // end of handleMouseUp
+
+
+
     renderNumbers(max, currNum) {
         let [prev, curr, next] = [currNum - 1, currNum, currNum + 1];
 
         // weed out values like 0 or anything over max
-        if (prev < 0) prev = "";
+        if (prev < 1) prev = "";
         if (next > max) next = "";
 
 
@@ -67,11 +94,17 @@ export default class RotatingButton extends Component {
             <div className="rot-btn">
                 <div className="rot-btn__btn-box">
                     <button
-                        className="rot-btn__arrow--active"
+                        className={this.state.current > 1 ? "rot-btn__arrow--active" : ""}
+                        onMouseDown={() => this.handleMouseDown(-1)}
+                        onMouseUp={() => this.handleMouseUp()}
+                        onMouseOut={() => this.handleMouseUp()}
                         onClick={() => this.changeCurrNum(-1)}>&#9650;</button>
 
                     <button
-                        className="rot-btn__arrow--active"
+                        className={this.state.current < this.state.currMax ? "rot-btn__arrow--active" : ""}
+                        onMouseDown={() => this.handleMouseDown(1)}
+                        onMouseUp={() => this.handleMouseUp()}
+                        onMouseOut={() => this.handleMouseUp()}
                         onClick={() => this.changeCurrNum(1)}>&#9660;</button>
                 </div>
                 <div className="rot-btn__num-box">

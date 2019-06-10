@@ -68,5 +68,6 @@
 }
 
 .rot-btn__arrow--active {
-
+    color: #36ebee !important;
+    text-shadow: -1px -1px black, 1px 1px 1px #9696c2 !important;
 }
