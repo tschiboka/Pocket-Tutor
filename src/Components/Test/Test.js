@@ -13,7 +13,8 @@ export default class Test extends Component {
         this.state = {
             "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
             "selectedTopics": [],
-            "selectedCards": []
+            "selectedCards": [],
+            "selectedCardsNum": 0
         } // end of state declaration
     } // end of constructor
 
@@ -94,6 +95,16 @@ export default class Test extends Component {
 
 
 
+    getRotatingButtonValue(value) {
+        const newState = this.state;
+
+        this.state.selectedCardsNum = value;
+
+        this.setState(newState);
+    } // end of getRotatingButtonValue
+
+
+
     renderTopics(topicSelector) {
         return (
             <ul className={"test__topic-list--" + topicSelector}>
@@ -164,6 +175,7 @@ export default class Test extends Component {
                     <RotatingButton
                         id="test__rotating-button"
                         max={this.state.selectedCards.length}
+                        getValue={this.getRotatingButtonValue.bind(this)}
                     />
                 </div>
 

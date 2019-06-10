@@ -30,6 +30,10 @@ export default class RotatingButton extends Component {
                 this.setState(newState);
             } // end of if max changed
         } // avoid re-render (state change triggers didUpdate again)
+        else {
+            this.props.getValue(this.state.current);
+            console.log(this.state.current);
+        }
     } // end of componentWillUpdate
 
 
@@ -43,16 +47,14 @@ export default class RotatingButton extends Component {
 
 
     handleMouseDown(num) {
-        console.log("START");
+        // set onmouse
         const newState = this.state;
-
         newState.mouseOn = true;
-
         this.setState(newState);
 
         const createTimer = (duration) => setTimeout(() => {
             if (this.state.mouseOn) {
-                duration -= 60; // dectrease duration
+                duration -= 60; // decrease duration
 
                 if (duration <= 60) duration = 60; // set minimum duration
 
@@ -68,12 +70,9 @@ export default class RotatingButton extends Component {
 
 
     handleMouseUp() {
-        console.log("STOP");
-
-        const newState = this.state;
-
+        // stop onmouse
+        console.log("STOP"); const newState = this.state;
         newState.mouseOn = false;
-
         this.setState(newState);
     } // end of handleMouseUp
 
