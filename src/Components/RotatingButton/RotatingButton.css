@@ -58,7 +58,7 @@
 .rot-btn__num {
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;  
     background: rgba(79, 110, 113, 0.05);
 }
 
@@ -69,5 +69,6 @@
 
 .rot-btn__arrow--active {
     color: #36ebee !important;
+    font-weight: bold;  
     text-shadow: -1px -1px black, 1px 1px 1px #9696c2 !important;
 }

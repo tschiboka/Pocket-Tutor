@@ -10,7 +10,7 @@ export default class RotatingButton extends Component {
             "current": this.props.max,
             "prevMax": this.props.max,
             "currMax": this.props.max,
-            "mouseDown": false
+            "mouseOn": false
         } // end of state declaration
     } // end of constructor
 
@@ -43,25 +43,36 @@ export default class RotatingButton extends Component {
 
 
     handleMouseDown(num) {
-        // MouseDown reacts with delay
-        const reactionTime = setTimeout(() => {
-            const delay = 200;
+        console.log("START");
+        const newState = this.state;
 
+        newState.mouseOn = true;
 
-            const newState = this.state;
+        this.setState(newState);
 
-            newState.mouseDown = true;
+        const createTimer = (duration) => setTimeout(() => {
+            if (this.state.mouseOn) {
+                duration -= 60; // dectrease duration
 
-            this.setState(newState);
-        }, 1500); // end of reactionTime
+                if (duration <= 60) duration = 60; // set minimum duration
+
+                this.changeCurrNum(num);
+                createTimer(duration); // recurse
+            } else clearTimeout(createTimer);
+        }, duration);
+
+        clearTimeout(createTimer);
+        createTimer(300);
     } // end of handleMousweDown
 
 
 
     handleMouseUp() {
+        console.log("STOP");
+
         const newState = this.state;
 
-        newState.mouseDown = false;
+        newState.mouseOn = false;
 
         this.setState(newState);
     } // end of handleMouseUp
@@ -107,9 +118,8 @@ export default class RotatingButton extends Component {
                         onMouseOut={() => this.handleMouseUp()}
                         onClick={() => this.changeCurrNum(1)}>&#9660;</button>
                 </div>
-                <div className="rot-btn__num-box">
-                    {this.renderNumbers(this.props.max, this.state.current)}
-                </div>
+
+                <div className="rot-btn__num-box">{this.renderNumbers(this.props.max, this.state.current)}</div>
             </div>
         ); // end of return
     } // end of render
