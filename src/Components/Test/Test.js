@@ -13,7 +13,7 @@ export default class Test extends Component {
         this.state = {
             "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
             "selectedTopics": [],
-            "selectedCardsIds": []
+            "selectedCards": []
         } // end of state declaration
     } // end of constructor
 
@@ -40,9 +40,9 @@ export default class Test extends Component {
         // sort lexicaly
         newState[whereTo].sort((a, b) => a.name > b.name);
 
-        this.setState(newState);
+        newState.selectedCards = this.selectCards(); // refresh selection
 
-        this.selectCards(); // refresh maxCards
+        this.setState(newState);
     } // end of swapTopicItems
 
 
@@ -68,32 +68,29 @@ export default class Test extends Component {
 
         newState.range = [min, max];
 
-        this.setState(newState);
+        newState.selectedCards = this.selectCards(); // refresh selection
 
-        this.selectCards();
+        this.setState(newState);
     } // end of getSliderValues
 
 
 
-    // calculate the maximum amount of cards possible, considering topics and result ranges (returns an array)
+    // Select cards, considering topics and result ranges (returns an array of card objects or empty array)
     selectCards() {
         const
             cards = JSON.parse(localStorage.cards),
-            topicsSelected = this.state.selectedTopics.map(t => t.name);
+            topicsSelected = this.state.selectedTopics.map(t => t.name);                       // declare HERE, in filter it'd not be efficient (it won't change throughout the function)
 
-        // filter relevant cards by topic and range
-        return cards.filter(c => {
-            const topicsOfCard = c.topics;
+        return cards.filter(c => {                                                             // filter relevant cards by topic and range
+            const
+                topicInterSection = !!c.topics.filter(t => topicsSelected.includes(t)).length, // if card has any topic from the selected ones
+                range = (this.state.range || [0, 100]),                                        // in case range slider hasn't been set
+                percent = c.results[1] ? Math.round((c.results[0] / c.results[1]) * 100) : 0,  // results as percentage
+                rangeInterSection = percent >= range[0] && percent <= range[1];                // if cards result falls within range
 
-            let
-                topicInterSection = !!topicsOfCard.filter(t => topicsSelected.includes(t)).length, // if card has any topic from the selected ones
-                range = (this.state.range || [0, 100]), // in case range slider hasn't been set
-                percent = c.results[1] ? Math.round((c.results[0] / c.results[1]) * 100) : 0, // results as percentage
-                rangeInterSection = percent >= range[0] && percent <= range[1];
-
-            return topicInterSection && rangeInterSection;
+            return topicInterSection && rangeInterSection;                                     // filter if BOTH range and topic matches, return the OBJECT
         }); // end of filter cards
-    } // end of calculateMaxCards
+    } // end of selectCards
 
 
 
@@ -166,6 +163,7 @@ export default class Test extends Component {
 
                     <RotatingButton
                         id="test__rotating-button"
+                        max={this.state.selectedCards}
                     />
                 </div>
 
