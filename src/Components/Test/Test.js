@@ -163,7 +163,7 @@ export default class Test extends Component {
 
                     <RotatingButton
                         id="test__rotating-button"
-                        max={this.state.selectedCards}
+                        max={this.state.selectedCards.length}
                     />
                 </div>
 

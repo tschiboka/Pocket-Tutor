@@ -61,3 +61,12 @@
     align-items: center;    
     background: rgba(79, 110, 113, 0.05);
 }
+
+.rot-btn__btn-box>button {
+    color: rgba(45, 50, 50);
+    text-shadow: none;
+}
+
+.rot-btn__arrow--active {
+
+}
