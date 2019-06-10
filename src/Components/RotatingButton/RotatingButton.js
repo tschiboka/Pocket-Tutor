@@ -16,9 +16,9 @@ export default class RotatingButton extends Component {
     renderNumbers(max) {
         return (
             <div className="rot-btn__nums">
-                <div id="rot-btn__num-prev" className="rot-btn__num">1</div>
-                <div id="rot-btn__num-curr" className="rot-btn__num">2</div>
-                <div id="rot-btn__num-next" className="rot-btn__num">3</div>
+                <div id="rot-btn__num-prev" className="rot-btn__num">156</div>
+                <div id="rot-btn__num-curr" className="rot-btn__num">2675</div>
+                <div id="rot-btn__num-next" className="rot-btn__num">34009</div>
             </div>
         );
     } // end of renderNumbers
