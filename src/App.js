@@ -20,7 +20,8 @@ export default class App extends Component {
       "isMainMenuVisible": false,  // main menu is invisible by default
       "view": "browse",            // default view is browse (user can read random cards)
       "editCardIsVisible": false,  // edit card will be able to be opened from multiple places
-      "editCardId": null           // if id is not set it will be given a new id by EditCard (aka new Card)
+      "editCardId": null,          // if id is not set it will be given a new id by EditCard (aka new Card)
+      "testCards": []              // arr of card objects selected by <Test> run by <RunTest>      
     }; // end of state declaration
   } // end of constructor
 
@@ -69,6 +70,15 @@ export default class App extends Component {
 
 
 
+  getCardsForTest(cardsArr) {
+    // set state
+    const newState = this.state;
+    newState.testCards = cardsArr;
+    this.setState(newState);
+  } // end of getCardsForTest
+
+
+
   // edit cards can be opened form multiple places thoughout the app
   openCloseEditCards(isOpen, id) {
     console.log("OPEN", isOpen, id);
@@ -112,12 +122,14 @@ export default class App extends Component {
 
         <Test
           visible={this.state.view === "test"}
+          getCards={this.getCardsForTest.bind(this)}
           changeView={this.changeView.bind(this)}
         />
 
         <RunTest
           visible={this.state.view === "runtest"}
           changeView={this.changeView.bind(this)}
+          cards={this.state.testCards}
         />
 
         { // EDIT CARDS

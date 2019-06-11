@@ -117,6 +117,9 @@ export default class Test extends Component {
                 tempSelectedCards.splice(rand, 1);
             } // end of for max numbers
 
+            // set cards for test on <App />
+            this.props.getCards(finalSelectedCards);
+
             // close tab
             this.props.changeView("runtest");
         } // end of cards num greater than 0

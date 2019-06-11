@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import "../RunTest/RunTest.css";
 
+import Card from "../Card/Card";
+
 export default class RunTest extends Component {
     render() {
         return (
@@ -15,7 +17,13 @@ export default class RunTest extends Component {
 
                 <div className="run-test__test-box">
                     <div className="run-test__cards">
+                        <div className="run-test__prev-card"><Card /></div>
 
+                        <div className="run-test__curr-card"><Card /></div>
+
+                        <div className="run-test__next-card"><Card /></div>
+
+                        <div className="run-test__next2-card"><Card /></div>
                     </div>
 
                     <div className="run-test__btn-box">
