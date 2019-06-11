@@ -9,6 +9,7 @@ import Topics from "./Components/Topics/Topics";
 import Cards from "./Components/Cards/Cards";
 import EditCards from "./Components/EditCards/EditCards";
 import Test from "./Components/Test/Test";
+import RunTest from "./Components/RunTest/RunTest";
 
 
 export default class App extends Component {
@@ -111,6 +112,11 @@ export default class App extends Component {
 
         <Test
           visible={this.state.view === "test"}
+          changeView={this.changeView.bind(this)}
+        />
+
+        <RunTest
+          visible={this.state.view === "runtest"}
           changeView={this.changeView.bind(this)}
         />
 
