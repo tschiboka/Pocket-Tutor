@@ -46,6 +46,45 @@
     transition: width .4s ease-in-out; 
 }
 
+.run-test__test-box {
+    width: 100%;
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow:         0 1px 5px #000 inset, 0 1px 0 #444;
+    -moz-box-shadow:    0 1px 5px #000 inset, 0 1px 0 #444;
+    -webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+}
+
+.run-test__cards {
+    width: 100%;
+    height: 90%;
+    background: rgba(0, 0, 0, .3);
+}
+
+.run-test__btn-box {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.run-test__btn-box>button {
+    height: 100%;
+    font-size: 3vh;
+}
+
+.run-test__btn-box>button:nth-child(odd) {
+    width: 20%;
+}
+
+.run-test__btn-box>button:nth-child(even) {
+    width: 60%;
+}
+
 @keyframes animate-stripes {
     0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }
