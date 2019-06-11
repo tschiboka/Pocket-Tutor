@@ -50,16 +50,12 @@ export default class Test extends Component {
 
 
     selectTestTopic(topicSelector, topicInd) {
-
-        console.log(topicSelector, topicInd);
         const selectedItem = document.querySelector(".test__topic-list--" + topicSelector + ">li#test__topic--" + topicInd);
 
         // check if item has been selected, in that case deselect
         ([...selectedItem.classList].find(cl => cl === "test__topic-list__item--selected"))
             ? selectedItem.classList.remove("test__topic-list__item--selected")
             : selectedItem.classList.add("test__topic-list__item--selected");
-
-        console.log(selectedItem);
     } // end of selectTestTopic
 
 
@@ -102,6 +98,26 @@ export default class Test extends Component {
 
         this.setState(newState);
     } // end of getRotatingButtonValue
+
+
+
+    startTest() {
+        if (this.state.selectedCardsNum) {
+            const
+                finalSelectedCards = [],
+                tempSelectedCards = this.state.selectedCards.map(e => e);
+
+            for (let i = 0; i < this.state.selectedCardsNum; i++) {
+                const
+                    rand = Math.floor(Math.random() * tempSelectedCards.length),
+                    selectedCard = tempSelectedCards[rand];
+
+                finalSelectedCards.push(selectedCard);
+
+                tempSelectedCards.splice(rand, 1);
+            } // end of for max numbers
+        } // end of cards num greater than 0
+    } // end of startTest
 
 
 
@@ -180,9 +196,9 @@ export default class Test extends Component {
                 </div>
 
                 <div className="test__footer">
-                    <button>Back</button>
+                    <button onClick={() => this.props.changeView("browse")}>Back</button>
 
-                    <button>Start Test</button>
+                    <button onClick={() => this.startTest()}>Start Test</button>
                 </div>
             </div>
         ); // end of return

@@ -32,7 +32,6 @@ export default class RotatingButton extends Component {
         } // avoid re-render (state change triggers didUpdate again)
         else {
             this.props.getValue(this.state.current);
-            console.log(this.state.current);
         }
     } // end of componentWillUpdate
 
@@ -71,7 +70,7 @@ export default class RotatingButton extends Component {
 
     handleMouseUp() {
         // stop onmouse
-        console.log("STOP"); const newState = this.state;
+        const newState = this.state;
         newState.mouseOn = false;
         this.setState(newState);
     } // end of handleMouseUp
