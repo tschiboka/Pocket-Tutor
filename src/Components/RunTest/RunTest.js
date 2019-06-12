@@ -10,9 +10,23 @@ export default class RunTest extends Component {
 
         this.state = {
             "current": 0,
-            "animationIsOn": false
+            "animationIsOn": false,
+            "cardsTurned": undefined
         } // end of state declaration
     } // end of constructor
+
+
+
+    turnCard() {
+        const turned = this.state.cardsTurned || Array(this.props.cards.length).fill(false);
+
+        turned[this.state.current] = turned[this.state.current] ? false : true;
+
+        // set state
+        const newState = this.state;
+        newState.cardsTurned = turned;
+        this.setState(newState);
+    } // end of turnCard
 
 
 
@@ -67,19 +81,31 @@ export default class RunTest extends Component {
                 <div className="run-test__test-box">
                     <div className="run-test__cards">
                         <div id="run-test__prev-card-div">
-                            <Card card={this.props.cards[this.state.current - 1]} />
+                            <Card
+                                card={this.props.cards[this.state.current - 1]}
+                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current - 1]}
+                            />
                         </div>
 
                         <div id="run-test__curr-card-div">
-                            <Card card={this.props.cards[this.state.current]} />
+                            <Card
+                                card={this.props.cards[this.state.current]}
+                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current]}
+                            />
                         </div>
 
                         <div id="run-test__next-card-div">
-                            <Card card={this.props.cards[this.state.current + 1]} />
+                            <Card
+                                card={this.props.cards[this.state.current + 1]}
+                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current + 1]}
+                            />
                         </div>
 
                         <div id="run-test__nex2-card-div">
-                            <Card card={this.props.cards[this.state.current + 2]} />
+                            <Card
+                                card={this.props.cards[this.state.current + 2]}
+                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current + 2]}
+                            />
                         </div>
                     </div>
 
@@ -92,6 +118,7 @@ export default class RunTest extends Component {
                         <button
                             id="run-test__turn-btn"
                             disabled={this.state.animationIsOn}
+                            onClick={() => this.turnCard()}
                         >Turn</button>
 
                         <button

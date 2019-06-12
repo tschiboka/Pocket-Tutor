@@ -15,9 +15,10 @@ export default class Card extends Component {
 
     render() {
         const CARD = this.props.card || { "id": -1, "question": "", "answer": "", "results": [0, 0], "topics": [""] };
-        console.log(CARD);
         return (
-            <div className="card__card-box">{CARD.question}</div>
+            <div className="card__card-box">
+                {this.props.turned ? CARD.answer : CARD.question}
+            </div>
         ); // end of return
     } // end of render
 } // end of Card Component
