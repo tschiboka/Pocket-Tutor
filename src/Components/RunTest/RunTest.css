@@ -113,6 +113,11 @@
     width: 60%;
 }
 
+.run-test__btn-box>button:disabled, .run-test__btn-box>button[disabled] {
+    color: #36ebee7e;
+    cursor: progress;
+}
+
 @keyframes animate-stripes {
     0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }

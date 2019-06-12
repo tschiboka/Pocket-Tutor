@@ -9,7 +9,8 @@ export default class RunTest extends Component {
         super(props);
 
         this.state = {
-            "current": 0
+            "current": 0,
+            "animationIsOn": false
         } // end of state declaration
     } // end of constructor
 
@@ -17,22 +18,37 @@ export default class RunTest extends Component {
 
     // true/false store result
     assesCard(result) {
-        // change state
+        // disable buttons while animate
         const newState = this.state;
-        newState.current++;
+        newState.animationIsOn = true;
         this.setState(newState);
 
-        console.log("RESULT", result);
+        // delay changes letting the animations time
+        const delayForAnimation = setTimeout(() => {
+            // here are the changes on the localstore card object
 
-        // here are the changes on the localstore card objetc
+            // change state
+            const newState = this.state;
+            newState.current++;
+            newState.animationIsOn = false;
+            this.setState(newState);
 
-        // roll the cards and animate
-        this.rollCard();
+            if (this.state.current >= this.props.cards.length) console.log("SHOW RESULT");
+
+            console.log("RESULT", result);
+
+
+            // roll the cards and animate
+            this.rollCard();
+
+            clearTimeout(delayForAnimation);
+        }, 1000);
     } // end of assesCard
 
 
 
     rollCard() {
+        console.log("ROLL HERE");
 
     } // end of rollCard
 
@@ -68,11 +84,20 @@ export default class RunTest extends Component {
                     </div>
 
                     <div className="run-test__btn-box">
-                        <button onClick={() => this.assesCard(false)}>&times;</button>
+                        <button
+                            id="run-test__correct-btn"
+                            disabled={this.state.animationIsOn}
+                            onClick={() => this.assesCard(false)}>&times;</button>
 
-                        <button>Turn</button>
+                        <button
+                            id="run-test__turn-btn"
+                            disabled={this.state.animationIsOn}
+                        >Turn</button>
 
-                        <button onClick={() => this.assesCard(true)}>&#10003;</button>
+                        <button
+                            id="run-test__false-btn"
+                            disabled={this.state.animationIsOn}
+                            onClick={() => this.assesCard(true)}>&#10003;</button>
                     </div>
                 </div>
             </div>
