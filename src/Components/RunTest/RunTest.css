@@ -46,52 +46,6 @@
     transition: width .4s ease-in-out; 
 }
 
-.run-test__test-box {
-    width: 100%;
-    height: 97%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow:         0 1px 5px #000 inset, 0 1px 0 #444;
-    -moz-box-shadow:    0 1px 5px #000 inset, 0 1px 0 #444;
-    -webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
-}
-
-.run-test__cards {
-    position: relative;
-    width: 100%;
-    height: 90%;
-    background: rgba(0, 0, 0, .3);
-}
-
-#run-test__prev-card-div, #run-test__curr-card-div, #run-test__next-card-div, #run-test__nex2-card-div {
-    position: absolute;
-    top: 0;
-    width: 25%;
-    height: 100%;
-}
-
-#run-test__prev-card-div {
-    left: 0;
-    background: blue;
-}
-
-#run-test__curr-card-div {
-    left: 25%;
-    background: pink;
-}
-
-#run-test__next-card-div {
-    left: 50%;
-    background: yellow;
-}
-
-#run-test__nex2-card-div {
-    left: 75%;
-    background: green;
-}
-
 .run-test__btn-box {
     width: 100%;
     height: 10%;
@@ -118,6 +72,75 @@
     cursor: progress;
 }
 
+
+@-webkit-keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
 @keyframes animate-stripes {
     0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+.run-test__test-box {
+    width: 100%;
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow:         0 1px 5px #000 inset, 0 1px 0 #444;
+    -moz-box-shadow:    0 1px 5px #000 inset, 0 1px 0 #444;
+    -webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+}
+
+.run-test__cards {
+    position: relative;
+    height: 90%;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+    
+}
+
+#run-test__prev-card-div, #run-test__curr-card-div, #run-test__next-card-div, #run-test__nex2-card-div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+#run-test__prev-card-div {
+    background: blue;
+    transform: rotateY(90deg) translateX(0);
+}
+
+#run-test__curr-card-div {   
+    background: green;
+    transform: rotateY(0deg) translateX(0);
+}
+
+#run-test__next-card-div {
+    left: 100%;
+    background: yellow;
+    transform: rotateY(90deg) translateX(0);
+}
+
+#run-test__nex2-card-div {
+    left: 100%;
+    background: red;
+    transform: rotateY(90deg) translateX(0);
+}
+
+.run-test__animate--curr-card {
+    animation: animate-curr-card 1s linear; 
+}
+
+@keyframes animate-curr-card {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 25%;
+    }
 }
