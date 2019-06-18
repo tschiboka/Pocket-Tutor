@@ -132,7 +132,7 @@
     transform: rotateY(90deg) translateX(0);
 }
 
-.run-test__animate--curr-card {
+.run-test__curr-card-div--animation {
     animation: animate-curr-card 1s linear; 
 }
 

@@ -39,7 +39,11 @@ export default class RunTest extends Component {
 
 
         // roll the cards and animate
-        this.rollCard();
+        const
+            name = ["prev", "curr", "next", "nex2"],               // the name strings that classes will have 
+            ids = name.map(na => "run-test__" + na + "-card-div"); // the divs ids
+
+        this.restartAnimations(ids);
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {
@@ -59,25 +63,18 @@ export default class RunTest extends Component {
 
 
 
-    rollCard() {
-        /* in order to restart animation every time we roll cards
-           they need to be destroyed and re-added */
-        console.log("ROLL HERE");
-
+    // In order to restart animation they need to be destroyed and re-added
+    // The function takes an array of strings as arguments!
+    restartAnimations(ids) {
         const // card-divs
-            prev = document.getElementById("run-test__prev-card-div"), // previous card div
-            curr = document.getElementById("run-test__curr-card-div"), // current card div
-            next = document.getElementById("run-test__next-card-div"), // next card div
-            nex2 = document.getElementById("run-test__nex2-card-div"), // the second next card div
-            divs = [prev, curr, next, nex2],                           // all divs in an array
-            clon = divs.map(div => div.cloneNode(true)),               // all clones of above divs
-            name = ["prev", "curr", "next", "nex2"];                   // the name strings that classes will have 
+            divs = ids.map(id => document.getElementById(id)),         // the div elements of the card-boxes
+            clon = divs.map(div => div.cloneNode(true));               // all clones of above divs
 
         // replace all elements with clone (clone has diff ref, so it will trigger animations)
         divs.forEach((div, i) => div.parentNode.replaceChild(clon[i], div));
 
         // add animation classes to the newly created clone divs
-        name.forEach((na, i) => clon[i].classList.add("run-test__animate--" + na + "-card"));
+        clon.forEach(cl => cl.classList.add(cl.id + "--animation"));
     } // end of rollCard
 
 
