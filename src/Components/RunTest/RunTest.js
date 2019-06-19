@@ -59,24 +59,6 @@ export default class RunTest extends Component {
 
     // The function takes an array of strings as arguments!
     restartAnimations() {
-        const
-            name = ["prev", "curr", "next", "nex2"],               // the name strings that classes will have 
-            ids = name.map(na => "run-test__" + na + "-card-div"), // the divs ids
-            anim = ids.map(id => id + "-animation");
-
-        const divs = ids.map(id => document.getElementsByClassName(id)[0]); // the div elements of the card-boxes
-
-        // remove all animation classes from all divs
-        const allDivs = document.querySelectorAll(".run-test__cards>div");
-        //allDivs.forEach(div => {
-        //    anim.forEach(an => { div.classList.remove(an); });
-        //});
-        console.log(divs);
-        divs.forEach((div, i) => {
-            if (i > 1) div.classList.add("BZDMEG");
-            console.log(!!div);
-            console.log(div && div);
-        });
     } // end of rollCard
 
 
@@ -86,20 +68,11 @@ export default class RunTest extends Component {
             name = ["prev", "curr", "next", "nex2"],
             curr = this.state.current,
             clNa = name.map((n, i) => ind === curr + i - 1 ? n : ""),
-            clss = "run-test__" + clNa.join("") + "-card-div ";
+            clss = "run-test__" + clNa.join("") + "-card-div";
 
-        console.log(clss);
-        return clss + (this.state.animationIsOn ? clss + "-animation" : "");
-
+        return clss + (this.state.animationIsOn ? " " + clss + "--animation" : "");
     } // end of addCardClasses
-    /**
-     * "run-test__" + (
-                                        i === this.state.current - 1 ? "prev" :
-                                            i === this.state.current ? "curr" :
-                                                i === this.state.current + 1 ? "next" :
-                                                    i === this.state.current + 2 ? "nex2" : ""
-                                    ) + "-card-div" + 
-     */
+
 
 
     render() {
