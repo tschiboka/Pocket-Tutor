@@ -157,7 +157,7 @@ export default class EditCards extends Component {
     handleTextAreaOnBlur(event, cardProp) {
         const newState = this.state;
 
-        newState.card[cardProp] = event.target.value;
+        newState.card[cardProp] = event.target.value.replace(/"/g, "\"");
 
         this.setState(newState);
     } // end of handleTextAreaOnBlur

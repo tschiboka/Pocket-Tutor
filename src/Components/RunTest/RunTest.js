@@ -25,6 +25,7 @@ export default class RunTest extends Component {
         // set current card in the array
         turned[this.state.current] = turned[this.state.current] ? false : true;
 
+
         // set state
         const newState = this.state;
         newState.cardsTurned = turned;
@@ -116,7 +117,7 @@ export default class RunTest extends Component {
                                 className={this.addCardClasses(i)}>
                                 <Card
                                     card={card}
-                                    turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current - 1]}
+                                    turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current]}
                                 />
                             </div>
                         ))}

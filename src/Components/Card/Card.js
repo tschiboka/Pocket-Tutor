@@ -13,11 +13,22 @@ export default class Card extends Component {
 
 
 
+    // function returns a styled text with syntax highlighting
+    synthaxCard(text) {
+        const
+            code = text.match(/<###.###>/g);
+
+        console.log(code);
+        return text;
+    } // end of synthaxCard
+
+
+
     render() {
         const CARD = this.props.card || { "id": -1, "question": "", "answer": "", "results": [0, 0], "topics": [""] };
         return (
             <div className="card__card-box">
-                {this.props.turned ? CARD.answer : CARD.question}
+                {this.synthaxCard(this.props.turned ? CARD.answer : CARD.question)}
             </div>
         ); // end of return
     } // end of render
