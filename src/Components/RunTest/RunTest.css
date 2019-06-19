@@ -27,8 +27,7 @@
     -webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
 }
 
-.run-test__progress {
-    width: 40%;
+#run-test__progress {
     height: calc(100% - 2px);
     border-radius: 6px;
     background-color: #36ebee;
@@ -140,19 +139,19 @@
 }
 
 .run-test__prev-card-div--animation {
-    animation: animate-prev-card 1s linear; 
+    animation: animate-prev-card 1.5s linear; 
 }
 
 .run-test__curr-card-div--animation {
-    animation: animate-curr-card 1s linear;
+    animation: animate-curr-card 1.5s linear;
 }
 
 .run-test__next-card-div--animation {
-    animation: animate-next-card 1s linear; 
+    animation: animate-next-card 1.5s linear; 
 }
 
 .run-test__nex2-card-div--animation {
-    animation: animate-nex2-card 1s linear; 
+    animation: animate-nex2-card 1.5s linear; 
 }
 
 @keyframes animate-prev-card {

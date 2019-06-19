@@ -30,14 +30,14 @@ export default class RunTest extends Component {
 
 
 
-    // true/false store result
+    // accept true/false store result
     assesCard(result) {
         // disable buttons while animate
         const newState = this.state;
         newState.animationIsOn = true;
         this.setState(newState);
 
-        //this.restartAnimations();
+        this.animateProgressBar();
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {
@@ -52,26 +52,47 @@ export default class RunTest extends Component {
             if (this.state.current >= this.props.cards.length) console.log("SHOW RESULT");
 
             clearTimeout(delayForAnimation);
-        }, 1000);
+        }, 1500);
     } // end of assesCard
 
 
 
-    // The function takes an array of strings as arguments!
-    restartAnimations() {
-    } // end of rollCard
-
-
-
+    // give classes to card divs on the fly while considering animation
     addCardClasses(ind) {
         const
-            name = ["prev", "curr", "next", "nex2"],
-            curr = this.state.current,
-            clNa = name.map((n, i) => ind === curr + i - 1 ? n : ""),
-            clss = "run-test__" + clNa.join("") + "-card-div";
+            name = ["prev", "curr", "next", "nex2"],                  // the placeholder names
+            curr = this.state.current,                                // current
+            clNa = name.map((n, i) => ind === curr + i - 1 ? n : ""), // get the name for the index 
+            clss = "run-test__" + clNa.join("") + "-card-div";        // create className  
 
         return clss + (this.state.animationIsOn ? " " + clss + "--animation" : "");
     } // end of addCardClasses
+
+
+
+    // dinamically animate the progress bar
+    animateProgressBar() {
+        const
+            cardLen = this.props.cards.length,                       // get cardsLength
+            current = this.state.current,                            // get current
+            calcPer = (lg, sm) => lg && sm ? (sm / lg) * 100 : 0,    // create func that return precentage
+            currPer = calcPer(cardLen, current),                     // current percentage
+            nextPer = calcPer(cardLen, current + 1),                 // percentage of the next step
+            progres = document.getElementById("run-test__progress"), // the progress bar element
+            oneStep = (nextPer - currPer) / 10;                      // the amount progress bar goes in one step (10 step anim)
+
+        let counter = 0,
+            currWidth = currPer;
+
+        // create a timer for progressbar width grow
+        const progressTimer = setInterval(() => {
+            currWidth += oneStep;                              // increase width by 1 unit
+
+            progres.style.width = currWidth + "%";             // set width
+
+            if (++counter === 9) clearInterval(progressTimer); // increment and clear    
+        }, 150); // end of progressTimer
+    } // end of animateProggressBar
 
 
 
@@ -81,7 +102,7 @@ export default class RunTest extends Component {
             <div className="run-test-box">
                 <div className="run-test__progress-box">
                     <div className="run-test__progressbar">
-                        <div className="run-test__progress"></div>
+                        <div id="run-test__progress"></div>
                     </div>
                 </div>
 
