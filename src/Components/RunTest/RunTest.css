@@ -101,7 +101,9 @@
     overflow: hidden;
 }
 
-#run-test__prev-card-div, #run-test__curr-card-div, #run-test__next-card-div, #run-test__nex2-card-div{
+.run-test__-card-div { display: none; }
+
+.run-test__prev-card-div, .run-test__curr-card-div, .run-test__next-card-div, .run-test__nex2-card-div{
     position: absolute;
     top: 0;
     left: 0;
@@ -110,45 +112,41 @@
 }
 
 
-#run-test__prev-card-div {
+.run-test__prev-card-div {
     background: blue;
     z-index: 0;
-    
 }
 
-#run-test__curr-card-div {   
+.run-test__curr-card-div {   
     background: green;
     z-index: 3;
-    opacity: 1;
 }
 
-#run-test__next-card-div {
-    background: yellow;
+.run-test__next-card-div {
+    background: gray;
     z-index: 2;
-    opacity: 1;
 }
 
-#run-test__nex2-card-div {
+.run-test__nex2-card-div {
     background: red;
     z-index: 1;
-    opacity: 1;
     transform: rotateY(90deg) scale(0.65);
 }
 
 .run-test__prev-card-div--animation {
-    animation: animate-prev-card 2s linear; 
+    animation: animate-prev-card 4s linear; 
 }
 
 .run-test__curr-card-div--animation {
-    animation: animate-curr-card 2s linear; 
+    animation: animate-curr-card 4s linear; 
 }
 
 .run-test__next-card-div--animation {
-    animation: animate-next-card 2s linear; 
+    animation: animate-next-card 4s linear; 
 }
 
 .run-test__nex2-card-div--animation {
-    animation: animate-nex2-card 2s linear; 
+    animation: animate-nex2-card 4s linear; 
 }
 
 @keyframes animate-prev-card {
@@ -174,6 +172,29 @@
     }
 }
 
+@-webkit-keyframes animate-prev-card {
+    0% {
+        -webkit-transform-origin: center center;
+        left: 0;
+        -webkit-transform: scale(1);
+    }
+    25% {
+        -webkit-transform-origin: center center;
+        left: -17.5%;
+        -webkit-transform: scale(0.65);
+    }
+    50% {
+        -webkit-transform-origin: center left;
+        left: -10%;
+        -webkit-transform: scale(0.65) rotateY(90deg);
+    }
+    100% {
+        -webkit-transform-origin: center left;
+        left: -10%;
+        -webkit-transform: scale(0.65) rotateY(90deg);
+    }
+}
+
 @keyframes animate-curr-card {
     0% {
         left: 0;
@@ -195,6 +216,29 @@
         z-index: 2;
     }
 }
+
+@-webkit-keyframes animate-curr-card {
+    0% {
+        left: 0;
+        -webkit-transform: scale(1);
+    }
+    25% {
+        left: 0;
+        -webkit-transform: scale(0.8);
+        z-index: 3;
+    }
+    50% {
+        left: -12.5%;
+        -webkit-transform: scale(0.65);
+        z-index: 2;
+    }
+    100% {
+        left: -12.5%;
+        -webkit-transform: scale(0.65);
+        z-index: 2;
+    }
+}
+
 
 @keyframes animate-next-card {
     0% {
@@ -218,6 +262,29 @@
     }
 }
 
+@-webkit-keyframes animate-next-card {
+    0% {
+        left: 0;
+        -webkit-transform: scale(1);
+    }
+    25% {
+        left: 17.5%;
+        -webkit-transform: scale(0.65);
+        z-index: 2;
+    }
+    50% {
+        left: 0;
+        -webkit-transform: scale(0.8);
+        z-index: 3;
+    }
+    100% {
+        left: 0;
+        -webkit-transform: scale(1);
+        z-index: 3;
+    }
+}
+
+
 @keyframes animate-nex2-card {
     0% {
     }
@@ -232,5 +299,22 @@
     100% {
         transform: rotateY(0deg) scale(0.65);
         transform-origin: center right;
+    }
+}
+
+@-webkit-keyframes animate-nex2-card {
+    0% {
+    }
+    25% {
+        -webkit-transform: rotateY(90deg) scale(0.65);
+        -webkit-transform-origin: center right;
+    }
+    50% {
+        -webkit-transform: rotateY(0deg) scale(0.65);
+        -webkit-transform-origin: center right;
+    }
+    100% {
+        -webkit-transform: rotateY(0deg) scale(0.65);
+        -webkit-transform-origin: center right;
     }
 }

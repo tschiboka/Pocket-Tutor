@@ -37,13 +37,7 @@ export default class RunTest extends Component {
         newState.animationIsOn = true;
         this.setState(newState);
 
-
-        // roll the cards and animate
-        const
-            name = ["prev", "curr", "next", "nex2"],               // the name strings that classes will have 
-            ids = name.map(na => "run-test__" + na + "-card-div"); // the divs ids
-
-        this.restartAnimations(ids);
+        //this.restartAnimations();
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {
@@ -63,20 +57,49 @@ export default class RunTest extends Component {
 
 
 
-    // In order to restart animation they need to be destroyed and re-added
     // The function takes an array of strings as arguments!
-    restartAnimations(ids) {
-        const // card-divs
-            divs = ids.map(id => document.getElementById(id)),         // the div elements of the card-boxes
-            clon = divs.map(div => div.cloneNode(true));               // all clones of above divs
+    restartAnimations() {
+        const
+            name = ["prev", "curr", "next", "nex2"],               // the name strings that classes will have 
+            ids = name.map(na => "run-test__" + na + "-card-div"), // the divs ids
+            anim = ids.map(id => id + "-animation");
 
-        // replace all elements with clone (clone has diff ref, so it will trigger animations)
-        divs.forEach((div, i) => div.parentNode.replaceChild(clon[i], div));
+        const divs = ids.map(id => document.getElementsByClassName(id)[0]); // the div elements of the card-boxes
 
-        // add animation classes to the newly created clone divs
-        clon.forEach(cl => cl.classList.add(cl.id + "--animation"));
+        // remove all animation classes from all divs
+        const allDivs = document.querySelectorAll(".run-test__cards>div");
+        //allDivs.forEach(div => {
+        //    anim.forEach(an => { div.classList.remove(an); });
+        //});
+        console.log(divs);
+        divs.forEach((div, i) => {
+            if (i > 1) div.classList.add("BZDMEG");
+            console.log(!!div);
+            console.log(div && div);
+        });
     } // end of rollCard
 
+
+
+    addCardClasses(ind) {
+        const
+            name = ["prev", "curr", "next", "nex2"],
+            curr = this.state.current,
+            clNa = name.map((n, i) => ind === curr + i - 1 ? n : ""),
+            clss = "run-test__" + clNa.join("") + "-card-div ";
+
+        console.log(clss);
+        return clss + (this.state.animationIsOn ? clss + "-animation" : "");
+
+    } // end of addCardClasses
+    /**
+     * "run-test__" + (
+                                        i === this.state.current - 1 ? "prev" :
+                                            i === this.state.current ? "curr" :
+                                                i === this.state.current + 1 ? "next" :
+                                                    i === this.state.current + 2 ? "nex2" : ""
+                                    ) + "-card-div" + 
+     */
 
 
     render() {
@@ -91,33 +114,16 @@ export default class RunTest extends Component {
 
                 <div className="run-test__test-box">
                     <div className="run-test__cards">
-                        <div id="run-test__prev-card-div">
-                            <Card
-                                card={this.props.cards[this.state.current - 1]}
-                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current - 1]}
-                            />
-                        </div>
-
-                        <div id="run-test__curr-card-div">
-                            <Card
-                                card={this.props.cards[this.state.current]}
-                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current]}
-                            />
-                        </div>
-
-                        <div id="run-test__next-card-div">
-                            <Card
-                                card={this.props.cards[this.state.current + 1]}
-                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current + 1]}
-                            />
-                        </div>
-
-                        <div id="run-test__nex2-card-div">
-                            <Card
-                                card={this.props.cards[this.state.current + 2]}
-                                turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current + 2]}
-                            />
-                        </div>
+                        {this.props.cards.map((card, i) => (
+                            <div
+                                key={i}
+                                className={this.addCardClasses(i)}>
+                                <Card
+                                    card={card}
+                                    turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current - 1]}
+                                />
+                            </div>
+                        ))}
                     </div>
 
                     <div className="run-test__btn-box">
@@ -138,7 +144,7 @@ export default class RunTest extends Component {
                             onClick={() => this.assesCard(true)}>&#10003;</button>
                     </div>
                 </div>
-            </div>
+            </div >
         ); // end of return
     } // end of render
 } // end of RunTest
