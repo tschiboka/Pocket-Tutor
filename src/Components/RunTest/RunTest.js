@@ -9,17 +9,20 @@ export default class RunTest extends Component {
         super(props);
 
         this.state = {
-            "current": 0,
-            "animationIsOn": false,
-            "cardsTurned": undefined
+            "current": 0,              // current card index
+            "animationIsOn": false,    // while animation goes disable buttons 
+            "cardsTurned": undefined,  // determines if card is faced question up [true, false]
+            "results": []              // collect correct/incorrect answers
         } // end of state declaration
     } // end of constructor
 
 
 
     turnCard() {
+        // create an array of false the first time the function runs
         const turned = this.state.cardsTurned || Array(this.props.cards.length).fill(false);
 
+        // set current card in the array
         turned[this.state.current] = turned[this.state.current] ? false : true;
 
         // set state
@@ -41,18 +44,17 @@ export default class RunTest extends Component {
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {
-            // here are the changes on the localstore card object
-
             // change state
             const newState = this.state;
-            newState.current++;
-            newState.animationIsOn = false;
+            newState.current++;             // here increment current with the delay
+            newState.animationIsOn = false; // turn of animation
             this.setState(newState);
 
+            // show results if last card has gone
             if (this.state.current >= this.props.cards.length) console.log("SHOW RESULT");
 
             clearTimeout(delayForAnimation);
-        }, 1500);
+        }, 1500); // end of delayForAnimation
     } // end of assesCard
 
 
@@ -122,7 +124,7 @@ export default class RunTest extends Component {
 
                     <div className="run-test__btn-box">
                         <button
-                            id="run-test__correct-btn"
+                            id="run-test__incorrect-btn"
                             disabled={this.state.animationIsOn}
                             onClick={() => this.assesCard(false)}>&times;</button>
 
@@ -133,12 +135,12 @@ export default class RunTest extends Component {
                         >Turn</button>
 
                         <button
-                            id="run-test__false-btn"
+                            id="run-test__correct-btn"
                             disabled={this.state.animationIsOn}
                             onClick={() => this.assesCard(true)}>&#10003;</button>
                     </div>
                 </div>
-            </div >
+            </div>
         ); // end of return
     } // end of render
 } // end of RunTest

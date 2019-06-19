@@ -58,6 +58,15 @@
     font-size: 3vh;
 }
 
+#run-test__correct-btn {
+    color: rgb(136, 255, 207);
+}
+
+#run-test__incorrect-btn {
+    color: rgb(211, 117, 159);
+    font-size: 4vh;
+}
+
 .run-test__btn-box>button:nth-child(odd) {
     width: 20%;
 }
