@@ -13,7 +13,7 @@ export default class Card extends Component {
 
 
 
-    // function returns an object with the text type or language and its content
+    // function returns an array of objects with the text type or language and its content
     chunkText(text) {
         const
             chunks = text.split(/(<###.+<###>)/gm),           // chunk text up to plain text and code
@@ -25,8 +25,26 @@ export default class Card extends Component {
             textOb = tempOb.map(ob => ob.type === "code"      // final text object that includes the language
                 ? { "type": getLan(ob.content), "content": ob.constent } : ob);
 
-        return JSON.stringify(textOb);
-    } // end of synthaxCard 
+        return textOb;
+    } // end of chunkTest 
+
+
+    formatText(text) {
+        const
+            textOb = this.chunkText(text), // get the text object with content and language
+            finalT = textOb.map(tob => {   // the final text function
+                let content = "";
+
+                switch (tob.type) {
+                    case "JS": { content = "JS"; break; }
+                    case "CSS": { content = "CSS"; break; }
+                    case "text": { content = "text"; break; }
+                } // end of swith
+                return content;
+            }).join("");
+
+        return finalT;
+    } // end of formatText
 
 
 
@@ -34,7 +52,7 @@ export default class Card extends Component {
         const CARD = this.props.card || { "id": -1, "question": "", "answer": "", "results": [0, 0], "topics": [""] };
         return (
             <div className="card__card-box">
-                {this.chunkText(this.props.turned ? CARD.answer : CARD.question)}
+                {this.formatText(this.props.turned ? CARD.answer : CARD.question)}
             </div>
         ); // end of return
     } // end of render
