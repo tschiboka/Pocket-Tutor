@@ -20,6 +20,15 @@
     scrollbar-color: aqua transparent;
 }
 
-.card__code {
-    font-family: monospace;
+.card__card-content>pre {
+    font-family: inherit;
+    text-align: inherit;
+}
+
+.code--green {
+    color:#86cd57;
+}
+
+.code--code-text {
+    background: rgba(255, 255, 255, 0.05);
 }
