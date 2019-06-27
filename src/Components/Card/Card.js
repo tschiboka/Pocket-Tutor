@@ -52,11 +52,11 @@ export default class Card extends Component {
                 dissectText(/\/\/.*/gm, "grey");                // get single line comments
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
                 dissectText(/(=>|===|!==|==|!=|\||&|>|<|>=|>=|!|\.\.\.)/gm, "pink"); // get signs
-                dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
                 dissectText(/(\s|^)(break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)(?=\s)/gm, "yellow"); // keywords
                 dissectText(/(\s|^)(class|const|enum|export|extends|default|import|super)(?=\s)/gm, "yellow"); // keywords
                 dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s)/gm, "yellow"); // reserved keywords
                 dissectText(/(\s|^)(null|true|false|NaN|Infinity|undefined)(?=\s|\W)/gm, "yellow"); // reserved keywords
+                dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 dissectText(/[+-/*:.]/gm, "lblue");           // get mathematical signs
                 dissectText(/[\(\)\{\}\[\];,]+/gm, "white");    // get brackets

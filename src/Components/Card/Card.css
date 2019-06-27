@@ -39,45 +39,47 @@
 }
 
 .code--green {
-    color:#86cd57;
+    color: rgb(179, 255, 179);
 }
 
 .code--orange {
-    color: orange;
+    color: rgb(255, 185, 128);
 }
 
 .code--yellow {
-    color: yellow;
+    color: rgb(253, 253, 186);
 }
 
 .code--pink {
-    color: pink;
+    color: rgb(255, 183, 219);
 }
 
 .code--lightblue {
-    color: lightblue;
+    color: rgb(159, 255, 255);
 }
 
 .code--white {
-    color: white;
+    color: rgb(228, 228, 228);
 }
 
 .code--purple {
-    color: purple;
+    color: rgb(255, 128, 255);
 }
 
 .code--blue {
-    color: blue;
+    color: rgb(189, 187, 255);
 }
 
 .code--grey {
-    color: grey;
+    color: rgb(144, 151, 160);
 }
 
 .code--code-text {
-    background: rgba(255, 255, 255, 0.05);
-    color: red;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2.4vh;
+    display: inline-block;
+    margin: 1vh;
+    background: rgba(255, 255, 255, 0.02);
+    color: rgb(240, 113, 113);
+    font-family: 'Fira', Courier, monospace;
+    font-size: 2vh;
     text-align: left;
 }
