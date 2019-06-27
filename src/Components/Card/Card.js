@@ -41,23 +41,22 @@ export default class Card extends Component {
 
         function dissectText(regexp, color) {                   // dissect the markup into pieces of syntax, so it wont match other regexp
             markup = markup.replace(regexp, match => {          // eg "text123" wont match 123 as a number but a string
-                if (/<###\d+>/gm.test(match)) return void (0);
                 markupArray.push(`<###${color}>${match}<###>`); // push the result with syntax coloring
-                return "<###" + index++ + "###>";               // sign piece of text with a number eg <###Number###>
+                return "¬" + index++ + "¬";                     // sign piece of text with a number eg •number
             });                                                 // end of replace
         }                                                       // end of dissectText
 
         switch (lang) {                                         // languages get different syntax
             case "JS": {                                        // JS
                 dissectText(/".*?"/gm, "green");                // get STRINGS
-                dissectText(/(\d+)(?!\d*###)/gm, "orange");     // get NUMBERS except the ones ending ###
+                dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 break;
-            } // end of case JS
-        } // end of swith language
+            }                                                   // end of case JS
+        }                                                       // end of swith language
 
-        // mark text up with colors
+        console.log(markup.match(/\u00ac\d+?/gm));
         const getIndex = i => Number(i.replace(/\D+/g, ""));    // extract index from <***Index>
-        return markup.replace(/<###\d+?###>/gm,                 // get <###Number###>
+        return markup.replace(/\u00ac\d+?\u00ac/gm,             // get <###Number###>
             i => markupArray[getIndex(i)]);                     // replace the syntaxised markup from array
     } // end of maqrkUpText
 
@@ -97,7 +96,7 @@ export default class Card extends Component {
 
     formatText(text) {
         const
-            textOb = this.chunkText(text), // get the text object with content and language
+            textOb = this.chunkText(text),                      // get the text object with content and language
             finalT = textOb.map(tob => this.markUpText(tob.type, tob.content));
 
         return <pre>{finalT.map((txt, i) => this.syntax(txt, textOb[i].type !== "text", i))}</pre>;
