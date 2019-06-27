@@ -61,8 +61,8 @@ export default class Card extends Component {
         }                                                       // end of swith language
 
         const getIndex = i => Number(i.replace(/\D+/g, ""));    // extract index from <¬Index¬>
-        console.log(markup.replace(/\u00ac\d+?\u00ac/gm,             // get <¬Number¬>
-            i => markupArray[getIndex(i)]));
+        //console.log(markup.replace(/\u00ac\d+?\u00ac/gm,             // get <¬Number¬>
+        //  i => markupArray[getIndex(i)]));
         return markup.replace(/\u00ac\d+?\u00ac/gm,             // get <¬Number¬>
             i => markupArray[getIndex(i)]);                     // replace the syntaxised markup from array
     } // end of maqrkUpText
@@ -72,10 +72,9 @@ export default class Card extends Component {
     // function returns react dom elements
     syntax(text, isCode, key) {
         const // dissect text into markup object with type and content
-            markups = text.split(/(<###.*?>.*?<###>)/gm)        // recognise markups
+            markups = text.split(/(<###.*?>[\s\S]*?<###>)/gm)        // recognise markups
                 .filter(e => !!e),                              // get rid of empty ones => ""
             dissect = txt => {                                  // create an object with type and content
-                console.log(text);
                 let type = "none", content = txt;               // type and content only changes if it has <###xy><###>tag
 
                 if (/<###.+/gm.test(txt)) {                     // if markup extract type
@@ -86,6 +85,7 @@ export default class Card extends Component {
                         .replace(/<###.+?>/gm, "")              // cut opening tag
                         .replace(/<###>/gm, "");                // cut closing tag
                 }                                               // end of IF its a markup
+                if (type === "grey") console.log("CONTENT", content, "FROM TEXT", txt);
                 return { "type": type, "content": content };    // return the object
             },                                                  // end of dissect
             markObjs = markups.map(m => dissect(m)),            // INVOKE DISSECT TEXT HERE
@@ -97,10 +97,11 @@ export default class Card extends Component {
                     case "lblue": return <span key={i} className="code--lightblue">{obj.content}</span>
                     case "white": return <span key={i} className="code--white">{obj.content}</span>
                     case "purple": return <span key={i} className="code--purple">{obj.content}</span>
-                    case "grey": return <span key={i} className="code--grey">{obj.content}</span>
+                    case "grey": { console.log(obj.content); return <span key={i} className="code--grey">{obj.content}</span> }
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
+        console.log(markups);
         return <span key={key} className={isCode ? "code--code-text" : ""}>{giveColor(markObjs)}</span>;
     } // end of syntax
 
