@@ -34,22 +34,37 @@ export default class Card extends Component {
 
 
     markUpText(lang, txt) {
-        let markup = txt;
+        let
+            markup = txt,                                       // the text recieved as parameter
+            index = 0;                                          // keeps tracking the markup indexing
+        const markupArray = [];                                 // the array that places the syntaxed text back
 
-        switch (lang) {
-            case "JS": {
-                markup = markup.replace(/".*?"/gm, e => "<###green>" + e + "<###>");
+        function dissectText(regexp, color) {                   // dissect the markup into pieces of syntax, so it wont match other regexp
+            markup = markup.replace(regexp, match => {          // eg "text123" wont match 123 as a number but a string
+                if (/<###\d+>/gm.test(match)) return void (0);
+                markupArray.push(`<###${color}>${match}<###>`); // push the result with syntax coloring
+                return "<###" + index++ + "###>";               // sign piece of text with a number eg <###Number###>
+            });                                                 // end of replace
+        }                                                       // end of dissectText
+
+        switch (lang) {                                         // languages get different syntax
+            case "JS": {                                        // JS
+                dissectText(/".*?"/gm, "green");                // get STRINGS
+                dissectText(/(\d+)(?!\d*###)/gm, "orange");     // get NUMBERS except the ones ending ###
                 break;
-            }
+            } // end of case JS
         } // end of swith language
 
-        return markup;
+        // mark text up with colors
+        const getIndex = i => Number(i.replace(/\D+/g, ""));    // extract index from <***Index>
+        return markup.replace(/<###\d+?###>/gm,                 // get <###Number###>
+            i => markupArray[getIndex(i)]);                     // replace the syntaxised markup from array
     } // end of maqrkUpText
 
 
 
+    // function returns react dom elements 
     syntax(text, isCode, key) {
-        console.log(isCode);
         const // dissect text into markup object with type and content
             markups = text.split(/(<###.*?>.*?<###>)/gm)        // recognise markups
                 .filter(e => !!e),                              // get rid of empty ones => ""
@@ -71,6 +86,7 @@ export default class Card extends Component {
                 switch (obj.type) {                             // according to their type
                     case "none": return <span key={i}>{obj.content}</span> // NONE: any text without markup
                     case "green": return <span key={i} className="code--green">{obj.content}</span>
+                    case "orange": return <span key={i} className="code--orange">{obj.content}</span>
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
