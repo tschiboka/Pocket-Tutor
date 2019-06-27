@@ -46,6 +46,26 @@
     color: orange;
 }
 
+.code--lightblue {
+    color: lightblue;
+}
+
+.code--white {
+    color: white;
+}
+
+.code--purple {
+    color: purple;
+}
+
+.code--blue {
+    color: blue;
+}
+
+.code--grey {
+    color: grey;
+}
+
 .code--code-text {
     background: rgba(255, 255, 255, 0.05);
     color: red;
