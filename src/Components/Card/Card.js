@@ -70,15 +70,16 @@ export default class Card extends Component {
                 dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange"); // get class selectors
                 dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue"); // get id selectors
                 dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue"); // get pseudo selectors
-                //dissectText(/(\s|^)(initial|inherit|unset)(?=\s)/gm, "orange"); // keywords
-                //dissectText(/(a|abbr|acronym|address|applet|article|area|aside|audio|b|base|bdo|big|blockquote|body|br)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/(button|canvas|caption|center|cite|code|col|colgroup|datalist|dd|del|dfn|div|dl|em|embed)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/(fieldset|figcaption|figure|font|footer|form|frameset|head|header|h1|h2|h3|h4|h5|h6|hr|i)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/(iframe|img|input|ins|kbd|label|legend|li|link|main|map|mark|meta|meter|nav|noscript|object|ol)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/(optgoup|option|p|param|pre|progress|q|s|samp|script|section|select|small|source|span|strike|strong)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/(sub|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|u|ul|var|video|wbr)(?=[\s\S]*{)/gm, "purple"); // html tag names
-                //dissectText(/()(?=[\s\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(abbr|acronym|address|applet|article|area|aside|audio|base|bdo|big|blockquote|body)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(button|canvas|caption|center|cite|code|colgroup|datalist|del|dfn|div|embed)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(fieldset|figcaption|figure|font|footer|form|frameset|header|head|h1|h2|h3|h4|h5|h6|hr)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(iframe|img|input|kbd|label|legend|link|main|map|mark|meta|meter|nav|noscript|object)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(optgoup|option|param|progress|samp|script|section|select|small|source|span|strike|strong)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(table|tbody|textarea|tfoot|th|thead|time|title|var|video|wbr)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(ins|em|dl|dd|col|pre|sub|sup|br|td|tr|ol|ul|li|u|i|a|b|s|q|p)(?=[ \t\S]*{)/gm, "purple"); // html tag names
+                dissectText(/(initial|inherit|unset)(?=\s*|;)/gm, "orange"); // keywords
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
+                dissectText(/(\d+)(?!\d*\u00ac)/gm, "lblue");  // get NUMBERS except the ones ending ¬
                 break;
             }
             default: { }                                        // React cries for default
