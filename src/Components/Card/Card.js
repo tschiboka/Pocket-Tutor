@@ -48,21 +48,36 @@ export default class Card extends Component {
 
         switch (lang) {                                         // languages get different syntax
             case "JS": {                                        // JS
-                dissectText(/\/\*[\s\S]*\*\//g, "grey");        // get multiline comments
+                dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
                 dissectText(/\/\/.*/gm, "grey");                // get single line comments
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
                 dissectText(/(=>|===|!==|==|!=|\||&|>|<|>=|>=|!|\.\.\.)/gm, "pink"); // get signs
-                dissectText(/(\s|^)(break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)(?=\s)/gm, "yellow"); // keywords
-                dissectText(/(\s|^)(class|const|enum|export|extends|default|import|super)(?=\s)/gm, "yellow"); // keywords
-                dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s)/gm, "yellow"); // reserved keywords
-                dissectText(/(\s|^)(null|true|false|NaN|Infinity|undefined)(?=\s|\W)/gm, "yellow"); // reserved keywords
+                dissectText(/(\s|^)(break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)(?=\s|\W)/gm, "yellow"); // keywords
+                dissectText(/(\s|^)(class|const|enum|export|extends|default|import|super)(?=\s|\W)/gm, "yellow"); // keywords
+                dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s|\W)/gm, "yellow"); // reserved keywords
+                dissectText(/(\s|^|\W)(null|true|false|NaN|Infinity|undefined|globalThis)(?=\s|\W)/gm, "pink"); // reserved keywords
+                dissectText(/(\s|^|\W)(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|\W)/gm, "pink"); // global functions and objs
+                dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink");          // get global functions
                 dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
-                dissectText(/[+-/*:.]/gm, "lblue");           // get mathematical signs
+                dissectText(/[+-/*:.]/gm, "lblue");             // get mathematical signs
                 dissectText(/[\(\)\{\}\[\];,]+/gm, "white");    // get brackets
-                dissectText(/[?:"£$%^&*=~#@']/gm, "purple");   // get rest of the characters
+                dissectText(/[?:"£$%^&*=~#@']/gm, "purple");    // get rest of the characters
                 break;
             }                                                   // end of case JS
+            case "CSS": {                                       // CSS   
+                dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
+                //dissectText(/(\s|^)(initial|inherit|unset)(?=\s)/gm, "orange"); // keywords
+                //dissectText(/(a|abbr|acronym|address|applet|article|area|aside|audio|b|base|bdo|big|blockquote|body|br)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/(button|canvas|caption|center|cite|code|col|colgroup|datalist|dd|del|dfn|div|dl|em|embed)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/(fieldset|figcaption|figure|font|footer|form|frameset|head|header|h1|h2|h3|h4|h5|h6|hr|i)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/(iframe|img|input|ins|kbd|label|legend|li|link|main|map|mark|meta|meter|nav|noscript|object|ol)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/(optgoup|option|p|param|pre|progress|q|s|samp|script|section|select|small|source|span|strike|strong)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/(sub|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|u|ul|var|video|wbr)(?=[\s\S]*{)/gm, "purple"); // html tag names
+                //dissectText(/()(?=[\s\S]*{)/gm, "purple"); // html tag names
+                dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
+                break;
+            }
             default: { }                                        // React cries for default
         }                                                       // end of swith language
 
