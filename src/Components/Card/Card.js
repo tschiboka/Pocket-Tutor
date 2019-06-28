@@ -62,13 +62,13 @@ export default class Card extends Component {
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 dissectText(/[+-/*:.]/gm, "lblue");             // get mathematical signs
                 dissectText(/[\(\)\{\}\[\];,]+/gm, "white");    // get brackets
-                dissectText(/[?:"£$%^&*=~#@']/gm, "purple");    // get rest of the characters
+                dissectText(/[?:"£$%^&*=~#@]/gm, "purple");     // get rest of the characters
                 break;
             }                                                   // end of case JS
             case "CSS": {                                       // CSS   
                 dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
                 dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange"); // get class selectors
-                dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue"); // get id selectors
+                dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue");// get id selectors
                 dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue"); // get pseudo selectors
                 dissectText(/(abbr|acronym|address|applet|article|area|aside|audio|base|bdo|big|blockquote|body)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(button|canvas|caption|center|cite|code|colgroup|datalist|del|dfn|div|embed)(?=[ \t\S]*{)/gm, "purple"); // html tag names
@@ -79,9 +79,17 @@ export default class Card extends Component {
                 dissectText(/(ins|em|dl|dd|col|pre|sub|sup|br|td|tr|ol|ul|li|u|i|a|b|s|q|p)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(initial|inherit|unset)(?=\s*|;)/gm, "orange"); // keywords
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
-                dissectText(/(\d+)(?!\d*\u00ac)/gm, "lblue");  // get NUMBERS except the ones ending ¬
+                dissectText(/\s-[\w-]+(?=[ \t\S]*:)/gm, "lblue"); // get browser specific properties
+                dissectText(/\s[\w-]+(?=[ \t\S]*:)/gm, "white");// get properties
+                dissectText(/(AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGray|DarkGrey|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|Darkorange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGray|DarkSlateGrey|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGray|DimGrey|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gray|Grey|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGray|LightGrey|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGray|LightSlateGrey|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGray|SlateGrey|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)+(?=[ \t\S;]*)/gmi, "purple"); // color names
+                dissectText(/(em|ex|cap|ch|ic|rem|lh|rlh|vw|vh|vi|vb|vmin|vmax)+(?=[ \t\S;]*)/gmi, "pink"); // relative units
+                dissectText(/(dpcm|dppx|cm|mm|Q|in|pc|pt|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi)+(?=[ \t\S;]*)/gmi, "pink"); // absolute units
+                dissectText(/(\d+)(?!\d*\u00ac)/gm, "lblue");   // get NUMBERS except the ones ending ¬
+                dissectText(/[+-/*.]/gm, "purple");            // get mathematical signs
+                dissectText(/[?"£$%^&*=~#@,]/gm, "purple");   // get rest of the characters
+                dissectText(/[\(\)\{\}\[\];:]+/gm, "white");    // get brackets
                 break;
-            }
+            }                                                   // end of CSS
             default: { }                                        // React cries for default
         }                                                       // end of swith language
 
