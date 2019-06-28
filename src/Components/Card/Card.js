@@ -57,7 +57,7 @@ export default class Card extends Component {
                 dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s|\W)/gm, "yellow"); // reserved keywords
                 dissectText(/(\s|^|\W)(null|true|false|NaN|Infinity|undefined|globalThis)(?=\s|\W)/gm, "pink"); // reserved keywords
                 dissectText(/(\s|^|\W)(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|\W)/gm, "pink"); // global functions and objs
-                dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink");          // get global functions
+                dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink"); // get global functions
                 dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 dissectText(/[+-/*:.]/gm, "lblue");             // get mathematical signs
@@ -67,6 +67,9 @@ export default class Card extends Component {
             }                                                   // end of case JS
             case "CSS": {                                       // CSS   
                 dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
+                dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange"); // get class selectors
+                dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue"); // get id selectors
+                dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue"); // get pseudo selectors
                 //dissectText(/(\s|^)(initial|inherit|unset)(?=\s)/gm, "orange"); // keywords
                 //dissectText(/(a|abbr|acronym|address|applet|article|area|aside|audio|b|base|bdo|big|blockquote|body|br)(?=[\s\S]*{)/gm, "purple"); // html tag names
                 //dissectText(/(button|canvas|caption|center|cite|code|col|colgroup|datalist|dd|del|dfn|div|dl|em|embed)(?=[\s\S]*{)/gm, "purple"); // html tag names
