@@ -69,6 +69,7 @@ export default class Card extends Component {
                 dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
                 dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange");// get class selectors
                 dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue");// get id selectors
+                dissectText(/\@[\w- ]+(?=[ \t\S]*{)/gm, "purple");// get keyframes and fontface 
                 dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue"); // get pseudo selectors
                 dissectText(/(\w+|-)+\s*(?=\()/gm, "blue");          // get functions
                 dissectText(/(abbr|acronym|address|applet|article|area|aside|audio|base|bdo|big|blockquote|body)(?=[ \t\S]*{)/gm, "purple"); // html tag names
@@ -78,12 +79,13 @@ export default class Card extends Component {
                 dissectText(/(optgoup|option|param|progress|samp|script|section|select|small|source|span|strike|strong)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(table|tbody|textarea|tfoot|th|thead|time|title|var|video|wbr)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(ins|em|dl|dd|col|pre|sub|sup|br|td|tr|ol|ul|li|u|i|a|b|s|q|p)(?=[ \t\S]*{)/gm, "purple"); // html tag names
-                dissectText(/(initial|inherit|unset)(?=\s*|;)/gm, "orange"); // keywords
+                dissectText(/(initial|inherit|unset|none)(?=\s*|;)/gm, "orange"); // keywords
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
                 dissectText(/#[\dabcde]+/gm, "blue");     // get hex colors
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "lblue");   // get NUMBERS except the ones ending ¬
                 dissectText(/\s-[\w-]+(?=[ \t\S]*:)/gm, "lblue"); // get browser specific properties
                 dissectText(/\s[\w-]+(?=[ \t\S]*:)/gm, "white");// get properties
+                dissectText(/(ease|normal|stretch)+(?=[ \t\S;]*)/gmi, "none"); // property values
                 dissectText(/(left|center|right|top|bottom)+(?=[ \t\S;]*)/gmi, "pink"); // positionings
                 dissectText(/(AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGray|DarkGrey|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|Darkorange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGray|DarkSlateGrey|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGray|DimGrey|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gray|Grey|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGray|LightGrey|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGray|LightSlateGrey|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGray|SlateGrey|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen|transparent)+(?=[ \t\S;]*)/gmi, "purple"); // color names
                 dissectText(/(em|ex|cap|ch|ic|rem|lh|rlh|vw|vh|vi|vb|vmin|vmax)+(?=[ \t;]+)/gmi, "pink"); // relative units
