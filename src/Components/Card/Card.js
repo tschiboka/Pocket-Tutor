@@ -15,6 +15,7 @@ export default class Card extends Component {
 
     // function returns an array of objects with the text type or language and its content
     chunkText(text) {
+        console.log(text, this.props.card);
         const
             chunks = text.split(/(<###.+<###>)/gm),             // chunk text up to plain text and code
             tempOb = chunks.map(ch => /<###.+/gm.test(ch)       // determine if chunk is code or text
@@ -42,6 +43,7 @@ export default class Card extends Component {
         function dissectText(regexp, color) {                   // dissect the markup into pieces of syntax, so it wont match other regexp
             markup = markup.replace(regexp, match => {          // eg "text123" wont match 123 as a number but a string
                 markupArray.push(`<###${color}>${match}<###>`); // push the result with syntax coloring
+                console.log(markupArray.length, markup, markupArray);
                 return "¬" + index++ + "¬";                     // sign piece of text with a number eg ¬number
             });                                                 // end of replace
         }                                                       // end of dissectText
@@ -56,9 +58,9 @@ export default class Card extends Component {
                 dissectText(/(\s|^)(class|const|enum|export|extends|default|import|super)(?=\s|\W)/gm, "yellow"); // keywords
                 dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s|\W)/gm, "yellow"); // reserved keywords
                 dissectText(/(\s|^|\W)(null|true|false|NaN|Infinity|undefined|globalThis)(?=\s|\W)/gm, "pink"); // reserved keywords
-                dissectText(/(\s|^|\W)(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|\W)/gm, "pink"); // global functions and objs
-                dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink"); // get global functions
                 dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
+                dissectText(/(\s|^|[\(\[])(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|.|\()/gm, "pink"); // global functions and objs
+                dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink"); // get global functions
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 dissectText(/[+-/*:.]/gm, "lblue");             // get mathematical signs
                 dissectText(/[\(\)\{\}\[\];,]+/gm, "white");    // get brackets
@@ -70,8 +72,8 @@ export default class Card extends Component {
                 dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange");// get class selectors
                 dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue");// get id selectors
                 dissectText(/\@[\w- ]+(?=[ \t\S]*{)/gm, "purple");// get keyframes and fontface 
-                dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue"); // get pseudo selectors
-                dissectText(/(\w+|-)+\s*(?=\()/gm, "blue");          // get functions
+                dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue");// get pseudo selectors
+                dissectText(/(\w+|-)+\s*(?=\()/gm, "blue");     // get functions
                 dissectText(/(abbr|acronym|address|applet|article|area|aside|audio|base|bdo|big|blockquote|body)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(button|canvas|caption|center|cite|code|colgroup|datalist|del|dfn|div|embed)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(fieldset|figcaption|figure|font|footer|form|frameset|header|head|h1|h2|h3|h4|h5|h6|hr)(?=[ \t\S]*{)/gm, "purple"); // html tag names
@@ -81,9 +83,9 @@ export default class Card extends Component {
                 dissectText(/(ins|em|dl|dd|col|pre|sub|sup|br|td|tr|ol|ul|li|u|i|a|b|s|q|p)(?=[ \t\S]*{)/gm, "purple"); // html tag names
                 dissectText(/(initial|inherit|unset|none)(?=\s*|;)/gm, "orange"); // keywords
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
-                dissectText(/#[\dabcde]+/gm, "blue");     // get hex colors
+                dissectText(/#[\dabcde]+/gm, "blue");           // get hex colors
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "lblue");   // get NUMBERS except the ones ending ¬
-                dissectText(/\s-[\w-]+(?=[ \t\S]*:)/gm, "lblue"); // get browser specific properties
+                dissectText(/\s-[\w-]+(?=[ \t\S]*:)/gm, "lblue");// get browser specific properties
                 dissectText(/\s[\w-]+(?=[ \t\S]*:)/gm, "white");// get properties
                 dissectText(/(absolute|all-scroll|all|alias|alternate-reverse|alternate|avoid|always|armenian|auto|backwards|balance|baseline|blink|block|bolder|bold|border-box|both|break-all|break-word|capitalize|cell|caption|circle|collapse|condensed|contain|contents|content-box|context-menu|column-reverse|column|copy|cover|counter|close-quote|crosshair|dashed|decimal-leading-zero|decimal|default|disc|distribute|dotted|double|ease-in-out|ease-in|ease-out|ease|end|expanded|extra-condensed|extra-expanded|fixed|forwards|flat|flow-root|flow|fixed|flex-end|flex-start|flex|gregorian|grid|groove|help|hidden|hide|horizontal|icon|infinite|inline-block|inline-flex|inline-grid|inline-table|inline|inset|inside|inter-word|italic|justify|keep-all|large|length|lighter|line-through|linear|list-item|lowercase|lower-alpha|lower-greek|lower-latin|lower-roman|ltr|no-close-quote|no-drop|not-allowed|ne-size|nwse-resize|no-open-quote|medium|menu|message-box|no-repeat|nowrap|normal|oblique|open-quote|outset|outside|overline|padding-box|paused|percentage|pointer|progress|preserve|pre-line|pre-wrap|pre|relative|repeat-x|repeat-y|repeat|reverse|ridge|round|row-reverse|row|rtl|run-in|running|scroll|semi-condendes|semi-expanded|separate|show|smaller|small-caps|small-caption|small|solid|space-around|space-between|space|square|status-bar|start|static|sticky|stretch|table-caption|table-column-group|table-header-group|table-footer-group|table-row-group|table-cell|table-column|table-row|table|text|thick|thin|ultra-condensed|ultra-expanded|underline|uppercase|upper-alpha|upper-latin|upper-roman|visible|vertical-text|vertical|wait|wavy|wrap-reverse|wrap|xx-large|x-large|xx-small|x-small|zoom-in|zoom-out)+(?=[ \t\S;]*)/gmi, "none"); // property values
                 dissectText(/(left|center|right|top|bottom)+(?=[ \t\S;]*)/gmi, "pink"); // positionings

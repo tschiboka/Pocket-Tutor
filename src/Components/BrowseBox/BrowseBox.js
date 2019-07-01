@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./BrowseBox.css";
 
 import TopicLabel from "../TopicLabel/TopicLabel";
+import Card from "../Card/Card";
 
 export default class BrowseBox extends Component {
     constructor(props) {
@@ -99,7 +100,9 @@ export default class BrowseBox extends Component {
 
                     <div className="browse-box__body">
                         {this.state.currentCard
-                            ? (this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer)
+                            //? (this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer)
+
+                            ? <Card turned={!this.state.questionIsUp} card={this.state.currentCard} />
                             : "No cards to show"}
                     </div>
 
