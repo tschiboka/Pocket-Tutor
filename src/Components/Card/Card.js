@@ -98,7 +98,9 @@ export default class Card extends Component {
             case "HTML": {                                      // HTML
                 dissectText(/<!--[\s\S]*?-->/g, "grey");        // get multiline comments
                 dissectText(/("|'|`).*?("|'|`)/gm, "green");    // get STRINGS
-                dissectText(/[\w-]+(?==)/gm, "lblue"); // get attributes
+                dissectText(/[\w-]+(?==)/gm, "blue");           // get attributes
+                dissectText(/&.{0,8};/gm, "pink");              // get entities
+                dissectText(/(<|>|\/|;|=)/gm, "white");         // get signs
             }                                                   // end of HTML
             default: { }                                        // React cries for default
         }                                                       // end of swith language
