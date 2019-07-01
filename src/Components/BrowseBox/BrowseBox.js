@@ -100,8 +100,6 @@ export default class BrowseBox extends Component {
 
                     <div className="browse-box__body">
                         {this.state.currentCard
-                            //? (this.state.questionIsUp ? this.state.currentCard.question : this.state.currentCard.answer)
-
                             ? <Card turned={!this.state.questionIsUp} card={this.state.currentCard} />
                             : "No cards to show"}
                     </div>

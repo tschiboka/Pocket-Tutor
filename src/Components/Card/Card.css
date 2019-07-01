@@ -2,8 +2,9 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: safe center;
+    align-items: safe center;
     /* Break words */
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -28,13 +29,13 @@
 .card__card-content>pre {
     font-family: inherit;
     text-align: inherit;
-    /* Overflow */
+    /* Overflow 
     overflow-x: auto;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
-    word-wrap: break-word;
+    word-wrap: break-word; */
 }
 
 .code--green {
