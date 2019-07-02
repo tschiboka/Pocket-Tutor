@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./CardThumbnail.css";
 import TopicLabel from "../TopicLabel/TopicLabel";
+import Card from "../Card/Card";
 
 export default class CardThumbnail extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ export default class CardThumbnail extends Component {
                     <span>{card.results[1] ? Math.round((card.results[0] / card.results[1]) * 100) : 0}% id:{card.id}</span>
                 </div>
 
-                <div className="card-thumbnail__body">{this.state.questionSide ? card.question : card.answer}</div>
+                <div className="card-thumbnail__body"><Card turned={!this.state.questionSide} card={card} /></div>
 
                 <div className="card-thumbnail__button-box">
                     {

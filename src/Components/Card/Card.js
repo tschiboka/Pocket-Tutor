@@ -148,7 +148,7 @@ export default class Card extends Component {
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
-        return <span key={key} className={isCode ? "code--code-text" : ""}>{giveColor(markObjs)}</span>;
+        return <span key={key} className={isCode ? "code--code-text" : "code--plain-text"}>{giveColor(markObjs)}</span>;
     } // end of syntax
 
 
