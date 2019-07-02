@@ -47,7 +47,6 @@ export default class Cards extends Component {
                     filters.topics.filter(ft => card.topics.includes(ft)).length) // intersection of topics on card and filter
             ))); // end of filter
 
-        console.log(filters, cards);
         // SORT CARDS
         if (this.state.sortby === "results") { cards = cards.sort((a, b) => a.percentage - b.percentage); }
 

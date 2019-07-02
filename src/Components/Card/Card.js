@@ -15,7 +15,6 @@ export default class Card extends Component {
 
     // function returns an array of objects with the text type or language and its content
     chunkText(text) {
-        console.log(text, this.props.card);
         const
             chunks = text.split(/(<###.+<###>)/gm),             // chunk text up to plain text and code
             tempOb = chunks.map(ch => /<###.+/gm.test(ch)       // determine if chunk is code or text
@@ -43,7 +42,6 @@ export default class Card extends Component {
         function dissectText(regexp, color) {                   // dissect the markup into pieces of syntax, so it wont match other regexp
             markup = markup.replace(regexp, match => {          // eg "text123" wont match 123 as a number but a string
                 markupArray.push(`<###${color}>${match}<###>`); // push the result with syntax coloring
-                console.log(markupArray.length, markup, markupArray);
                 return "¬" + index++ + "¬";                     // sign piece of text with a number eg ¬number
             });                                                 // end of replace
         }                                                       // end of dissectText

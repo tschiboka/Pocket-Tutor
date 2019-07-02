@@ -81,7 +81,6 @@ export default class App extends Component {
 
   // edit cards can be opened form multiple places thoughout the app
   openCloseEditCards(isOpen, id) {
-    console.log("OPEN", isOpen, id);
     const newState = this.state;
 
     newState.editCardIsVisible = isOpen;

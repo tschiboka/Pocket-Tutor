@@ -223,7 +223,10 @@ export default class EditCards extends Component {
                                 onClick={() => this.toggleCollapseBtn(1)}
                             >{this.state.collapseBtns[1] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
+                            <button className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
+
                             Edit question
+
                             {
                                 /\w/g.test(this.state.card.question) ?
                                     <span className="edit-cards__valid-field-txt">&#10003;</span> :
@@ -253,7 +256,10 @@ export default class EditCards extends Component {
                                 onClick={() => this.toggleCollapseBtn(2)}
                             >{this.state.collapseBtns[2] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
+                            <button className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
+
                             Edit answer
+
                             {
                                 /\w/g.test(this.state.card.answer) ?
                                     <span className="edit-cards__valid-field-txt">&#10003;</span> :
