@@ -168,11 +168,26 @@ export default class EditCards extends Component {
 
 
     addCodeTag(lang, where) {
-        const                                                                      // get elements and values for positioning lang tag
-            tArea = document.getElementById("edit-cards__" + where + "-textarea"), // get the textarea element
-            stPos = tArea.selectionStart,                                          // selection start position
-            enPos = tArea.selectionEnd;                                            // selection end position
-        console.log(tArea, stPos, enPos);
+        const                                             // get elements and values for positioning lang tag
+            txtId = "edit-cards__" + where + "-textarea", // get the element id               
+            tArea = document.getElementById(txtId),       // get the textarea element
+            stPos = tArea.selectionStart,                 // selection start position
+            enPos = tArea.selectionEnd;                   // selection end position
+
+        if (stPos === enPos) {                            // if there is no selection in text area
+            tArea.value =                                 // add new value to textarea
+                tArea.value.slice(0, stPos) +             // get text before cursor position
+                "<###lang=" + lang + "><###>" +           // add tag
+                tArea.value.slice(stPos);                 // get text after cursor position
+        }                                                 // end of if there is no selection
+        else {                                            // if there is text selected
+            tArea.value =                                 // add new value to textarea
+                tArea.value.slice(0, stPos) +             // get text before cursor position
+                "<###lang=" + lang + ">" +                // add start language tag
+                tArea.value.slice(stPos, enPos) +         // add selected area
+                "<###>" +                                 // add end tag
+                tArea.value.slice(enPos);                 // add rest of text
+        }                                                 // end of if there is a selection
     } // end of addCodeTag
 
 
@@ -324,9 +339,9 @@ export default class EditCards extends Component {
                                     className="edit-cards__language-menu">
                                     <button onClick={() => this.addCodeTag("HTML", "answer")}>HTML</button>
 
-                                    <button onClick={() => this.addCodeTag("HTML", "answer")}>CSS</button>
+                                    <button onClick={() => this.addCodeTag("CSS", "answer")}>CSS</button>
 
-                                    <button onClick={() => this.addCodeTag("HTML", "answer")}>JS</button>
+                                    <button onClick={() => this.addCodeTag("JS", "answer")}>JS</button>
                                 </div>}
                         </div>
                     </div>
