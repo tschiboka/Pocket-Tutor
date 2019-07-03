@@ -5,15 +5,10 @@
     flex-wrap: nowrap;
     justify-content: safe center;
     align-items: safe center;
-    /* Overflow */
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: aqua transparent;
-}
-
-.card__card-content>pre {
-    font-family: inherit;
-    text-align: inherit;
 }
 
 .code--green {
@@ -53,14 +48,31 @@
 }
 
 .code--code-text {
-    margin: 1vh;
+    max-width: 90vw;
+    display: block;
+    padding: 1vh;
     background: rgba(255, 255, 255, 0.03);
     font-size: 1.9vh;
     color: rgb(240, 113, 113);
     font-family: 'Fira', Courier, monospace;
     text-align: left;
+        /* Overflow */
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: aqua transparent;
+    
 }
 
-.card--plain-text {
-    font-size: 2vh;
+.code--plain-text > span{
+    display: block;
+    padding: 1vh;
+    font-size: 2.6vh;
+    white-space: wrap;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    /* Non standard for WebKit */
+    word-break: break-word;
+    -ms-word-break: break-word;
 }

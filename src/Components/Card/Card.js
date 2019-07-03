@@ -146,7 +146,9 @@ export default class Card extends Component {
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
-        return <span key={key} className={isCode ? "code--code-text" : "code--plain-text"}>{giveColor(markObjs)}</span>;
+        return isCode
+            ? <pre><span key={key} className="code--code-text">{giveColor(markObjs)}</span></pre>
+            : <span key={key} className="code--plain-text">{giveColor(markObjs)}</span>;
     } // end of syntax
 
 
@@ -156,7 +158,7 @@ export default class Card extends Component {
             textOb = this.chunkText(text),                      // get the text object with content and language
             finalT = textOb.map(tob => this.markUpText(tob.type, tob.content));
 
-        return <pre>{finalT.map((txt, i) => this.syntax(txt, textOb[i].type !== "text", i))}</pre>;
+        return <span>{finalT.map((txt, i) => this.syntax(txt, textOb[i].type !== "text", i))}</span>;
     } // end of formatText
 
 
