@@ -31,7 +31,6 @@ export default class RoundProgress extends Component {
     render() {
         const
             R = Math.min(this.state.width, this.state.height) / 2 - 10;
-        console.log(R * Math.PI * 2);
         return (
             <div id={this.props.id} class="rnd-progress">
                 <svg preserveAspectRatio="none">
@@ -48,6 +47,7 @@ export default class RoundProgress extends Component {
                         cx="50%"
                         cy="50%"
                         r={R - 10}
+                        strokeDasharray={((Number(this.props.percent) / 100) * 240) + " 1000"}
                     />
                 </svg>
             </div >
