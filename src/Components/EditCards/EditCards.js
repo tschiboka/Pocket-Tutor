@@ -293,8 +293,20 @@ export default class EditCards extends Component {
                                 id="edit-cards__question-textarea"
                                 defaultValue={this.state.card.question && this.state.card.question}
                                 onBlur={e => this.handleTextAreaOnBlur(e, "question")}
+                                onFocus={() => this.clearLanguageMenu(0)}
                             >
                             </textarea>
+
+                            {this.state.languageMenuOpen[0] &&
+                                <div
+                                    id="edit-cards__language-menu--question"
+                                    className="edit-cards__language-menu">
+                                    <button onClick={() => this.addCodeTag("HTML", "question")}>HTML</button>
+
+                                    <button onClick={() => this.addCodeTag("CSS", "question")}>CSS</button>
+
+                                    <button onClick={() => this.addCodeTag("JS", "question")}>JS</button>
+                                </div>}
                         </div>
 
                         <div className="edit-cards__question-box"></div>
