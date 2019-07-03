@@ -123,6 +123,23 @@
     align-items: center;
 }
 
+.edit-cards__language-menu {
+    position: absolute;
+    height: 2.8vh;
+    width: 50%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    background: #111215;
+}
+
+.edit-cards__language-menu button {
+    width: 33%;
+    height: 100%;
+    font-size: 2.4vh;
+}
+
 .edit-cards__textarea {
     resize: none;
     white-space: nowrap;
@@ -150,6 +167,7 @@
     box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
     -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);  
+    opacity: 0.5;
 }
 
 .edit-cards__textarea:focus {
@@ -157,6 +175,7 @@
 }
 
 .edit-cards__question-text, .edit-cards__answer-text {
+    position: relative;
     height: 33%;
 }
 

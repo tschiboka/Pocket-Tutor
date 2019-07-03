@@ -18,10 +18,11 @@ export default class EditCards extends Component {
                     "question": "",
                     "answer": "",
                     "results": [0, 0],
-                    "topics": []
+                    "topics": [],
                 }, // end of empty card def
             "collapseBtns": [false, false, false], // [labels, question-text, answer-text] collapse buttons (false default)
             "enabledTopics": [], // all the topic options that are currently selected will be disabled (card can not have a certain topic multiple times)
+            "languageMenuOpen": [false, false], // [questionMenuOpen, answerMenuOpen]
         } // end of state declaration
     } // end of constructor
 
@@ -64,6 +65,9 @@ export default class EditCards extends Component {
     toggleCollapseBtn(collapseInd) {
         // set collapse btns
         const newState = this.state;
+
+        // collapse languageMenus
+        newState.languageMenuOpen = [false, false];
 
         newState.collapseBtns[collapseInd] = newState.collapseBtns[collapseInd] ? false : true;
 
@@ -154,6 +158,15 @@ export default class EditCards extends Component {
 
 
 
+    toggleLanguageMenu(index) {
+        // change state according to index
+        const newState = this.state;
+        newState.languageMenuOpen[index] = !newState.languageMenuOpen[index];
+        this.setState(newState);
+    } // end of toggleLanguageMenu
+
+
+
     handleTextAreaOnBlur(event, cardProp) {
         const newState = this.state;
 
@@ -223,7 +236,10 @@ export default class EditCards extends Component {
                                 onClick={() => this.toggleCollapseBtn(1)}
                             >{this.state.collapseBtns[1] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
-                            <button className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
+                            <button
+                                id="edit-cards__language-btn--question"
+                                onClick={() => this.toggleLanguageMenu(0)}
+                                className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
 
                             Edit question
 
@@ -256,7 +272,10 @@ export default class EditCards extends Component {
                                 onClick={() => this.toggleCollapseBtn(2)}
                             >{this.state.collapseBtns[2] ? <span>&#9660;</span> : <span>&#9650;</span>}</button>
 
-                            <button className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
+                            <button
+                                id="edit-cards__language-btn--answer"
+                                onClick={() => this.toggleLanguageMenu(1)}
+                                className="edit-cards__language-btn"><span>&lt;<span>&bull;</span><span>&bull;</span><span>&bull;</span>/&gt;</span></button>
 
                             Edit answer
 
@@ -279,6 +298,17 @@ export default class EditCards extends Component {
                                 onBlur={e => this.handleTextAreaOnBlur(e, "answer")}
                             >
                             </textarea>
+
+                            {this.state.languageMenuOpen[1] &&
+                                <div
+                                    id="edit-cards__language-menu--answer"
+                                    className="edit-cards__language-menu">
+                                    <button>HTML</button>
+
+                                    <button>CSS</button>
+
+                                    <button>JS</button>
+                                </div>}
                         </div>
                     </div>
 
