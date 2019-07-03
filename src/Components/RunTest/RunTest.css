@@ -163,6 +163,13 @@
     animation: animate-nex2-card 1.5s linear; 
 }
 
+.run-test__results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @keyframes animate-prev-card {
     0% {
         transform-origin: center center;

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../RunTest/RunTest.css";
 
 import Card from "../Card/Card";
+import RoundProgress from "../RoundProgress/RoundProgress";
 
 export default class RunTest extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class RunTest extends Component {
             "current": 0,              // current card index
             "animationIsOn": false,    // while animation goes disable buttons 
             "cardsTurned": undefined,  // determines if card is faced question up [true, false]
-            "results": []              // collect correct/incorrect answers
+            "results": [],             // collect correct/incorrect answers
+            "showResult": false        // show results div
         } // end of state declaration
     } // end of constructor
 
@@ -42,7 +44,7 @@ export default class RunTest extends Component {
             crdID = this.props.cards[this.state.current].id,  // get the current cards id
             crdIn = cards.findIndex(c => c.id === crdID),     // find its index in local storage cards
             [oldCor, oldTot] = cards[crdIn].results,          // extract results
-            newCor = oldCor + (result ? 1 : 0);                 // increment correct if result truthy
+            newCor = oldCor + (result ? 1 : 0);               // increment correct if result truthy
 
         cards[crdIn].results = [newCor, ++oldTot];            // modify results here
         localStorage.setItem("cards", JSON.stringify(cards)); // set localstore with updated results
@@ -58,12 +60,13 @@ export default class RunTest extends Component {
         const delayForAnimation = setTimeout(() => {
             // change state
             const newState = this.state;
-            newState.current++;             // here increment current with the delay
-            newState.animationIsOn = false; // turn of animation
-            this.setState(newState);
+            newState.current++;                                  // here increment current with the delay
+            newState.animationIsOn = false;                      // turn of animation
 
-            // show results if last card has gone
-            if (this.state.current >= this.props.cards.length) console.log("SHOW RESULT");
+            if (this.state.current >= this.props.cards.length) { // show results if last card has gone
+                newState.showResult = true;                      // set state to show result
+            }                                                    // end of if last card has gone
+            this.setState(newState);                             // change state HERE
 
             clearTimeout(delayForAnimation);
         }, 1500); // end of delayForAnimation
@@ -112,47 +115,52 @@ export default class RunTest extends Component {
 
     render() {
         return (
-            this.props.visible &&
-            <div className="run-test-box">
-                <div className="run-test__progress-box">
-                    <div className="run-test__progressbar">
-                        <div id="run-test__progress"></div>
+            !this.state.showResult ?
+                this.props.visible &&
+                <div className="run-test-box">
+                    <div className="run-test__progress-box">
+                        <div className="run-test__progressbar">
+                            <div id="run-test__progress"></div>
+                        </div>
+                    </div>
+
+                    <div className="run-test__test-box">
+                        <div className="run-test__cards">
+                            {this.props.cards.map((card, i) => (
+                                <div
+                                    key={i}
+                                    className={this.addCardClasses(i)}>
+                                    <Card
+                                        card={card}
+                                        turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current]}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="run-test__btn-box">
+                            <button
+                                id="run-test__incorrect-btn"
+                                disabled={this.state.animationIsOn}
+                                onClick={() => this.assesCard(false)}>&times;</button>
+
+                            <button
+                                id="run-test__turn-btn"
+                                disabled={this.state.animationIsOn}
+                                onClick={() => this.turnCard()}
+                            >Turn</button>
+
+                            <button
+                                id="run-test__correct-btn"
+                                disabled={this.state.animationIsOn}
+                                onClick={() => this.assesCard(true)}>&#10003;</button>
+                        </div>
                     </div>
                 </div>
-
-                <div className="run-test__test-box">
-                    <div className="run-test__cards">
-                        {this.props.cards.map((card, i) => (
-                            <div
-                                key={i}
-                                className={this.addCardClasses(i)}>
-                                <Card
-                                    card={card}
-                                    turned={!this.state.cardsTurned ? false : this.state.cardsTurned[this.state.current]}
-                                />
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="run-test__btn-box">
-                        <button
-                            id="run-test__incorrect-btn"
-                            disabled={this.state.animationIsOn}
-                            onClick={() => this.assesCard(false)}>&times;</button>
-
-                        <button
-                            id="run-test__turn-btn"
-                            disabled={this.state.animationIsOn}
-                            onClick={() => this.turnCard()}
-                        >Turn</button>
-
-                        <button
-                            id="run-test__correct-btn"
-                            disabled={this.state.animationIsOn}
-                            onClick={() => this.assesCard(true)}>&#10003;</button>
-                    </div>
+                : <div className="run-test__results">
+                    <RoundProgress id="run-test--JS-percent1" percent="75" name="JS" />
+                    <RoundProgress id="run-test--JS-percent2" percent="75" name="JS" />
                 </div>
-            </div>
         ); // end of return
     } // end of render
 } // end of RunTest

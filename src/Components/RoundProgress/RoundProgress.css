@@ -1,0 +1,26 @@
+.rnd-progress {
+    width: 100%;
+    height: 100%;
+}
+
+.rnd-progress svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.rnd-progress__bg-arc {
+    stroke: rgba(0, 0, 0, 0.4);
+    fill: transparent;
+    stroke-width: 5px;
+    transform-origin: 50% 50%;
+    transform: rotate(145deg);
+}
+
+.rnd-progress__pc-arc {
+    stroke: transparent;
+    fill: transparent;
+    stroke-width: 5px;
+    transform-origin: 50% 50%;
+    transform: rotate(0deg);
+}

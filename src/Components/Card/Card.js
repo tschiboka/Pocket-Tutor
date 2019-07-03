@@ -114,6 +114,8 @@ export default class Card extends Component {
 
     // function returns react dom elements
     syntax(text, isCode, key) {
+        if (!text.length) return <span></span> // return on empty strings
+
         const // dissect text into markup object with type and content
             markups = text.split(/(<###.*?>[\s\S]*?<###>)/gm)   // recognise markups
                 .filter(e => !!e),                              // get rid of empty ones => ""
@@ -146,9 +148,10 @@ export default class Card extends Component {
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
+        console.log(text.length);
         return isCode
             ? <pre><span key={key} className="code--code-text">{giveColor(markObjs)}</span></pre>
-            : <span key={key} className="code--plain-text">{giveColor(markObjs)}</span>;
+            : <span key={key} className="code--plain-text">{text.split("\n").map(txt => <span>{txt}<br /></span>)}</span>;
     } // end of syntax
 
 
