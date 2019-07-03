@@ -36,6 +36,17 @@ export default class RunTest extends Component {
 
     // accept true/false store result
     assesCard(result) {
+        // set results in localstore
+        let
+            cards = JSON.parse(localStorage.cards),           // get cards from localStorage
+            crdID = this.props.cards[this.state.current].id,  // get the current cards id
+            crdIn = cards.findIndex(c => c.id === crdID),     // find its index in local storage cards
+            [oldCor, oldTot] = cards[crdIn].results,          // extract results
+            newCor = oldCor + (result ? 1 : 0);                 // increment correct if result truthy
+
+        cards[crdIn].results = [newCor, ++oldTot];            // modify results here
+        localStorage.setItem("cards", JSON.stringify(cards)); // set localstore with updated results
+
         // disable buttons while animate
         const newState = this.state;
         newState.animationIsOn = true;

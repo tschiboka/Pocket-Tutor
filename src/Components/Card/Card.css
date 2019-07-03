@@ -50,7 +50,7 @@
 .code--code-text {
     max-width: 90vw;
     display: block;
-    padding: 1vh;
+    padding: 1vh 3vw 1vh 1vw;
     background: rgba(255, 255, 255, 0.03);
     font-size: 1.9vh;
     color: rgb(240, 113, 113);
@@ -65,7 +65,7 @@
 
 .code--plain-text > span{
     display: block;
-    padding: 1vh;
+    padding: 1vw;
     font-size: 2.6vh;
     white-space: wrap;
     -webkit-hyphens: auto;
