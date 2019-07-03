@@ -167,6 +167,24 @@ export default class EditCards extends Component {
 
 
 
+    addCodeTag(lang, where) {
+        const                                                                      // get elements and values for positioning lang tag
+            tArea = document.getElementById("edit-cards__" + where + "-textarea"), // get the textarea element
+            stPos = tArea.selectionStart,                                          // selection start position
+            enPos = tArea.selectionEnd;                                            // selection end position
+        console.log(tArea, stPos, enPos);
+    } // end of addCodeTag
+
+
+
+    clearLanguageMenu(index) {
+        const newState = this.state;
+        newState.languageMenuOpen[index] = false;
+        this.setState(newState);
+    } // end of clearLanguageMenu
+
+
+
     handleTextAreaOnBlur(event, cardProp) {
         const newState = this.state;
 
@@ -296,6 +314,7 @@ export default class EditCards extends Component {
                                 id="edit-cards__answer-textarea"
                                 defaultValue={this.state.card.answer && this.state.card.answer}
                                 onBlur={e => this.handleTextAreaOnBlur(e, "answer")}
+                                onFocus={() => this.clearLanguageMenu(1)}
                             >
                             </textarea>
 
@@ -303,11 +322,11 @@ export default class EditCards extends Component {
                                 <div
                                     id="edit-cards__language-menu--answer"
                                     className="edit-cards__language-menu">
-                                    <button>HTML</button>
+                                    <button onClick={() => this.addCodeTag("HTML", "answer")}>HTML</button>
 
-                                    <button>CSS</button>
+                                    <button onClick={() => this.addCodeTag("HTML", "answer")}>CSS</button>
 
-                                    <button>JS</button>
+                                    <button onClick={() => this.addCodeTag("HTML", "answer")}>JS</button>
                                 </div>}
                         </div>
                     </div>
