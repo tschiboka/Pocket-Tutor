@@ -15,7 +15,6 @@ export default class RunTest extends Component {
             "cardsTurned": undefined,  // determines if card is faced question up [true, false]
             "results": [],             // collect correct/incorrect answers
             "showResult": false,       // show results div
-            "totalTopics": {},         // all possible topics 
             "detailedResults": {}      // topics and results  
         } // end of state declaration
     } // end of constructor
@@ -64,7 +63,7 @@ export default class RunTest extends Component {
             }                                                 // end of if
             let res = newState.detailedResults[topic];        // store topic result
             newState.detailedResults[topic] =                 // update detailed results topic
-                [+res[0] + (result ? 1 : 0), +res[1] + 1];              // increment only if reuslt is truthy
+                [+res[0] + (result ? 1 : 0), +res[1] + 1];    // increment only if reuslt is truthy
         });                                                   // end of topics foreach
 
         console.log(newState.detailedResults);
@@ -126,6 +125,38 @@ export default class RunTest extends Component {
 
 
 
+    renderResults() {
+        const
+            resu = this.state.detailedResults,
+            perc = {};
+        Object.keys(resu).forEach(t =>
+            perc[t] = Math.round(resu[t][0] ? (resu[t][0] / resu[t][1]) * 100 : 0));
+
+        /*   console.log(perc);
+           console.log("KEYS", perc[Object.keys(perc)[0]]);
+           if (this.props.cards.length === 1 || Object.keys(this.state.detailedResults).length === 1) {
+               return <div className="run-test__results">
+                   <div className="run-test__total">
+                       <RoundProgress
+                           id="run-test--JS-percent1"
+                           percent={perc[Object.keys(perc)[0]]}
+                           name="Total"
+                           color="#ddd" />
+                   </div>
+               </div>
+           }
+           else {
+               return <div className="run-test__results run-test__results-topic">
+                   <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
+                   <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
+                   <RoundProgress id="run-test--JS-percent1" percent="75" name="CSS" color="#ffff79" />
+               </div>
+           }*/
+        return <div></div>
+    } // end of renderResults
+
+
+
     render() {
         return (
             !this.state.showResult ?
@@ -170,10 +201,10 @@ export default class RunTest extends Component {
                         </div>
                     </div>
                 </div>
-                : <div className="run-test__results">
-                    {}
-                    <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
-                    <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
+                : <div className="run-test__results-box">
+                    <div className="run-test__results-body">{this.renderResults()}</div>
+
+                    <div className="run-test__results-footer"><button>OK</button></div>
                 </div>
         ); // end of return
     } // end of render

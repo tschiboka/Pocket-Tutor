@@ -163,11 +163,28 @@
     animation: animate-nex2-card 1.5s linear; 
 }
 
-.run-test__results {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.run-test__results-box {
+    width: 90%;
+    height: 85%;
+    margin: 5%;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid #3e4652;
+}
+
+.run-test__results-body {
+    width: 100%;
+    height: 90%;
+}
+
+.run-test__results-footer {
+    width: 100%;
+    height: 10%;
+}
+
+.run-test__results-footer button {
+    width: 100%;
+    height: 100%;
+    font-size: 3vh;
 }
 
 @keyframes animate-prev-card {
