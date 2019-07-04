@@ -39,16 +39,26 @@ export default class RoundProgress extends Component {
                         class="rnd-progress__bg-arc"
                         cx="50%"
                         cy="50%"
-                        strokeDasharray={"240 120"}
+                        strokeDasharray={"240 1000"}
                         r={R - 10}
                     />
+
                     <circle
                         class="rnd-progress__pc-arc"
+                        stroke={this.props.color}
                         cx="50%"
                         cy="50%"
                         r={R - 10}
                         strokeDasharray={((Number(this.props.percent) / 100) * 240) + " 1000"}
                     />
+
+                    <circle
+                        class="rnd-progress__pc-stroke"
+                        cx="50%"
+                        cy="50%"
+                        r={R - 10}
+                    />
+
                 </svg>
             </div >
         ); // end of return

@@ -10,7 +10,7 @@
 }
 
 .rnd-progress__bg-arc {
-    stroke: rgba(0, 0, 0, 0.3);
+    stroke: rgba(0, 0, 0, 0.6);
     fill: transparent;
     stroke-width: 5px;
     transform-origin: 50% 50%;
@@ -18,13 +18,22 @@
 }
 
 .rnd-progress__pc-arc {
-    stroke: white;
     fill: transparent;
     stroke-width: 5px;
     transform-origin: 50% 50%;
     transform: rotate(145deg);
     animation: arc-grow 2s linear;
 }
+
+.rnd-progress__pc-stroke {
+    stroke: rgba(0, 0, 0, 0.9);
+    fill: transparent;
+    stroke-width: 5px;
+    stroke-dasharray: 1 22 2 22 2 22 2 22 2 22 2 22 2 22 2 22 2 22 2 22 1 1000;
+    transform-origin: 50% 50%;
+    transform: rotate(145deg);
+}
+
 
 @keyframes arc-grow {
     from {
