@@ -38,7 +38,7 @@ export default class RoundProgress extends Component {
                 if (counter >= 100) {
                     clearInterval(timer);
                 }
-            }, 75);
+            }, 65);
 
     } // end of componentDidMount
 

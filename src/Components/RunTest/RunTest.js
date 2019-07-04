@@ -14,7 +14,9 @@ export default class RunTest extends Component {
             "animationIsOn": false,    // while animation goes disable buttons 
             "cardsTurned": undefined,  // determines if card is faced question up [true, false]
             "results": [],             // collect correct/incorrect answers
-            "showResult": false        // show results div
+            "showResult": false,       // show results div
+            "totalTopics": {},         // all possible topics 
+            "detailedResults": {}      // topics and results  
         } // end of state declaration
     } // end of constructor
 
@@ -26,7 +28,6 @@ export default class RunTest extends Component {
 
         // set current card in the array
         turned[this.state.current] = turned[this.state.current] ? false : true;
-
 
         // set state
         const newState = this.state;
@@ -55,6 +56,18 @@ export default class RunTest extends Component {
         this.setState(newState);
 
         this.animateProgressBar();
+
+        // give detailed results for charts
+        cards[crdIn].topics.forEach(topic => {                // go through cards topics
+            if (!newState.detailedResults[topic]) {           // if obj doesnt have key add it
+                newState.detailedResults[topic] = [0, 0];     // with 0 (it will be incremented later)
+            }                                                 // end of if
+            let res = newState.detailedResults[topic];        // store topic result
+            newState.detailedResults[topic] =                 // update detailed results topic
+                [+res[0] + (result ? 1 : 0), +res[1] + 1];              // increment only if reuslt is truthy
+        });                                                   // end of topics foreach
+
+        console.log(newState.detailedResults);
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {
@@ -158,6 +171,7 @@ export default class RunTest extends Component {
                     </div>
                 </div>
                 : <div className="run-test__results">
+                    {}
                     <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
                     <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
                 </div>
