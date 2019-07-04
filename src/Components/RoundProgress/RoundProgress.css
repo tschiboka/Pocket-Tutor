@@ -22,7 +22,7 @@
     stroke-width: 5px;
     transform-origin: 50% 50%;
     transform: rotate(145deg);
-    animation: arc-grow 2s linear;
+    animation: arc-grow 3s linear; 
 }
 
 .rnd-progress__pc-stroke {
@@ -34,6 +34,12 @@
     transform: rotate(145deg);
 }
 
+.rnd-progress svg text {
+    fill: white;
+    text-anchor: middle;
+    font-family: "Arial Rounded MT Bold";
+    font-weight: lighter;
+}
 
 @keyframes arc-grow {
     from {

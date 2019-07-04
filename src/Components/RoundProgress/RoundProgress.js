@@ -9,6 +9,7 @@ export default class RoundProgress extends Component {
         this.state = {
             "width": 0,
             "height": 0,
+            "currentPercent": 0
         } // end of state declaration
     } // end of constructor
 
@@ -24,6 +25,21 @@ export default class RoundProgress extends Component {
         newState.width = Math.round(rect.width);            // set height
         this.setState(newState);
 
+        let counter = 0;
+        const
+            text = this.props.id + "__pc-text",
+            timer = setInterval(() => {
+                counter += 2.5;
+
+                const newState = this.state;
+                newState.currentPercent = (this.props.percent / 100 * counter).toFixed(0);
+                this.setState(newState);
+
+                if (counter >= 100) {
+                    clearInterval(timer);
+                }
+            }, 75);
+
     } // end of componentDidMount
 
 
@@ -34,6 +50,7 @@ export default class RoundProgress extends Component {
         return (
             <div id={this.props.id} class="rnd-progress">
                 <svg preserveAspectRatio="none">
+
                     <circle
                         id={this.props.id + "__bg-arc"}
                         class="rnd-progress__bg-arc"
@@ -59,6 +76,9 @@ export default class RoundProgress extends Component {
                         r={R - 10}
                     />
 
+                    <text x="50%" y="55%" id={this.props.id + "__pc-text"}>{this.state.currentPercent}%</text>
+
+                    <text x="50%" y="85%">{this.props.name}</text>
                 </svg>
             </div >
         ); // end of return
