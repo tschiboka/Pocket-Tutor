@@ -66,6 +66,8 @@ export default class RunTest extends Component {
                 [+res[0] + (result ? 1 : 0), +res[1] + 1];    // increment only if reuslt is truthy
         });                                                   // end of topics foreach
 
+        // general results
+        newState.results.push(result);                        // collect results for evaluation without topics
         console.log(newState.detailedResults);
 
         // delay changes letting the animations time
@@ -132,34 +134,37 @@ export default class RunTest extends Component {
         Object.keys(resu).forEach(t =>
             perc[t] = Math.round(resu[t][0] ? (resu[t][0] / resu[t][1]) * 100 : 0));
 
-        /*   console.log(perc);
-           console.log("KEYS", perc[Object.keys(perc)[0]]);
-           if (this.props.cards.length === 1 || Object.keys(this.state.detailedResults).length === 1) {
-               return <div className="run-test__results">
-                   <div className="run-test__total">
-                       <RoundProgress
-                           id="run-test--JS-percent1"
-                           percent={perc[Object.keys(perc)[0]]}
-                           name="Total"
-                           color="#ddd" />
-                   </div>
-               </div>
-           }
-           else {
-               return <div className="run-test__results run-test__results-topic">
-                   <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
-                   <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
-                   <RoundProgress id="run-test--JS-percent1" percent="75" name="CSS" color="#ffff79" />
-               </div>
-           }*/
-        return <div className="run-test__results">
-            <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
-            <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
-            <RoundProgress id="run-test--JS-percent3" percent="25" name="CSS" color="#ffff79" />
-            <RoundProgress id="run-test--JS-percent4" percent="47" name="React" color="#b3ffb3" />
-            <RoundProgress id="run-test--JS-percent5" percent="88" name="JS" color="#ff9bce" />
-            <RoundProgress id="run-test--JS-percent6" percent="7" name="Web Development" color="#ffff79" />
-        </div>
+        if (this.props.cards.length === 1 || Object.keys(this.state.detailedResults).length === 1) {
+            return <div className="run-test__results">
+                <RoundProgress
+                    id="run-test--JS-percent1"
+                    percent={perc[Object.keys(perc)[0]]}
+                    name="Total"
+                    color="#ddd" />
+            </div>
+        }
+        else {
+            const total = (this.state.results.map(r => r ? 1 : 0).reduce((p, c) => p + c) / this.state.results.length) * 100;
+            return <div className="run-test__results">
+                <RoundProgress
+                    id="run-test--JS-percent1"
+                    percent={total}
+                    name="Total"
+                    color="#ddd" />
+                {Object.keys(perc).map((t, i) => {
+                    const
+                        percentage = perc[t],
+                        color = JSON.parse(localStorage.topics).find(to => to.name === t).color;
+
+                    return <RoundProgress
+                        id={"run-test--JS-percent" + i + 1}
+                        percent={percentage}
+                        name={t}
+                        color={color}
+                    />
+                })}
+            </div>
+        }
     } // end of renderResults
 
 
