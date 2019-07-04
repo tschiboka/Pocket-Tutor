@@ -80,11 +80,11 @@ export default class RoundProgress extends Component {
                         strokeDasharray={dashStr}
                     />
                 </svg>
-                <div className="rnd-progress__perc-txt">
+                <div className="rnd-progress__txt">
                     <span>
-                        <span id={this.props.id + "__pc-text"}>{this.state.currentPercent}%</span>
+                        <span id={this.props.id + "__pc-text"} className="rnd-progress__percent">{this.state.currentPercent}%</span>
                         <br />
-                        {this.props.name}
+                        <span className="rnd-progress__name">{this.props.name.match(/.{0,6}/g)[0]}</span>
                     </span>
                 </div>
             </div>

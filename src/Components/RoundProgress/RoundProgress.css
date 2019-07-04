@@ -35,7 +35,7 @@
     transform: rotate(135deg);
 }
 
-.rnd-progress__perc-txt {
+.rnd-progress__txt {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,12 +45,17 @@
     justify-content: center;
     align-items: center;
     color: #ccc;
-    text-shadow: -2px -2px 2px black;
-    font-family: "Arial Rounded MT Bold";
-    font-weight: lighter;
-    font-size: 4vh;
-    line-height: 6vh;
+    text-shadow: -1px -1px black, 1px 1px 1px #9696c2;
     text-align: center;
+}
+
+.rnd-progress__percent {
+    font-family: "Arial Rounded MT Bold";
+    font-size: 2.7vh;
+}
+
+.rnd-progress__name {
+    font-size: 2.4vh;
 }
 
 @keyframes arc-grow {

@@ -152,7 +152,14 @@ export default class RunTest extends Component {
                    <RoundProgress id="run-test--JS-percent1" percent="75" name="CSS" color="#ffff79" />
                </div>
            }*/
-        return <div></div>
+        return <div className="run-test__results">
+            <RoundProgress id="run-test--JS-percent1" percent="75" name="ES6" color="#b3ffb3" />
+            <RoundProgress id="run-test--JS-percent2" percent="100" name="JS" color="#ff9bce" />
+            <RoundProgress id="run-test--JS-percent3" percent="25" name="CSS" color="#ffff79" />
+            <RoundProgress id="run-test--JS-percent4" percent="47" name="React" color="#b3ffb3" />
+            <RoundProgress id="run-test--JS-percent5" percent="88" name="JS" color="#ff9bce" />
+            <RoundProgress id="run-test--JS-percent6" percent="7" name="Web Development" color="#ffff79" />
+        </div>
     } // end of renderResults
 
 
