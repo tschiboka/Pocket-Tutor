@@ -37,7 +37,7 @@ export default class RoundProgress extends Component {
                 if (counter >= 100) {
                     clearInterval(timer);
                 }
-            }, 65); // end of timer
+            }, 50); // end of timer
     } // end of componentDidMount
 
 
@@ -56,7 +56,7 @@ export default class RoundProgress extends Component {
 
                     <circle
                         id={this.props.id + "__bg-arc"}
-                        class="rnd-progress__bg-arc"
+                        className="rnd-progress__bg-arc"
                         cx="50%"
                         cy="50%"
                         strokeDasharray={totPerc}
@@ -64,7 +64,7 @@ export default class RoundProgress extends Component {
                     />
 
                     <circle
-                        class="rnd-progress__pc-arc"
+                        className="rnd-progress__pc-arc"
                         stroke={this.props.color}
                         cx="50%"
                         cy="50%"
@@ -73,7 +73,7 @@ export default class RoundProgress extends Component {
                     />
 
                     <circle
-                        class="rnd-progress__pc-stroke"
+                        className="rnd-progress__pc-stroke"
                         cx="50%"
                         cy="50%"
                         r={R - 10}

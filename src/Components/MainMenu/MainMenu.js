@@ -86,6 +86,7 @@ export default class MainMenu extends Component {
                         className="main-menu-item"
                         id="main-menu__results"
                         key="results"
+                        onClick={() => this.handleMenuItemClick("results")}
                     >
                         <div>
                             <img src={result_icon} alt="results" />

@@ -148,10 +148,12 @@ export default class Card extends Component {
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
-        console.log(text.length);
         return isCode
-            ? <pre><span key={key} className="code--code-text">{giveColor(markObjs)}</span></pre>
-            : <span key={key} className="code--plain-text">{text.split("\n").map(txt => <span>{txt}<br /></span>)}</span>;
+            ? <pre key={key}><span className="code--code-text">{giveColor(markObjs)}</span></pre>
+            : <span key={key} className="code--plain-text">{
+                text.split("\n")
+                    .map((txt, i) => <span key={i}>{txt}<br /></span>)
+            }</span>;
     } // end of syntax
 
 

@@ -216,7 +216,6 @@ export default class Topics extends Component {
 
 
     closeTopicsPanel() {
-        console.log("HERE");
         // set initial state back
         const newState = this.state;
         newState.view = "none";
@@ -227,6 +226,7 @@ export default class Topics extends Component {
         newState.sortby = "created";
         newState.ascending = true;
         this.setState(newState);
+
         this.props.changeView("browse");
     } // end of closeTopics
 

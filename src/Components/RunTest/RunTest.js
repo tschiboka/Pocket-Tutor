@@ -157,6 +157,7 @@ export default class RunTest extends Component {
                         color = JSON.parse(localStorage.topics).find(to => to.name === t).color;
 
                     return <RoundProgress
+                        key={i}
                         id={"run-test--JS-percent" + i + 1}
                         percent={percentage}
                         name={t}
