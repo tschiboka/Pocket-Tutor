@@ -171,6 +171,22 @@ export default class Cards extends Component {
 
 
 
+    closeCards() {
+        // set back initial state
+        this.setState({
+            "sortby": "id",
+            "ascending": true,
+            "filterCardsPanelVisible": false,
+            "filtersApplied": "none", // alternatively if filter is set {range:[x, y], topics:["topic1", "topic2", "topic3"]}
+            "deleteConfirmVisible": false,
+            "deleteId": 0
+        }); // end of state declaration
+
+        this.props.changeView("browse");
+    } // end of closeCards
+
+
+
     render() {
         return (
             this.props.visible &&
@@ -193,7 +209,7 @@ export default class Cards extends Component {
 
                         <button onClick={() => this.toggleFilterCardsPanel(this.state.filterCardsPanelVisible ? false : true)}>Filter</button>
 
-                        <button onClick={() => this.props.changeView("browse")}>Back</button>
+                        <button onClick={() => this.closeCards()}>Back</button>
                     </div>
                     {
                         this.state.filterCardsPanelVisible &&

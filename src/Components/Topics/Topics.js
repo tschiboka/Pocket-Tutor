@@ -152,7 +152,7 @@ export default class Topics extends Component {
     } // end of removeTopicFromCards
 
 
-    changeView(newView = "none") {
+    changeTopicsView(newView = "none") {
         // set view to add
 
         const newState = this.state;
@@ -215,6 +215,23 @@ export default class Topics extends Component {
 
 
 
+    closeTopicsPanel() {
+        console.log("HERE");
+        // set initial state back
+        const newState = this.state;
+        newState.view = "none";
+        newState.removeButtonsVisible = false;
+        newState.removeMsgVisible = false;
+        newState.removeName = "";
+        newState.removeNum = 0;
+        newState.sortby = "created";
+        newState.ascending = true;
+        this.setState(newState);
+        this.props.changeView("browse");
+    } // end of closeTopics
+
+
+
     render() {
         return (
             <div
@@ -257,16 +274,16 @@ export default class Topics extends Component {
                     </div>
 
                     <div className="topics-box__buttons">
-                        <button onClick={() => this.changeView("add-topic")}>Add</button>
+                        <button onClick={() => this.changeTopicsView("add-topic")}>Add</button>
 
                         <button onClick={() => this.toggleRemoveButtons()}>Remove</button>
 
-                        <button onClick={() => this.props.changeView("browse")}>Back</button>
+                        <button onClick={() => this.closeTopicsPanel()}>Back</button>
                     </div>
 
                     <AddTopic
                         visible={this.state.view === "add-topic"}
-                        closeAddTopic={this.changeView.bind(this)}
+                        closeAddTopic={this.changeTopicsView.bind(this)}
                     />
                 </div>
             </div>
