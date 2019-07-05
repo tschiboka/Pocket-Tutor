@@ -1,7 +1,35 @@
 .results {
     width: 100%;
     height: 92%;
+}
+
+.results__header {
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    box-shadow:         inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 1px 1px 1px #000000, inset -1px -1px 1px rgba(255, 255, 255, 0.2); 
+}
+
+.results__body {
+    width: 100%;
+    height: 86%;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: aqua transparent;
+}
+
+.results__footer {
+    width: 100%;
+    height: 7%;
+}
+
+.results__footer button {
+    width: 100%;
+    height: 100%;
+    font-size: 3.2vh;
 }
