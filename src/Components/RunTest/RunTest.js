@@ -169,6 +169,21 @@ export default class RunTest extends Component {
 
 
 
+    closeTest() {
+        // set back the original state
+        this.setState({
+            "current": 0,              // current card index
+            "animationIsOn": false,    // while animation goes disable buttons 
+            "cardsTurned": undefined,  // determines if card is faced question up [true, false]
+            "results": [],             // collect correct/incorrect answers
+            "showResult": false,       // show results div
+            "detailedResults": {}      // topics and results  
+        });
+        this.props.changeView("browse");
+    } // end of closeTest
+
+
+
     render() {
         return (
             !this.state.showResult ?
@@ -216,7 +231,9 @@ export default class RunTest extends Component {
                 : <div className="run-test__results-box">
                     <div className="run-test__results-body">{this.renderResults()}</div>
 
-                    <div className="run-test__results-footer"><button>OK</button></div>
+                    <div className="run-test__results-footer">
+                        <button onClick={() => this.closeTest()}>OK</button>
+                    </div>
                 </div>
         ); // end of return
     } // end of render

@@ -120,6 +120,14 @@ export default class Test extends Component {
             // set cards for test on <App />
             this.props.getCards(finalSelectedCards);
 
+            // set back initial state
+            this.setState({
+                "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
+                "selectedTopics": [],
+                "selectedCards": [],
+                "selectedCardsNum": 0
+            }); // end of state declaration
+
             // close tab
             this.props.changeView("runtest");
         } // end of cards num greater than 0
@@ -143,6 +151,20 @@ export default class Test extends Component {
             </ul>
         ); // end of return list
     } // end of renderTopics
+
+
+
+    closeTest() {
+        // set back initial state
+        this.setState({
+            "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
+            "selectedTopics": [],
+            "selectedCards": [],
+            "selectedCardsNum": 0
+        }); // end of state declaration
+
+        this.props.changeView("browse");
+    } // end of closeTest
 
 
 
@@ -202,7 +224,7 @@ export default class Test extends Component {
                 </div>
 
                 <div className="test__footer">
-                    <button onClick={() => this.props.changeView("browse")}>Back</button>
+                    <button onClick={() => this.closeTest()}>Back</button>
 
                     <button onClick={() => this.startTest()}>Start Test</button>
                 </div>
