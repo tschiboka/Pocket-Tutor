@@ -32,15 +32,15 @@ export default class Results extends Component {
 
 
     render() {
-        const layout = this.state.results < 8 ? "two-rows" : "three-rows";
+        const layout = this.state.results <= 8 ? "two-rows" : "three-rows";
         return (
             this.props.visible && <div className="results">
                 <div className="results__header">RESULTS</div>
 
-                <div className={"results__body results__body--two-rows"}>
+                <div className={"results__body results__body--" + layout}>
                     {
                         this.state.results.map((res, i) => (
-                            <div className={"results__item results-item--two-rows"}>
+                            <div className={"results__item results-item--" + layout}>
                                 <RoundProgress
                                     key={i}
                                     id={"results__percent--" + i}
