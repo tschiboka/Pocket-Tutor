@@ -28,9 +28,24 @@
 }
 
 .results-item--two-rows {
-    width: 50%;
-    height: 25%;
+    width: 48%;
+    margin: 1%;
+    height: 23%;
 }
+
+.results__body--two-rows > div:nth-child(odd) {
+    border-right: 1px solid #272c32;
+    border-bottom: 1px solid #272c32;
+    border-bottom-right-radius: 5px;
+}
+
+.results__body--two-rows > div:nth-child(even) {
+    border-left: 1px solid #272c32;
+    border-bottom: 1px solid #272c32;
+    border-bottom-left-radius: 5px;
+}
+
+.results__body--two-rows > div:nth-last-child(1):nth-child(odd) { border: none; }
 
 .results__footer {
     width: 100%;

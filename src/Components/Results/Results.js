@@ -37,7 +37,7 @@ export default class Results extends Component {
             this.props.visible && <div className="results">
                 <div className="results__header">RESULTS</div>
 
-                <div className={"results__body results-body--" + layout}>
+                <div className={"results__body results__body--two-rows"}>
                     {
                         this.state.results.map((res, i) => (
                             <div className={"results__item results-item--two-rows"}>
