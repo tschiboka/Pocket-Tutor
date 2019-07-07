@@ -23,25 +23,32 @@ export default class Results extends Component {
                     color = JSON.parse(localStorage.topics) // get localStorage topics
                         .find(to => to.name === t).color;   // find corrisponding color
 
-                return { "topicname": t, "color": color, "percent": precentage };
+                return { "topicName": t, "color": color, "percent": precentage };
             }); // end of topic.map
 
-        console.log(resul);
-        this.state = {
-            "results": resul
-        }
+        this.state = { "results": resul };
     } // end of constructor
 
 
 
     render() {
+        const layout = this.state.results < 8 ? "two-rows" : "three-rows";
         return (
             this.props.visible && <div className="results">
                 <div className="results__header">RESULTS</div>
 
-                <div className="results__body">
+                <div className={"results__body results-body--" + layout}>
                     {
-                        //this.state.results.map(  ))
+                        this.state.results.map((res, i) => (
+                            <div className={"results__item results-item--two-rows"}>
+                                <RoundProgress
+                                    key={i}
+                                    id={"results__percent--" + i}
+                                    percent={res.percent}
+                                    color={res.color}
+                                    name={res.topicName}
+                                />
+                            </div>))
                     }
                 </div>
 

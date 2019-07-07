@@ -21,6 +21,15 @@
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: aqua transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: safe center;
+    align-items: safe center;
+}
+
+.results-item--two-rows {
+    width: 50%;
+    height: 25%;
 }
 
 .results__footer {
