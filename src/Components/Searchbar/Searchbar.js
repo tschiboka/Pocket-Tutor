@@ -31,6 +31,16 @@ export default class Searchbar extends Component {
 
 
     autocompleteSearchBar() {
+        const dessectSearch = (txt, word) => {
+            const
+                inpRegE = new RegExp(word, "gmi"),
+                befRegE = new RegExp("^(.*?)" + word, "gmi"),
+                befText = txt.match(befRegE)[0] ? txt.match(befRegE)[0].replace(inpRegE, "") : "",
+                aftRegE = new RegExp(word + ".*", "gmi"),
+                aftText = txt.match(aftRegE)[0] ? txt.match(aftRegE)[0].replace(inpRegE, "") : "";
+
+            return { "before": befText, "input": input, "after": aftText };
+        } // end of dessectSearch
         const input = document.getElementById("searchbar-input").value; // get current search input value
 
         // return from function if input length is too short avoiding unneccesary computation
@@ -47,9 +57,18 @@ export default class Searchbar extends Component {
                     question = card.question.match(regExp),                    // find search in questions
                     answer = card.answer.match(regExp);                        // find search in answers
 
+
                 // return an object with id, question/answer and search results
-                if (question) return { "id": card.id, "QA": "Q", "search": question[0] };
-                if (answer) return { "id": card.id, "QA": "A", "search": answer[0] };
+                if (question) return ({
+                    "id": card.id,
+                    "QA": "Q",
+                    "search": dessectSearch(question[0], input)
+                });
+                if (answer) return {
+                    "id": card.id,
+                    "QA": "A",
+                    "search": dessectSearch(answer[0], input)
+                };
             }).filter(c => !!c); // get rid of undefined values
 
         // set component state
@@ -61,15 +80,19 @@ export default class Searchbar extends Component {
 
 
     renderSearchResults() {
-        console.log(JSON.stringify(this.state));
         return this.state.searchResults.map((item, i) => (
             <div
                 key={i}
                 id={"searchbar__autocomplete--" + item.id}
                 className="searchbar__autocomplete">
-                <span>{item.search}</span>
+                <span>
+                    <span>{item.search.before}</span>
+                    <span>{item.search.input}</span>
+                    <span>{item.search.after}</span>
+                </span>
                 <span>{item.id + item.QA}</span>
-            </div>)); // end of map searchResults
+            </div>
+        )); // end of map searchResults
     } // end of renderSearchResults
 
 
