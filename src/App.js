@@ -105,6 +105,7 @@ export default class App extends Component {
         </header>
 
         <BrowseBox
+          order="default"
           visible={this.state.view === "browse"}
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
         />

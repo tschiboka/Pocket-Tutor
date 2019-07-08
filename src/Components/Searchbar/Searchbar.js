@@ -61,7 +61,6 @@ export default class Searchbar extends Component {
                     question = card.question.match(regExp),                    // find search in questions
                     answer = card.answer.match(regExp);                        // find search in answers
 
-
                 // return an object with id, question/answer and search results
                 if (question) return ({
                     "id": card.id,
@@ -83,12 +82,19 @@ export default class Searchbar extends Component {
 
 
 
+    showResult(item) {
+        console.log(item);
+    } // end of showResult
+
+
+
     renderSearchResults() {
         return this.state.searchResults.map((item, i) => (
             <div
                 key={i}
                 id={"searchbar__autocomplete--" + item.id}
-                className="searchbar__autocomplete">
+                className="searchbar__autocomplete"
+                onClick={() => this.showResult(item)}>
                 <span>
                     <span>{item.search.before}</span>
                     <span>{item.search.input}</span>

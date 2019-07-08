@@ -8,70 +8,65 @@ import Card from "../Card/Card";
 export default class BrowseBox extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            currentCard: this.randomCard(),
-            questionIsUp: true
+            "cardIndices": [],
+            "currentCard": 0,
+            "questionIsUp": true
         };
     } // end of constructor
 
-    randomCard() {
-        if (localStorage.cards) {
-            const
-                cardsLength = JSON.parse(localStorage.cards).length,
-                RAN = Math.floor(Math.random() * cardsLength);
+    componentWillMount() { this.props.order === "default" && this.setdefaultCardIndices(); }
 
-            return JSON.parse(localStorage.cards)[RAN];
-        }
-    } // end of randomCard
+    componentWillUpdate() { this.props.order === "default" && this.setdefaultCardIndices(); }
 
+    setdefaultCardIndices() {
+        const
+            newState = this.state,
+            CARDS = JSON.parse(localStorage.cards);
 
-    // prev and next click handlers are temporaly solutions, cards can coome in different order
-    // rather than random in the later development of the app
+        newState.cardIndices =
+            new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id);
+
+        this.setState(newState);
+    } // end of setDefaultCardIndices
+
     prevClickHandler() {
-        this.setState({
-            currentCard: this.randomCard(),
-            questionIsUp: true
-        }); // end of setState
+        const newState = this.state;
+        newState.currentCard--;
+        this.setState(newState);
     } // end of prevClickHandler
 
     nextClickHandler() {
-        this.setState({
-            currentCard: this.randomCard(),
-            questionIsUp: true
-        }); // end of setState
+        const newState = this.state;
+        newState.currentCard++;
+        this.setState(newState);
     } // end of prevClickHandler
 
     turnClickHandler() {
-        // set state to turn card
-        this.setState({
-            currentCard: this.state.currentCard, // card doesn't change
-            questionIsUp: this.state.questionIsUp ? false : true // toggle question / answer
-        }); // end of setState
+        const newState = this.state;
+        newState.questionIsUp = !newState.questionIsUp; // toggle question / answer
+        this.setState(newState);
     } // end of turnClickHandler
 
-    setProgress = () => {
-        if (this.state.currentCard) {
-            const [correctAnswers, totalAnswers] = Array.from(this.state.currentCard.results);
+    setProgress = (card) => {
+        if (card) {
+            const [correctAnswers, totalAnswers] = Array.from(card.results);
 
             return (totalAnswers ? Math.round((correctAnswers / totalAnswers) * 100) : 0) + "%";
         }
-        else {
-            return "0";
-        }
+        else return "0";
     } // end of setProgress
 
-    renderTopics() {
-        const
-            CARD = this.state.currentCard,
-            topics = [],
-            colors = [];
+    renderTopics(card) {
+        const topics = [], colors = [];
 
         // extract topics
-        if (CARD) {
-            if (CARD.topics && Array.isArray(CARD.topics)) {
+        if (card) {
+            if (card.topics && Array.isArray(card.topics)) {
                 // max 3 topics allowed
                 for (let i = 0; i < 3; i++) {
-                    if (CARD.topics[i]) topics.push(CARD.topics[i]);
+                    if (card.topics[i]) topics.push(card.topics[i]);
                 } // end of for 3
             } // end of there are topics
         } // end of there is a valid card
@@ -90,60 +85,60 @@ export default class BrowseBox extends Component {
     } // end of renderTopics
 
     render() {
+        const card = JSON
+            .parse(localStorage.cards)
+            .find(c => c.id === this.state.cardIndices[this.state.currentCard]);
         return (
-            this.props.visible
-                ?
-                <div className="browse-box">
-                    <div className="browse-box__header">
-                        {this.renderTopics()}
-                    </div>
+            this.props.visible && <div className="browse-box">
+                <div className="browse-box__header">
+                    {this.renderTopics(card)}
+                </div>
+                <div className="browse-box__body">
+                    {card
+                        ? <Card turned={!this.state.questionIsUp} card={card} />
+                        : "No cards to show"}
+                </div>
 
-                    <div className="browse-box__body">
-                        {this.state.currentCard
-                            ? <Card turned={!this.state.questionIsUp} card={this.state.currentCard} />
-                            : "No cards to show"}
-                    </div>
+                <div className="browse-box__footer">
+                    <div className="browse-box__footer__progress-box">
+                        <button
+                            onClick={() => this.props.openCloseEditCards(true, card.id)}
+                            className="browse-box__footer__progress-box__edit"
+                            disabled={!card}
+                        >Edit</button>
 
-                    <div className="browse-box__footer">
-                        <div className="browse-box__footer__progress-box">
-                            <button
-                                onClick={() => this.props.openCloseEditCards(true, this.state.currentCard.id)}
-                                className="browse-box__footer__progress-box__edit"
-                                disabled={!this.state.currentCard}
-                            >Edit</button>
-
-                            <div className="browse-box__footer__progress-box__progress">
-                                <div className="browse-box__footer__progress-bar">
-                                    <div
-                                        className="browse-box__footer__progress"
-                                        style={{ width: this.setProgress() }}
-                                    ></div>
-                                </div>
+                        <div className="browse-box__footer__progress-box__progress">
+                            <div className="browse-box__footer__progress-bar">
+                                <div
+                                    className="browse-box__footer__progress"
+                                    style={{ width: this.setProgress(card) }}
+                                ></div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="browse-box__footer__button-box">
-                            <button
-                                id="browse-box__prev-btn"
-                                onClick={() => this.prevClickHandler()}
-                                disabled={!this.state.currentCard}
-                            >Prev</button>
+                    <div className="browse-box__footer__button-box">
+                        <button
+                            id="browse-box__prev-btn"
+                            onClick={() => this.prevClickHandler()}
+                            disabled={!this.state.cardIndices[this.state.currentCard - 1]}
+                        >Prev</button>
 
-                            <button
-                                id="browse-box__turn-btn"
-                                onClick={() => this.turnClickHandler()}
-                                disabled={!this.state.currentCard}
-                            >Turn</button>
+                        <button
+                            id="browse-box__turn-btn"
+                            onClick={() => this.turnClickHandler()}
+                            disabled={!this.state.cardIndices[this.state.currentCard]}
+                        >Turn</button>
 
-                            <button
-                                id="browse-box__next-btn"
-                                onClick={() => this.nextClickHandler()}
-                                disabled={!this.state.currentCard}
-                            >Next</button>
-                        </div>
+                        <button
+                            id="browse-box__next-btn"
+                            onClick={() => this.nextClickHandler()}
+                            disabled={!this.state.cardIndices[this.state.currentCard + 1]}
+                        >Next</button>
                     </div>
                 </div>
-                : null
+
+            </div >
         ); // end of return
     } // end of render
 } // end of BrowseBox
