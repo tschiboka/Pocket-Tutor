@@ -11,6 +11,25 @@ export default class Searchbar extends Component {
 
 
 
+    componentDidMount() { this.setAutoCompleteHeight(); }
+
+
+
+    componentDidUpdate() { this.setAutoCompleteHeight(); }
+
+
+
+    setAutoCompleteHeight() {
+        const
+            resultsDiv = document.getElementById("searchbar__results"), // get results div
+            resultsLen = this.state.searchResults.length,               // get results length
+            divsHeight = (resultsLen >= 3 ? 3 : resultsLen) * 6 + "%";  // cant be larger than 3 items
+
+        resultsDiv.style.height = divsHeight;
+    } // end of setAutoCompleteHeight
+
+
+
     autocompleteSearchBar() {
         const input = document.getElementById("searchbar-input").value; // get current search input value
 
@@ -42,7 +61,15 @@ export default class Searchbar extends Component {
 
 
     renderSearchResults() {
-
+        console.log(JSON.stringify(this.state));
+        return this.state.searchResults.map((item, i) => (
+            <div
+                key={i}
+                id={"searchbar__autocomplete--" + item.id}
+                className="searchbar__autocomplete">
+                <span>{item.search}</span>
+                <span>{item.id + item.QA}</span>
+            </div>)); // end of map searchResults
     } // end of renderSearchResults
 
 
@@ -60,7 +87,7 @@ export default class Searchbar extends Component {
 
                 <button><div>&#9906;</div></button>
 
-                {this.state.searchResults.length ? <div className="searchbar__results">{this.renderSearchResults()}</div> : void (0)}
+                {<div id="searchbar__results">{this.renderSearchResults()}</div>}
             </div>
         ); // end of return
     } // end of render
