@@ -9,25 +9,22 @@ export default class BrowseBox extends Component {
     constructor(props) {
         super(props);
 
+        const CARDS = JSON.parse(localStorage.cards);
+
         this.state = {
-            "cardIndices": [],
+            "cardIndices": new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id),
             "currentCard": 0,
             "questionIsUp": true
         };
     } // end of constructor
 
-    componentWillMount() { this.props.order === "default" && this.setdefaultCardIndices(); }
+    //componentWillMount() { this.props.order === "default" && this.setdefaultCardIndices(); }
 
-    componentWillUpdate() { this.props.order === "default" && this.setdefaultCardIndices(); }
+    //componentWillUpdate() { this.props.order === "default" && this.setdefaultCardIndices(); }
 
     setdefaultCardIndices() {
-        const
-            newState = this.state,
-            CARDS = JSON.parse(localStorage.cards);
-
-        newState.cardIndices =
-            new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id);
-
+        const newState = this.state, CARDS = JSON.parse(localStorage.cards);
+        newState.cardIndices = new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id);
         this.setState(newState);
     } // end of setDefaultCardIndices
 
@@ -137,8 +134,7 @@ export default class BrowseBox extends Component {
                         >Next</button>
                     </div>
                 </div>
-
-            </div >
+            </div>
         ); // end of return
     } // end of render
 } // end of BrowseBox

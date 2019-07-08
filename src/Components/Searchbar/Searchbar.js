@@ -23,7 +23,7 @@ export default class Searchbar extends Component {
         const
             resultsDiv = document.getElementById("searchbar__results"), // get results div
             resultsLen = this.state.searchResults.length,               // get results length
-            divsHeight = (resultsLen >= 3 ? 3 : resultsLen) * 6 + "%";  // cant be larger than 3 items
+            divsHeight = (resultsLen >= 1 ? 15 : resultsLen) * 6 + "%";  // cant be larger than 3 items
 
         resultsDiv.style.height = divsHeight;
     } // end of setAutoCompleteHeight
@@ -32,7 +32,7 @@ export default class Searchbar extends Component {
 
     autocompleteSearchBar() {
         const dessectSearch = (txt, word) => {
-            const
+            let
                 inpRegE = new RegExp(word, "gmi"),                      // input keyword regexp
                 befRegE = new RegExp("^(.*?)" + word, "gmi"),           // characters before keyword regexp
                 befText = txt.match(befRegE)[0] ? txt.match(befRegE)[0] // find characters before keyword
@@ -41,8 +41,22 @@ export default class Searchbar extends Component {
                 aftRegE = new RegExp(word + ".*", "gmi"),               // characters after keyword regexp
                 aftText = txt.match(aftRegE)[0] ? txt.match(aftRegE)[0] // find characters after keyword
                     .replace(inpRegE, "")                               // get rid of input
-                    .replace(/(<###lang.+?>|<###>)/gm, "") : "";        // get rid of tags
+                    .replace(/(<###lang.+?>|<###>)/gm, "") : "",        // get rid of tags
+                maxChr = Math.floor((40 - input.length) / 2),           // get the maximum characters allowed on one side
+                befLen = befText.length,                                // get before text length
+                befLeftOver = befLen <= maxChr ? maxChr - befLen : 0,   // get before text leftover if any
+                aftLen = aftText.length,                                // get after text length
+                aftLeftOver = aftLen <= maxChr ? maxChr - aftLen : 0;   // get afteer text leftover if any
 
+            console.log(befLen, aftLen);
+            console.log("LEFTOVER", befLeftOver, aftLeftOver);
+            if (befLeftOver) aftText = aftText.substr(0, maxChr + befLeftOver)
+            else (aftText = aftText.substr(0, maxChr));
+            if (aftLeftOver) befText = befText.substr(0, maxChr + aftLeftOver);
+            else (befText = befText.substr(0, maxChr));
+            console.log(befLen, aftLen);
+
+            console.log("MAXCHARS", maxChr, befLeftOver, aftLeftOver);
             return { "before": befText, "input": input, "after": aftText };
         } // end of dessectSearch
         const input = document.getElementById("searchbar-input").value; // get current search input value
@@ -57,7 +71,7 @@ export default class Searchbar extends Component {
             localSt = JSON.parse(localStorage.cards),                          // get cards
             results = localSt.map(card => {                                    // iterate over cards
                 const
-                    regExp = new RegExp(".{0,20}" + input + ".{0,20}", "gmi"), // the search and any 20 chars before or after
+                    regExp = new RegExp(".{0,40}" + input + ".{0,40}", "gmi"), // the search and any 20 chars before or after
                     question = card.question.match(regExp),                    // find search in questions
                     answer = card.answer.match(regExp);                        // find search in answers
 
