@@ -76,12 +76,18 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .searchbar__autocomplete {
     height: 6vh;
     width: 100%;
+    padding: 0 1% 0 1%;
     line-height: 6vh;
     font-style: italic;
     border-bottom: 1px solid #2c323b;
-
+    display: flex;
+    justify-content: center;
 }
+
+.searchbar__autocomplete span:first-child { width: 89%;}
+
+.searchbar__autocomplete span:last-child { width: 9%; text-align: end;}
 
 .searchbar__autocomplete span { color: #697c97; }
 
-.searchbar__autocomplete > span > span:nth-child(2){ color: #ccc; }
+.searchbar__autocomplete > span > span:nth-child(2){ color: #eee; }
