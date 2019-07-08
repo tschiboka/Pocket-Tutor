@@ -188,6 +188,10 @@ export default class EditCards extends Component {
                 "<###>" +                                 // add end tag
                 tArea.value.slice(enPos);                 // add rest of text
         }                                                 // end of if there is a selection
+
+        const newState = this.state;                      // it's necessary to set state
+        newState.card[where] = tArea.value;               // bacause unless other character is pressed
+        this.setState(newState);                          // changes made won't be saved
     } // end of addCodeTag
 
 
@@ -293,6 +297,7 @@ export default class EditCards extends Component {
                                 id="edit-cards__question-textarea"
                                 defaultValue={this.state.card.question && this.state.card.question}
                                 onBlur={e => this.handleTextAreaOnBlur(e, "question")}
+                                onChange={e => this.handleTextAreaOnBlur(e, "question")}
                                 onFocus={() => this.clearLanguageMenu(0)}
                             >
                             </textarea>
@@ -341,6 +346,7 @@ export default class EditCards extends Component {
                                 id="edit-cards__answer-textarea"
                                 defaultValue={this.state.card.answer && this.state.card.answer}
                                 onBlur={e => this.handleTextAreaOnBlur(e, "answer")}
+                                onChange={e => this.handleTextAreaOnBlur(e, "answer")}
                                 onFocus={() => this.clearLanguageMenu(1)}
                             >
                             </textarea>

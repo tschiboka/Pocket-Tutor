@@ -3,32 +3,18 @@ import React, { Component } from "react";
 import "../Card/Card.css";
 
 export default class Card extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-        } // end of state declaration
-    } // end of constructor
-
-
-
     // function returns an array of objects with the text type or language and its content
     chunkText(text) {
-        const
-            chunks = text.split(/(<###.+<###>)/gm),             // chunk text up to plain text and code
-            tempOb = chunks.map(ch => /<###.+/gm.test(ch)       // determine if chunk is code or text
-                ? { "type": "code", "content": ch }             // if code 
-                : { "type": "text", "content": ch }),           // if plain text
-            getLan = (txt) => txt.match(/<###lang=.+?>/gm)[0]   // get language tag
-                .replace(/<###lang=/, "").replace(/>/, ""),     // extract language
-            getTxt = (txt) => txt                               // get text content
-                .replace(/<###lang=.+?>/gm, "")                 // get rid of opening tag
-                .replace(/<###>/gm, ""),                        // and closing tag
-            textOb = tempOb.map(ob => ob.type === "code"        // final text object that includes the language
-                ? { "type": getLan(ob.content), "content": getTxt(ob.content) } : ob);
+        console.log("UNFORMATTED", text);
+        // return plain text that has no code tags <###>
 
-        return textOb;
+        const
+            textOb = [],
+            chunks = text.split(/<###/gm);
+        let index = 0;
+
+        console.log(chunks);
+        return [{ "type": "text", "content": text }];
     } // end of chunkTest 
 
 
@@ -114,7 +100,7 @@ export default class Card extends Component {
 
     // function returns react dom elements
     syntax(text, isCode, key) {
-        if (!text.length) return <span></span> // return on empty strings
+        if (!text.length) return <span key={key}></span> // return on empty strings
 
         const // dissect text into markup object with type and content
             markups = text.split(/(<###.*?>[\s\S]*?<###>)/gm)   // recognise markups
