@@ -43,7 +43,6 @@ export default class Card extends Component {
         if (!textObjects.length) textObjects                                      // if textObject is empty
             .push({ "type": currentType, "content": currentText });               // push object into array
 
-        console.log(textObjects);
         return textObjects;
     } // end of chunkTest 
 

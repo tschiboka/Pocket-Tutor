@@ -33,11 +33,15 @@ export default class Searchbar extends Component {
     autocompleteSearchBar() {
         const dessectSearch = (txt, word) => {
             const
-                inpRegE = new RegExp(word, "gmi"),
-                befRegE = new RegExp("^(.*?)" + word, "gmi"),
-                befText = txt.match(befRegE)[0] ? txt.match(befRegE)[0].replace(inpRegE, "") : "",
-                aftRegE = new RegExp(word + ".*", "gmi"),
-                aftText = txt.match(aftRegE)[0] ? txt.match(aftRegE)[0].replace(inpRegE, "") : "";
+                inpRegE = new RegExp(word, "gmi"),                      // input keyword regexp
+                befRegE = new RegExp("^(.*?)" + word, "gmi"),           // characters before keyword regexp
+                befText = txt.match(befRegE)[0] ? txt.match(befRegE)[0] // find characters before keyword
+                    .replace(inpRegE, "")                               // get rid of input
+                    .replace(/(<###lang.+?>|<###>)/gm, "") : "",        // get rid of tags
+                aftRegE = new RegExp(word + ".*", "gmi"),               // characters after keyword regexp
+                aftText = txt.match(aftRegE)[0] ? txt.match(aftRegE)[0] // find characters after keyword
+                    .replace(inpRegE, "")                               // get rid of input
+                    .replace(/(<###lang.+?>|<###>)/gm, "") : "";        // get rid of tags
 
             return { "before": befText, "input": input, "after": aftText };
         } // end of dessectSearch
