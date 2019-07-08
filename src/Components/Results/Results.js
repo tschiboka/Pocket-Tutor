@@ -21,10 +21,11 @@ export default class Results extends Component {
                         ? Math.round((allResultOnTopic[0] / allResultOnTopic[1]) * 100)
                         : 0,                            // else 0
                     color = JSON.parse(localStorage.topics) // get localStorage topics
-                        .find(to => to.name === t).color;   // find corrisponding color
+                        .find(to => to.name === t).color; // find corrisponding color
 
-                return { "topicName": t, "color": color, "percent": precentage };
-            }); // end of topic.map
+                return { "topicName": t, "color": color, "percent": precentage }
+            }) // end of topic.map
+                .sort((a, b) => a.topicName.toUpperCase() > b.topicName.toUpperCase()); // sort obj case insensitive
 
         this.state = { "results": resul };
     } // end of constructor
