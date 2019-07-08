@@ -5,16 +5,46 @@ import "../Card/Card.css";
 export default class Card extends Component {
     // function returns an array of objects with the text type or language and its content
     chunkText(text) {
-        console.log("UNFORMATTED", text);
-        // return plain text that has no code tags <###>
+        // js has no lookbehind regexp so this will be a quick mock up
+        // to divide text into chunks of text and code objects
+        console.log("UNFORMATTED\n", text);
 
-        const
-            textOb = [],
-            chunks = text.split(/<###/gm);
-        let index = 0;
+        let currentText = "", textObjects = [], currentType = "text";             // default type is text
 
-        console.log(chunks);
-        return [{ "type": "text", "content": text }];
+        for (let i = 0; i < text.length; i++) {
+            const isOpeningTag = false, isClosingTag = false;                     // flags representing any possible tags
+
+            if (text[i] === "<") {                                                // if possible tag
+                const
+                    following9Char = text.substr(i, 9),                           // next 9 characters
+                    following5char = text.substr(i, 5);                           // next 5 characters
+                if (following9Char === "<###lang=") isOpeningTag = true;          // if openingtag
+                if (following5char === "<###>") isClosingTag = true;              // if closingtag
+            }                                                                     // end of if possible tag
+
+            if (isOpeningTag) {
+                const lang = text.substr(i + 9, text.substr(i + 9).indexOf(">")); // extract language
+                currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
+                textObjects.push({ "type": currentType, "content": currentText });// push object into array
+                currentType = lang;                                               // set language type 
+                currentText = "";                                                 // clear text
+                i += 10 + lang.length;                                            // jump after <###lang XYZ >
+            }                                                                     // end of if openingtag
+
+            if (isClosingTag) {
+                currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
+                textObjects.push({ "type": currentType, "content": currentText });// push object into array
+                currentText = "";                                                 // clear text
+                currentType = "text";                                             // set default text type back
+                i += 5;                                                           // jump through tag
+            }                                                                     // end of if closingtag
+            currentText += text[i];                                               // add characters into text
+        }                                                                         // end of for characters in text
+        if (!textObjects.length) textObjects                                      // if textObject is empty
+            .push({ "type": currentType, "content": currentText });               // push object into array
+
+        console.log(textObjects);
+        return textObjects;
     } // end of chunkTest 
 
 
