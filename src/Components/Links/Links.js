@@ -17,15 +17,38 @@ export default class Links extends Component {
     } // end of comnponentWillRecieveProps
 
 
-    addLink() {
+    addLink(links) {
+        links.push({ "description": "", "url": "" });
 
+        localStorage.setItem("links", JSON.stringify(links));
+
+        this.forceUpdate();
     } // end of addLink
+
+
+
+    removeLink(id) {
+        console.log("REMOVE", id);
+        const links = JSON.parse(localStorage.links);
+
+        links.splice(id, 1);
+
+        localStorage.setItem("links", JSON.stringify(links));
+
+        this.forceUpdate();
+    } // end of removeLink
 
 
 
     renderLinks(links) {
         console.log(links);
-        return links.map((l, i) => <Link key={i} description={l.description} url={l.url} />);
+        return links.map((l, i) =>
+            <Link
+                key={i}
+                id={i}
+                description={l.description}
+                remove={this.removeLink.bind(this)}
+                url={l.url} />);
     } // end of renderLinks
 
 
@@ -40,7 +63,7 @@ export default class Links extends Component {
 
                     Links
 
-                    <button onClick={() => this.addLink()}>+</button>
+                    <button onClick={() => this.addLink(links)}>+</button>
                 </div>
 
                 <div className="links__body">{this.renderLinks(links)}</div>
