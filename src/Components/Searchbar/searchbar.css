@@ -81,17 +81,16 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     border-bottom: 1px solid #2c323b;
     display: flex;
     justify-content: center;
-    font-size: 2.2vh;
+    font-size: 2.8vh;
 }
 
-.searchbar__autocomplete span:first-child { width: 89%;}
+.searchbar__autocomplete span:first-child { width: 88%;}
 
 .searchbar__autocomplete span:last-child { width: 9%; text-align: end;}
 
 .searchbar__autocomplete span { 
-    color: #c1ccdc;
+    color: #9eadc4;
     font-style: italic;
-    font-family: 'Fira', Courier, monospace;
 }
 
 .searchbar__autocomplete > span > span:nth-child(2){ color: #36ebee; }
