@@ -4,6 +4,7 @@
     display: flex;
     justify-content: safe center;
     flex-wrap: nowrap;
+    flex-direction: column;
     align-items: safe center;
     overflow-y: auto;
     overflow-x: hidden;
@@ -54,22 +55,21 @@
 .code--code-text {
     max-width: 90vw;
     display: block;
-    padding: 1vh 3vw 1vh 1vw;
+    padding: 1vh 1vw 1vh 1vw;
     background: rgba(255, 255, 255, 0.03);
     font-size: 1.9vh;
     color: rgb(240, 113, 113);
     font-family: 'Fira', Courier, monospace;
     text-align: left;
-        /* Overflow */
-        overflow: auto;
-        scrollbar-width: thin;
-        scrollbar-color: aqua transparent;
-    
+    /* Overflow */
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: aqua transparent;
 }
 
 .code--plain-text > span{
     display: block;
-    padding: 1vw;
+    padding: 0 1vw;
     font-size: 2.6vh;
     white-space: wrap;
     -webkit-hyphens: auto;
