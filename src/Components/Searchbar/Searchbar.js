@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 
 import "./searchbar.css";
+import BrowseBox from "../BrowseBox/BrowseBox";
 
 export default class Searchbar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { "searchResults": [] }; // going to be an array of result objects
+        this.state = {
+            "searchResults": [],      // going to be an array of result objects
+            "showResultCards": false, // if true show the results of the search
+            "resultCards": []         // the result card objects
+        };
     } // end of constructor
 
 
@@ -26,6 +31,7 @@ export default class Searchbar extends Component {
             divsHeight = (resultsLen >= 15 ? 15 : resultsLen) * 6 + "%";// cant be larger than 15 items
 
         resultsDiv.style.height = divsHeight;
+        resultsDiv.style.zIndex = "4";
     } // end of setAutoCompleteHeight
 
 
@@ -104,8 +110,15 @@ export default class Searchbar extends Component {
 
 
 
-    showResult(item) {
-        console.log(item);
+    showResult(items) {
+        // close search tab
+        document.getElementById("searchbar-input").value = "";
+        this.autocompleteSearchBar();
+
+        // hide results
+        document.getElementById("searchbar__results").style.zIndex = "1";
+
+        this.props.setBrowse(items.map(c => c.id));
     } // end of showResult
 
 
@@ -116,7 +129,7 @@ export default class Searchbar extends Component {
                 key={i}
                 id={"searchbar__autocomplete--" + item.id}
                 className="searchbar__autocomplete"
-                onClick={() => this.showResult(item)}>
+                onClick={() => this.showResult([item])}>
                 <span>
                     <span>{item.search.before}</span>
                     <span>{item.search.input}</span>

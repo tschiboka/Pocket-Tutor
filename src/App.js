@@ -20,6 +20,8 @@ export default class App extends Component {
     this.state = {
       "isMainMenuVisible": false,  // main menu is invisible by default
       "view": "browse",            // default view is browse (user can read random cards)
+      "browseOrder": "default",    // cards in order of id
+      "browseArray": [],           // if browse not default set a selection of card ids
       "editCardIsVisible": false,  // edit card will be able to be opened from multiple places
       "editCardId": null,          // if id is not set it will be given a new id by EditCard (aka new Card)
       "testCards": []              // arr of card objects selected by <Test> run by <RunTest>      
@@ -57,6 +59,8 @@ export default class App extends Component {
 
     newState.view = view;
 
+    console.log(view);
+
     this.setState(newState);
   } // end of changeView
 
@@ -92,6 +96,16 @@ export default class App extends Component {
 
 
 
+  setBrowseSelection(param) {
+    console.log("SETBROWSE SELECTION", param);
+    const newState = this.state;
+    newState.browseOrder = "selection";
+    newState.browseArray = param;
+    this.setState(newState);
+  } // end of setBrowseSeelection
+
+
+
   render() {
     this.setLocalStorage();
     return (
@@ -101,11 +115,16 @@ export default class App extends Component {
             toggle={this.extendMainMenu.bind(this)}
           />
 
-          <Searchbar />
+          <Searchbar
+            setBrowse={this.setBrowseSelection.bind(this)}
+            changeView={this.changeView.bind(this)} />
         </header>
 
         <BrowseBox
-          order="default"
+          order={this.state.browseOrder}
+          cardIds={this.state.browseOrder === "default"
+            ? new Array(JSON.parse(localStorage.cards).length).fill("").map((_, i) => JSON.parse(localStorage.cards)[i].id)
+            : this.state.browseArray}
           visible={this.state.view === "browse"}
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
         />

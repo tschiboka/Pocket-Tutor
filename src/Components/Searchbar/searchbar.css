@@ -84,6 +84,11 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     font-size: 2.8vh;
 }
 
+#searchbar__results > div:hover {
+    background: rgba(134, 211, 224, 0.2);
+    cursor: pointer;
+}
+
 .searchbar__autocomplete span:first-child { width: 88%;}
 
 .searchbar__autocomplete span:last-child { width: 9%; text-align: end;}

@@ -9,24 +9,12 @@ export default class BrowseBox extends Component {
     constructor(props) {
         super(props);
 
-        const CARDS = JSON.parse(localStorage.cards);
-
         this.state = {
-            "cardIndices": new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id),
             "currentCard": 0,
             "questionIsUp": true
         };
     } // end of constructor
 
-    //componentWillMount() { this.props.order === "default" && this.setdefaultCardIndices(); }
-
-    //componentWillUpdate() { this.props.order === "default" && this.setdefaultCardIndices(); }
-
-    setdefaultCardIndices() {
-        const newState = this.state, CARDS = JSON.parse(localStorage.cards);
-        newState.cardIndices = new Array(CARDS.length).fill("").map((_, i) => CARDS[i].id);
-        this.setState(newState);
-    } // end of setDefaultCardIndices
 
     prevClickHandler() {
         const newState = this.state;
@@ -34,17 +22,23 @@ export default class BrowseBox extends Component {
         this.setState(newState);
     } // end of prevClickHandler
 
+
+
     nextClickHandler() {
         const newState = this.state;
         newState.currentCard++;
         this.setState(newState);
     } // end of prevClickHandler
 
+
+
     turnClickHandler() {
         const newState = this.state;
         newState.questionIsUp = !newState.questionIsUp; // toggle question / answer
         this.setState(newState);
     } // end of turnClickHandler
+
+
 
     setProgress = (card) => {
         if (card) {
@@ -54,6 +48,8 @@ export default class BrowseBox extends Component {
         }
         else return "0";
     } // end of setProgress
+
+
 
     renderTopics(card) {
         const topics = [], colors = [];
@@ -81,10 +77,13 @@ export default class BrowseBox extends Component {
         return elems;
     } // end of renderTopics
 
+
+
     render() {
+        console.log(this.props.cardIds);
         const card = JSON
             .parse(localStorage.cards)
-            .find(c => c.id === this.state.cardIndices[this.state.currentCard]);
+            .find(c => c.id === this.props.cardIds[this.state.currentCard]);
         return (
             this.props.visible && <div className="browse-box">
                 <div className="browse-box__header">
@@ -118,19 +117,19 @@ export default class BrowseBox extends Component {
                         <button
                             id="browse-box__prev-btn"
                             onClick={() => this.prevClickHandler()}
-                            disabled={!this.state.cardIndices[this.state.currentCard - 1]}
+                            disabled={!this.props.cardIds[this.state.currentCard - 1]}
                         >Prev</button>
 
                         <button
                             id="browse-box__turn-btn"
                             onClick={() => this.turnClickHandler()}
-                            disabled={!this.state.cardIndices[this.state.currentCard]}
+                            disabled={!this.props.cardIds[this.state.currentCard]}
                         >Turn</button>
 
                         <button
                             id="browse-box__next-btn"
                             onClick={() => this.nextClickHandler()}
-                            disabled={!this.state.cardIndices[this.state.currentCard + 1]}
+                            disabled={!this.props.cardIds[this.state.currentCard + 1]}
                         >Next</button>
                     </div>
                 </div>
