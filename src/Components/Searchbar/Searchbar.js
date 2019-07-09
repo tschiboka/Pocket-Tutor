@@ -123,6 +123,13 @@ export default class Searchbar extends Component {
 
 
 
+    submitSearch(e) {
+        console.log(e.key);
+        if (e.key === "Enter") this.showResult(this.state.searchResults);
+    } // end of submitSearch
+
+
+
     renderSearchResults() {
         return this.state.searchResults.map((item, i) => (
             <div
@@ -151,9 +158,10 @@ export default class Searchbar extends Component {
                     maxLength="30"
                     autoFocus={false}
                     onChange={() => this.autocompleteSearchBar()}
+                    onKeyDown={(e) => this.submitSearch(e)}
                     placeholder="Search cards content" />
 
-                <button><div>&#9906;</div></button>
+                <button onClick={() => this.showResult(this.state.searchResults)}><div>&#9906;</div></button>
 
                 {<div id="searchbar__results">{this.renderSearchResults()}</div>}
             </div>
