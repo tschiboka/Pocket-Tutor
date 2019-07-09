@@ -11,9 +11,26 @@ export default class BrowseBox extends Component {
 
         this.state = {
             "currentCard": 0,
-            "questionIsUp": true
+            "questionIsUp": true,
         };
     } // end of constructor
+
+
+
+
+    componentWillReceiveProps(nextProps) {
+        // if props ids changed, reset current
+        const sameIds = nextProps.cardIds.every((c, i) => this.props.cardIds[i] === c);
+
+        if (sameIds) return void (0);
+
+        console.log("here", sameIds);
+
+        const newState = this.state;
+        newState.currentCard = 0;
+        this.setState(newState);
+    } // end of componentWillReceiveProps
+
 
 
     prevClickHandler() {
@@ -80,12 +97,25 @@ export default class BrowseBox extends Component {
 
 
     render() {
-        console.log(this.props.cardIds);
         const card = JSON
             .parse(localStorage.cards)
             .find(c => c.id === this.props.cardIds[this.state.currentCard]);
         return (
             this.props.visible && <div className="browse-box">
+                <div className="browse-box__info">
+                    {this.props.order === "selection"
+                        ? <div className="browse-box__search-info">{"Result on search \"" + this.props.keyWord + "\" (" + (this.state.currentCard + 1) + "/" + this.props.cardIds.length + ")"}</div>
+                        : <div className="browse-box__search-info">{"All cards (" + (this.state.currentCard + 1) + "/" + this.props.cardIds.length + ")"}</div>
+                    }
+
+                    <button
+                        className="browse-box__close-search-btn"
+                        disabled={this.props.order === "default"}
+                        onClick={() => this.props.reset()}>
+                        &times;</button>
+
+                </div>
+
                 <div className="browse-box__header">
                     {this.renderTopics(card)}
                 </div>

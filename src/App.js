@@ -96,13 +96,23 @@ export default class App extends Component {
 
 
 
-  setBrowseSelection(param) {
-    console.log("SETBROWSE SELECTION", param);
+  setBrowseSelection(ids, keyWord) {
     const newState = this.state;
     newState.browseOrder = "selection";
-    newState.browseArray = param;
+    newState.browseSearchKeyword = keyWord;
+    newState.browseArray = ids;
     this.setState(newState);
   } // end of setBrowseSeelection
+
+
+
+  resetDefaultBrowse() {
+    const newState = this.state;
+    newState.browseOrder = "default";
+    newState.browseSearchKeyword = "";
+    newState.browseArray = [];
+    this.setState(newState);
+  } // resetDefaultBrowse
 
 
 
@@ -125,7 +135,9 @@ export default class App extends Component {
           cardIds={this.state.browseOrder === "default"
             ? new Array(JSON.parse(localStorage.cards).length).fill("").map((_, i) => JSON.parse(localStorage.cards)[i].id)
             : this.state.browseArray}
+          keyWord={this.state.browseSearchKeyword}
           visible={this.state.view === "browse"}
+          reset={this.resetDefaultBrowse.bind(this)}
           openCloseEditCards={this.openCloseEditCards.bind(this)} // edit cards can be opened from here as well
         />
 

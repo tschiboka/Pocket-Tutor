@@ -111,6 +111,7 @@ export default class Searchbar extends Component {
 
 
     showResult(items) {
+        console.log(items);
         // close search tab
         document.getElementById("searchbar-input").value = "";
         this.autocompleteSearchBar();
@@ -118,13 +119,12 @@ export default class Searchbar extends Component {
         // hide results
         document.getElementById("searchbar__results").style.zIndex = "1";
 
-        this.props.setBrowse(items.map(c => c.id));
+        this.props.setBrowse(items.map(c => c.id), items[0].search.input);
     } // end of showResult
 
 
 
     submitSearch(e) {
-        console.log(e.key);
         if (e.key === "Enter") this.showResult(this.state.searchResults);
     } // end of submitSearch
 
