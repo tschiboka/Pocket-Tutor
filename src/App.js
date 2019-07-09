@@ -57,11 +57,7 @@ export default class App extends Component {
   // CHANGE THE MAIN VIEW OF THE APP
   changeView(view) {
     const newState = this.state;
-
     newState.view = view;
-
-    console.log(view);
-
     this.setState(newState);
   } // end of changeView
 
@@ -88,10 +84,8 @@ export default class App extends Component {
   // edit cards can be opened form multiple places thoughout the app
   openCloseEditCards(isOpen, id) {
     const newState = this.state;
-
     newState.editCardIsVisible = isOpen;
     newState.editCardId = id;
-
     this.setState(newState);
   } // end of openCloseEditCards
 
@@ -172,6 +166,7 @@ export default class App extends Component {
 
         <Links
           visible={this.state.view === "links"}
+          changeView={this.changeView.bind(this)}
         />
 
         { // EDIT CARDS
