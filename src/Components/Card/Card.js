@@ -7,7 +7,7 @@ export default class Card extends Component {
     chunkText(text) {
         // js has no lookbehind regexp so this will be a quick mock up
         // to divide text into chunks of text and code objects
-        console.log("UNFORMATTED\n", text);
+        //console.log("UNFORMATTED\n", text);
 
         let currentText = "", textObjects = [], currentType = "text";             // default type is text
 
@@ -24,7 +24,7 @@ export default class Card extends Component {
 
             if (isOpeningTag) {
                 const lang = text.substr(i + 9, text.substr(i + 9).indexOf(">")); // extract language
-                currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
+                //currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
                 textObjects.push({ "type": currentType, "content": currentText });// push object into array
                 currentType = lang;                                               // set language type 
                 currentText = "";                                                 // clear text
@@ -32,18 +32,24 @@ export default class Card extends Component {
             }                                                                     // end of if openingtag
 
             if (isClosingTag) {
-                currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
+                //currentText = currentText.replace(/^\n{0,}|\n{0,}$/gm, "");       // trim unwanted whitespace
                 textObjects.push({ "type": currentType, "content": currentText });// push object into array
                 currentText = "";                                                 // clear text
                 currentType = "text";                                             // set default text type back
                 i += 5;                                                           // jump through tag
             }                                                                     // end of if closingtag
             currentText += text[i];                                               // add characters into text
+
+            if (i === text.length - 1)                                            // if last character
+                textObjects.push({ "type": currentType, "content": currentText });// push rest into array
         }                                                                         // end of for characters in text
+
+        //if (currentText.replace(/\s*/gm, "").length > 0) textObjects.push({ "type": "text", "content": currentText });
         if (!textObjects.length) textObjects                                      // if textObject is empty
             .push({ "type": currentType, "content": currentText });               // push object into array
 
-        return textObjects;
+        textObjects = textObjects.filter(o => o.content.replace(/\s*/gm, "").length);
+        return textObjects.map(o => ({ "type": o.type, "content": o.content.replace(/^\n{0,}|\n{0,}$/gm, "") }));
     } // end of chunkTest 
 
 
