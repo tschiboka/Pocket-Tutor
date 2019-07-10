@@ -24,8 +24,8 @@
 .main-menu-item {
     padding: 8% 0;
     list-style: none;
-    font-size: 3.2vh;
-    line-height: 3.2vh;
+    font-size: 3.4vh;
+    line-height: 3.4vh;
     cursor: pointer;
 }
 
@@ -37,8 +37,8 @@
 }
 
 .main-menu-item div img {
-    width: 3.2vh;
-    height: 3.2vh;
+    width: 3.4vh;
+    height: 3.4vh;
     margin-left: 20%;
     margin-right: 10%;
 }

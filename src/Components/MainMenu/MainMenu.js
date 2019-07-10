@@ -106,17 +106,6 @@ export default class MainMenu extends Component {
                             Test
                             </div>
                     </li>
-
-                    <li
-                        className="main-menu-item"
-                        id="main-menu__settings"
-                        key="settings"
-                    >
-                        <div>
-                            <img src={settings_icon} alt="settings" />
-                            Settings
-                            </div>
-                    </li>
                 </ul>
             </div>
         )
