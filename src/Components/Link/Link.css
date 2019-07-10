@@ -36,12 +36,59 @@
     color: #36ebee;
     font-size: 2.5vh;
     font-style: italic;
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .link__body > div:last-child {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     font-family: 'Fira', Courier, monospace;
     font-size: 2vh;
     color: #f77394;
+}
+
+.link__body > div:last-child button {
+    width: 15%;
+    height: 100%;
+    font-size: 2.2vh;
+}
+
+.link__body > div:last-child > div {
+    width: 95%;
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;    
+}
+
+.link__body input {
+    width: 100%;
+    height: 50%;
+    padding: 2%;
+    outline: none;
+    border: none;
+    font-family: inherit;
+    font-style: italic;
+    text-shadow: -1px -1px black, 1px 1px 1px #9696c2;
+    background: #191b20;
+    box-shadow:         inset 2px 2px 2px #000000, inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow:    inset 2px 2px 2px #000000, inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: inset 2px 2px 2px #000000, inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.link__body input:first-child {
+    color: #36ebee;
+    font-size: 2.5vh;
+}
+
+.link__body input:last-child {
+    color: #f77394;
+    font-size: 2vh;
+    font-style: normal;
+    font-family: 'Fira', Courier, monospace;
 }
 
 .link__buttons {

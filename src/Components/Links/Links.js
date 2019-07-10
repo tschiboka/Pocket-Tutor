@@ -28,15 +28,26 @@ export default class Links extends Component {
 
 
     removeLink(id) {
-        console.log("REMOVE", id);
         const links = JSON.parse(localStorage.links);
 
         links.splice(id, 1);
-
         localStorage.setItem("links", JSON.stringify(links));
 
         this.forceUpdate();
     } // end of removeLink
+
+
+
+    updateLink(id, property, value) {
+        const links = JSON.parse(localStorage.links);
+
+        links[id][property] = value;
+
+        localStorage.setItem("links", JSON.stringify(links));
+        console.log(id, property);
+
+        this.forceUpdate();
+    } // end of updateLink
 
 
 
@@ -48,6 +59,7 @@ export default class Links extends Component {
                 id={i}
                 description={l.description}
                 remove={this.removeLink.bind(this)}
+                update={this.updateLink.bind(this)}
                 url={l.url} />);
     } // end of renderLinks
 
