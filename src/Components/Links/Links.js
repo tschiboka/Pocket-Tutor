@@ -5,12 +5,6 @@ import Link from "../Link/Link";
 import "../Links/Links.css";
 
 export default class Links extends Component {
-    constructor(props) {
-        super(props);
-    } // end of constructor
-
-
-
     // check if links is available in localStorage before rendering
     componentWillReceiveProps() {
         if (!localStorage.links) localStorage.setItem("links", "[]");

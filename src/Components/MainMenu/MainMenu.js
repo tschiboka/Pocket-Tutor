@@ -7,7 +7,6 @@ import cards_icon from "./../../images/cards-icon.png";
 import links_icon from "./../../images/links-icon.png";
 import result_icon from "./../../images/result-icon.png";
 import test_icon from "./../../images/test-icon.png";
-import settings_icon from "./../../images/settings-icon.png";
 
 export default class MainMenu extends Component {
     componentDidUpdate() {

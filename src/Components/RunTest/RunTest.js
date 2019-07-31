@@ -68,7 +68,6 @@ export default class RunTest extends Component {
 
         // general results
         newState.results.push(result);                        // collect results for evaluation without topics
-        console.log(newState.detailedResults);
 
         // delay changes letting the animations time
         const delayForAnimation = setTimeout(() => {

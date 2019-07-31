@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import "./searchbar.css";
-import BrowseBox from "../BrowseBox/BrowseBox";
 
 export default class Searchbar extends Component {
     constructor(props) {
@@ -80,9 +79,9 @@ export default class Searchbar extends Component {
         } // end of if
 
         const
-            safeInp = input.replace(/[({\[\]}).?|^$*+\\]/gm, c => ("\\" + c)), // escape all possible error prone characters
+            safeInp = input.replace(/[({[\]}).?|^$*+\\]/gm, c => ("\\" + c)),  // escape all possible error prone characters
             localSt = JSON.parse(localStorage.cards),                          // get cards
-            results = localSt.map(card => {                                    // iterate over cards
+            results = localSt.forEach(card => {                                // iterate over cards
                 const
                     any = ".{0,40}",                                           // regexp quantifier
                     regExp = new RegExp(any + safeInp + any, "gmi"),           // the search and any 20 chars before or after

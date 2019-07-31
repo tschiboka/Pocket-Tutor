@@ -93,9 +93,7 @@ export default class Test extends Component {
 
     getRotatingButtonValue(value) {
         const newState = this.state;
-
-        this.state.selectedCardsNum = value;
-
+        newState.selectedCardsNum = value;
         this.setState(newState);
     } // end of getRotatingButtonValue
 

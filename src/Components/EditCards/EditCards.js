@@ -50,7 +50,7 @@ export default class EditCards extends Component {
         enabledTopics.unshift("no topic");
 
         // weed out the ones to be desabled
-        topicsToDisable.map(td => {
+        topicsToDisable.forEach(td => {
             if (td !== "no topic") {
                 enabledTopics = enabledTopics.filter(en => en !== td);
             } // end of if not no topic

@@ -7,12 +7,10 @@ export default class Card extends Component {
     chunkText(text) {
         // js has no lookbehind regexp so this will be a quick mock up
         // to divide text into chunks of text and code objects
-        console.log("UNFORMATTED\n", text);
-
         let currentText = "", textObjects = [], currentType = "text";             // default type is text
 
         for (let i = 0; i < text.length; i++) {
-            const isOpeningTag = false, isClosingTag = false;                     // flags representing any possible tags
+            let isOpeningTag = false, isClosingTag = false;                       // flags representing any possible tags
 
             if (text[i] === "<") {                                                // if possible tag
                 const
@@ -74,19 +72,19 @@ export default class Card extends Component {
                 dissectText(/(\s|^)(implements|interface|let|package|private|protected|public|static|yield)(?=\s|\W)/gm, "yellow"); // reserved keywords
                 dissectText(/(\s|^|\W)(null|true|false|NaN|Infinity|undefined|globalThis)(?=\s|\W)/gm, "pink"); // reserved keywords
                 dissectText(/\w+\s*(?=\()/gm, "blue");          // get functions
-                dissectText(/(\s|^|[\(\[])(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|.|\()/gm, "pink"); // global functions and objs
+                dissectText(/(\s|^|[([])(Number|BigInt|Math|Date|String|RegExp|Array|Map|Set|WeakMap|WeakSet|JSON|Promise|Generator|Reflect|Proxy|Object|Function|Boolean|Symbol|Error|EvalError|RangeError|InternalError|ReferenceError|SyntaxError|TypeError|URIError)(?=\s|.|\()/gm, "pink"); // global functions and objs
                 dissectText(/\.()\s*(?=\(eval|uneval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)/gm, "pink"); // get global functions
                 dissectText(/(\d+)(?!\d*\u00ac)/gm, "orange");  // get NUMBERS except the ones ending ¬
                 dissectText(/[+-/*:.]/gm, "lblue");             // get mathematical signs
-                dissectText(/[\(\)\{\}\[\];,]+/gm, "white");    // get brackets
+                dissectText(/[(){}[\];,]+/gm, "white");         // get brackets
                 dissectText(/[?:"£$%^&*=~#@]/gm, "purple");     // get rest of the characters
                 break;
             }                                                   // end of case JS
             case "CSS": {                                       // CSS   
                 dissectText(/\/\*[\s\S]*?\*\//g, "grey");       // get multiline comments
                 dissectText(/\.[\w-]+(?=[ \t\S]*{)/gm, "orange");// get class selectors
-                dissectText(/\#[\w-]+(?=[ \t\S]*{)/gm, "lblue");// get id selectors
-                dissectText(/\@[\w- ]+(?=[ \t\S]*{)/gm, "purple");// get keyframes and fontface 
+                dissectText(/#[\w-]+(?=[ \t\S]*{)/gm, "lblue"); // get id selectors
+                dissectText(/@[\w- ]+(?=[ \t\S]*{)/gm, "purple");// get keyframes and fontface 
                 dissectText(/(::|:)+[\w-]+(?=[ \t\S]*{)/gm, "blue");// get pseudo selectors
                 dissectText(/(\w+|-)+\s*(?=\()/gm, "blue");     // get functions
                 dissectText(/(abbr|acronym|address|applet|article|area|aside|audio|base|bdo|big|blockquote|body)(?=[ \t\S]*{)/gm, "purple"); // html tag names
@@ -109,7 +107,7 @@ export default class Card extends Component {
                 dissectText(/(dpcm|dppx|cm|mm|Q|in|pc|pt|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi)+(?=[ \t;]+)/gmi, "pink"); // absolute units
                 dissectText(/[+-/*.]/gm, "purple");             // get mathematical signs
                 dissectText(/[?"£$%^&*=~#@,]/gm, "purple");     // get rest of the characters
-                dissectText(/[\(\)\{\}\[\];:]+/gm, "white");    // get brackets
+                dissectText(/[(){}[\];:]+/gm, "white");         // get brackets
                 break;
             }                                                   // end of CSS
             case "HTML": {                                      // HTML
@@ -118,6 +116,7 @@ export default class Card extends Component {
                 dissectText(/[\w-]+(?==)/gm, "blue");           // get attributes
                 dissectText(/&.{0,8};/gm, "pink");              // get entities
                 dissectText(/(<|>|\/|;|=)/gm, "white");         // get signs
+                break;
             }                                                   // end of HTML
             default: { }                                        // React cries for default
         }                                                       // end of swith language
@@ -131,7 +130,7 @@ export default class Card extends Component {
 
     // function returns react dom elements
     syntax(text, isCode, key) {
-        if (!text.length) return <span key={key}></span> // return on empty strings
+        if (!text.length) return <span key={key}></span>        // return on empty strings
 
         const // dissect text into markup object with type and content
             markups = text.split(/(<###.*?>[\s\S]*?<###>)/gm)   // recognise markups
@@ -150,7 +149,7 @@ export default class Card extends Component {
                 return { "type": type, "content": content };    // return the object
             },                                                  // end of dissect
             markObjs = markups.map(m => dissect(m)),            // INVOKE DISSECT TEXT HERE
-            giveColor = mark => mark.map((obj, i) => {          // return with components
+            giveColor = mark => mark.forEach((obj, i) => {      // return with components
                 switch (obj.type) {                             // according to their type
                     case "none": return <span key={i}>{obj.content}</span> // NONE: any text without markup
                     case "green": return <span key={i} className="code--green">{obj.content}</span>
@@ -162,6 +161,7 @@ export default class Card extends Component {
                     case "blue": return <span key={i} className="code--blue">{obj.content}</span>
                     case "yellow": return <span key={i} className="code--yellow">{obj.content}</span>
                     case "pink": return <span key={i} className="code--pink">{obj.content}</span>
+                    default: { throw Error("No such color is defibed:" + obj.type); }
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 

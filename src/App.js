@@ -68,6 +68,7 @@ export default class App extends Component {
     // set default localstorage values in case missing or first visit
     if (!localStorage.cards) { localStorage.setItem("cards", "[]") }
     if (!localStorage.topics) { localStorage.setItem("topics", "[]") }
+    if (!localStorage.links) { localStorage.setItem("links", "[]") }
   } // end of setLocalStorage
 
 
