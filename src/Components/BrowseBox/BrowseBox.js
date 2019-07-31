@@ -108,11 +108,11 @@ export default class BrowseBox extends Component {
                         : <div className="browse-box__search-info">{"All cards (" + (this.state.currentCard + 1) + "/" + this.props.cardIds.length + ")"}</div>
                     }
 
-                    <button
+                    {this.props.order === "selection" && <button
                         className="browse-box__close-search-btn"
                         disabled={this.props.order === "default"}
                         onClick={() => this.props.reset()}>
-                        &times;</button>
+                        &times;</button>}
 
                 </div>
 
