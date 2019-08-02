@@ -118,7 +118,7 @@ export default class Card extends Component {
                 dissectText(/(<|>|\/|;|=)/gm, "white");         // get signs
                 break;
             }                                                   // end of HTML
-            default: { }                                        // React cries for default
+            default: { if (lang !== "text") throw Error(`${lang} language is not implemented!`) }
         }                                                       // end of swith language
 
         const getIndex = i => Number(i.replace(/\D+/g, ""));    // extract index from <¬Index¬>
@@ -149,7 +149,7 @@ export default class Card extends Component {
                 return { "type": type, "content": content };    // return the object
             },                                                  // end of dissect
             markObjs = markups.map(m => dissect(m)),            // INVOKE DISSECT TEXT HERE
-            giveColor = mark => mark.forEach((obj, i) => {      // return with components
+            giveColor = mark => mark.map((obj, i) => {      // return with components
                 switch (obj.type) {                             // according to their type
                     case "none": return <span key={i}>{obj.content}</span> // NONE: any text without markup
                     case "green": return <span key={i} className="code--green">{obj.content}</span>
@@ -161,7 +161,7 @@ export default class Card extends Component {
                     case "blue": return <span key={i} className="code--blue">{obj.content}</span>
                     case "yellow": return <span key={i} className="code--yellow">{obj.content}</span>
                     case "pink": return <span key={i} className="code--pink">{obj.content}</span>
-                    default: { throw Error("No such color is defibed:" + obj.type); }
+                    default: throw Error("No such color is defibed:" + obj.type);
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
