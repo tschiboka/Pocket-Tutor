@@ -118,7 +118,7 @@ export default class Card extends Component {
                 dissectText(/(<|>|\/|;|=)/gm, "white");         // get signs
                 break;
             }                                                   // end of HTML
-            default: { if (lang !== "text") throw Error(`${lang} language is not implemented!`) }
+            default: { if (lang !== "text") throw Error(`${lang} language is not implemented!`) } // other than text gives an error
         }                                                       // end of swith language
 
         const getIndex = i => Number(i.replace(/\D+/g, ""));    // extract index from <¬Index¬>

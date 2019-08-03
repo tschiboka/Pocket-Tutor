@@ -106,7 +106,7 @@ export default class Cards extends Component {
                 className={"cards__header__" + sortby + (this.state.sortby === sortby ? " cards__header--active" : "")}
                 onClick={() => this.changeSortBy(sortby)}
             >
-                {sortby}
+                {<span>{sortby} </span>}
 
                 {this.state.sortby === sortby && (this.state.ascending ? <span>&#9650;</span> : <span>&#9660;</span>)}
             </button>

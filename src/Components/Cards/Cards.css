@@ -39,9 +39,11 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: row;
     align-content: center;
     color: #697c97;
     font-size: 2.2vh;
+    text-shadow: none;
 }
 
 .cards__header button:hover {

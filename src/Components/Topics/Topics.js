@@ -48,7 +48,7 @@ export default class Topics extends Component {
 
         // SORT TOPICS
         switch (this.state.sortby) {
-            case "name": { topics = topics.sort((accu, curr) => accu.name > curr.name); break; }
+            case "name": { topics = topics.sort((accu, curr) => accu.name.toUpperCase() > curr.name.toUpperCase()); break; }
 
             case "cards": { topics = topics.sort((accu, curr) => accu.number > curr.number); break; }
 
@@ -207,7 +207,7 @@ export default class Topics extends Component {
                 className={"topics-box__header__" + { sortby } + (this.state.sortby === sortby ? " topics-box__header--active" : "")}
                 onClick={() => this.changeSortBy(sortby)}
             >
-                {sortby}
+                {<span>{sortby} </span>}
                 {this.state.sortby === sortby && (this.state.ascending ? <span>&#9650;</span> : <span>&#9660;</span>)}
             </button>
         ) // end of return
