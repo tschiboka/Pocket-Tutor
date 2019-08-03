@@ -119,7 +119,7 @@ export default class EditCards extends Component {
 
 
     renderTopicLabels() {
-        let topics = JSON.parse(localStorage.topics);
+        let topics = JSON.parse(localStorage.topics).sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase());
         topics.unshift({ "name": "no topic" });
 
         return (
