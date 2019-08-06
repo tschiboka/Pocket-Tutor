@@ -68,7 +68,7 @@
 }
 
 .edit-cards__invalid-field-txt {
-    color: rgb(247, 123, 123);
+    color: rgb(250, 73, 147);
 }
 
 .edit-cards__collapse-btn {
@@ -103,7 +103,7 @@
 }
 
 #edit-cards__submit-btn:disabled {
-    color: rgb(247, 123, 123);
+    color: rgb(250, 73, 147);
 }
 
 .edit-cards__topic-box {

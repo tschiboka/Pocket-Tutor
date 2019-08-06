@@ -121,7 +121,7 @@ export default class BrowseBox extends Component {
                 </div>
                 <div className="browse-box__body">
                     {card
-                        ? <Card turned={!this.state.questionIsUp} card={card} />
+                        ? <Card turned={!this.state.questionIsUp} card={card} keyword={this.props.keyWord} />
                         : "No cards to show"}
                 </div>
 

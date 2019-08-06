@@ -149,19 +149,20 @@ export default class Card extends Component {
                 return { "type": type, "content": content };    // return the object
             },                                                  // end of dissect
             markObjs = markups.map(m => dissect(m)),            // INVOKE DISSECT TEXT HERE
-            giveColor = mark => mark.map((obj, i) => {      // return with components
+            giveColor = mark => mark.map((obj, i) => {          // return with components
+                const highlight = this.props.keyword && new RegExp(this.props.keyword, "gmi").test(obj.content) ? " code--highlight" : "";
                 switch (obj.type) {                             // according to their type
-                    case "none": return <span key={i}>{obj.content}</span> // NONE: any text without markup
-                    case "green": return <span key={i} className="code--green">{obj.content}</span>
-                    case "orange": return <span key={i} className="code--orange">{obj.content}</span>
-                    case "lblue": return <span key={i} className="code--lightblue">{obj.content}</span>
-                    case "white": return <span key={i} className="code--white">{obj.content}</span>
-                    case "purple": return <span key={i} className="code--purple">{obj.content}</span>
-                    case "grey": return <span key={i} className="code--grey">{obj.content}</span>
-                    case "blue": return <span key={i} className="code--blue">{obj.content}</span>
-                    case "yellow": return <span key={i} className="code--yellow">{obj.content}</span>
-                    case "pink": return <span key={i} className="code--pink">{obj.content}</span>
-                    default: throw Error("No such color is defibed:" + obj.type);
+                    case "none": return <span key={i} className={highlight}>{obj.content}</span> // NONE: any text without markup
+                    case "green": return <span key={i} className={"code--green" + highlight}>{obj.content}</span>
+                    case "orange": return <span key={i} className={"code--orange" + highlight}>{obj.content}</span>
+                    case "lblue": return <span key={i} className={"code--lightblue" + highlight}>{obj.content}</span>
+                    case "white": return <span key={i} className={"code--white" + highlight}>{obj.content}</span>
+                    case "purple": return <span key={i} className={"code--purple" + highlight}>{obj.content}</span>
+                    case "grey": return <span key={i} className={"code--grey" + highlight}>{obj.content}</span>
+                    case "blue": return <span key={i} className={"code--blue" + highlight}>{obj.content}</span>
+                    case "yellow": return <span key={i} className={"code--yellow" + highlight}>{obj.content}</span>
+                    case "pink": return <span key={i} className={"code--pink" + highlight}>{obj.content}</span>
+                    default: throw Error("No such color is defined:" + obj.type);
                 }                                               // end of swith obj type
             });                                                 // end of giveColor func
 
@@ -169,7 +170,26 @@ export default class Card extends Component {
             ? <pre key={key}><span className="code--code-text">{giveColor(markObjs)}</span></pre>
             : <span key={key} className="code--plain-text">{
                 text.split("\n")
-                    .map((txt, i) => <span key={i}>{txt}<br /></span>)
+                    .map((txt, i) => {
+                        if (!this.props.keyword) return <span key={i}>{txt}<br /></span>
+
+                        const
+                            hightlightText = new RegExp(this.props.keyword, "gmi").test(txt) ? " text--highlight" : "",
+                            chunks = txt.split(this.props.keyword);
+                        console.log(chunks);
+
+                        if (chunks.length === 1) return <span key={i}>{txt}<br /></span>
+
+                        // if text has the keyword further divide it
+                        return <span key={i} className={"text--highlight"}>{chunks.map((ch, chI) => {
+                            if (chI < chunks.length - 1)
+                                return <span>
+                                    <span>{ch}</span>
+
+                                    <span className={"text--keyword"}>{this.props.keyword}</span>
+                                </span>
+                        })}<span>{chunks[chunks.length - 1]}</span><br /></span>
+                    })
             }</span>;
     } // end of syntax
 

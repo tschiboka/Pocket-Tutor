@@ -81,7 +81,7 @@ export default class Searchbar extends Component {
         const
             safeInp = input.replace(/[({[\]}).?|^$*+\\]/gm, c => ("\\" + c)),  // escape all possible error prone characters
             localSt = JSON.parse(localStorage.cards),                          // get cards
-            results = localSt.forEach(card => {                                // iterate over cards
+            results = localSt.map(card => {                                // iterate over cards
                 const
                     any = ".{0,40}",                                           // regexp quantifier
                     regExp = new RegExp(any + safeInp + any, "gmi"),           // the search and any 20 chars before or after
@@ -99,6 +99,7 @@ export default class Searchbar extends Component {
                     "QA": "A",
                     "search": dessectSearch(answer[0], safeInp)
                 };
+                return void (0); // return for the sake of React, strangely gives warning for not returning at the end of function
             }).filter(c => !!c); // get rid of undefined values
 
         // set component state
@@ -119,6 +120,8 @@ export default class Searchbar extends Component {
         document.getElementById("searchbar__results").style.zIndex = "1";
 
         this.props.setBrowse(items.map(c => c.id), items[0].search.input);
+
+        this.props.changeView("browse");
     } // end of showResult
 
 

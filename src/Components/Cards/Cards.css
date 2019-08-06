@@ -1,15 +1,14 @@
 .cards {
     position: relative;
-    width: calc(96% - 2px);
-    height: calc(88% - 2px);
-    margin: 2%;
-    border: 1px solid #3e4652;
+    width: calc(98.5% - 2px);
+    height: calc(92.5% - 2px);
+    margin: 1%;
 }
 
 .cards-box {
-    width: 96%;
-    height: 95%;
-    margin: 4% 2%;
+    width: 98%;
+    height: 97%;
+    margin: 1% 1%;
     display: flex;
     flex-direction: column;
     background: rgba(0, 0, 0, 0.1);

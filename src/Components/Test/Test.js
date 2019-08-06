@@ -11,7 +11,7 @@ export default class Test extends Component {
         super(props);
 
         this.state = {
-            "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name > b.name), // topics are sorted alphabeticaly
+            "availableTopics": JSON.parse(localStorage.topics).sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase()), // topics are sorted alphabeticaly
             "selectedTopics": [],
             "selectedCards": [],
             "selectedCardsNum": 0

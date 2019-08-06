@@ -41,7 +41,7 @@ export default class Results extends Component {
                 <div className={"results__body results__body--" + layout}>
                     {
                         this.state.results.map((res, i) => (
-                            <div className={"results__item results-item--" + layout}>
+                            <div className={"results__item results-item--" + layout} key={i}>
                                 <RoundProgress
                                     key={i}
                                     id={"results__percent--" + i}
