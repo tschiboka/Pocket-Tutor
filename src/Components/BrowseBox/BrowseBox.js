@@ -24,8 +24,6 @@ export default class BrowseBox extends Component {
 
         if (sameIds) return void (0);
 
-        console.log("here", sameIds);
-
         const newState = this.state;
         newState.currentCard = 0;
         this.setState(newState);

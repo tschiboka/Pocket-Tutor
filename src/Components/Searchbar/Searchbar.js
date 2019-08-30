@@ -111,7 +111,6 @@ export default class Searchbar extends Component {
 
 
     showResult(items) {
-        console.log(items);
         // close search tab
         document.getElementById("searchbar-input").value = "";
         this.autocompleteSearchBar();

@@ -176,14 +176,13 @@ export default class Card extends Component {
                         const
                             hightlightText = new RegExp(this.props.keyword, "gmi").test(txt) ? " text--highlight" : "",
                             chunks = txt.split(this.props.keyword);
-                        console.log(chunks);
 
                         if (chunks.length === 1) return <span key={i}>{txt}<br /></span>
 
                         // if text has the keyword further divide it
-                        return <span key={i} className={"text--highlight"}>{chunks.map((ch, chI) => {
+                        return <span key={i} className={hightlightText}>{chunks.map((ch, chI) => {
                             if (chI < chunks.length - 1)
-                                return <span>
+                                return <span key={chI}>
                                     <span>{ch}</span>
 
                                     <span className={"text--keyword"}>{this.props.keyword}</span>

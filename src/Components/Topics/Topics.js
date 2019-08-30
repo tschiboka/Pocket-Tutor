@@ -48,9 +48,15 @@ export default class Topics extends Component {
 
         // SORT TOPICS
         switch (this.state.sortby) {
-            case "name": { topics = topics.sort((accu, curr) => accu.name.toUpperCase() > curr.name.toUpperCase()); break; }
+            case "name": {
+                topics = topics.sort((prev, curr) => prev.name.toUpperCase().localeCompare(curr.name.toUpperCase()));
+                break;
+            } // end of sortby name
 
-            case "cards": { topics = topics.sort((accu, curr) => accu.number > curr.number); break; }
+            case "cards": {
+                topics = topics.sort((prev, curr) => prev.number - curr.number);
+                break;
+            } // end of sortby cards
 
             default: { } // react expects defult
         } // end of switch
